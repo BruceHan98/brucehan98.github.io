@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>hexo-icarus 从零搭建个人博客 - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="从零开始使用hexo搭建自己的博客"><meta property="og:type" content="blog"><meta property="og:title" content="hexo-icarus 从零搭建个人博客"><meta property="og:url" content="https://brucehan98@github.io/2021/12/13/hexo-icarus%20%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="从零开始使用hexo搭建自己的博客"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://brucehan98@github.io/img/og_image.png"><meta property="article:published_time" content="2021-12-13T09:36:02.000Z"><meta property="article:modified_time" content="2021-12-23T09:08:31.971Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="hexo"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="../../../../img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2021/12/13/hexo-icarus%20%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"},"headline":"hexo-icarus 从零搭建个人博客","image":["https://brucehan98@github.io/img/og_image.png"],"datePublished":"2021-12-13T09:36:02.000Z","dateModified":"2021-12-23T09:08:31.971Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"从零开始使用hexo搭建自己的博客"}</script><link rel="canonical" href="https://brucehan98@github.io/2021/12/13/hexo-icarus%20%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-13T09:36:02.000Z" title="2021-12-13T09:36:02.000Z">2021-12-13</time>发表</span><span class="level-item"><time dateTime="2021-12-23T09:08:31.971Z" title="2021-12-23T09:08:31.971Z">2021-12-23</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/%E5%8D%9A%E5%AE%A2/">博客</a></span><span class="level-item">10 分钟读完 (大约1543个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div><br></div><h1 class="title is-3 is-size-4-mobile">hexo-icarus 从零搭建个人博客</h1><div class="content"><h2 id="hexo-icarus-使用详解"><a href="#hexo-icarus-使用详解" class="headerlink" title="hexo-icarus 使用详解"></a>hexo-icarus 使用详解</h2><h3 id="0-安装"><a href="#0-安装" class="headerlink" title="0. 安装"></a>0. 安装</h3><p><strong>Requirements</strong></p>
+<ul>
+<li>Node.js ($\geq$ 10.13)</li>
+<li>Git</li>
+</ul>
+<p><strong>Install hexo</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm install -g hexo<br></code></pre></td></tr></table></figure>
+<p>安装之后便可以使用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npx hexo &lt;command&gt;<br></code></pre></td></tr></table></figure>
+<p><strong>Install icarus</strong></p>
+<p>在 Hexo 网站目录下，安装 icarus 主题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm install -S hexo-theme-icarus<br></code></pre></td></tr></table></figure>
+<p>推荐下载 icarus 仓库到 theme 目录下，方便后续调整 icarus 配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git clone https://github.com/ppoffice/hexo-theme-icarus.git theme/icarus<br></code></pre></td></tr></table></figure>
+<p>在 hexo 的默认配置文件 _config.yml 中开启 icarus 主题：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">theme:</span> <span class="hljs-string">icarus</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h3><p>初始化 Hexo 目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npx hexo init &lt;folder&gt;<br>cd &lt;folder&gt;<br>npm install<br></code></pre></td></tr></table></figure>
+<p>初始化之后的目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"> .<br>├── _config.yml				# 配置文件<br>├── package.json		       # 应用依赖的版本<br>├── scaffolds				# 脚手架模板<br>├── source				     # 网站内容<br> |   ├── _drafts			    # Hexo 忽略&#x27;_&#x27;开头的隐藏文件（夹），除了&quot;_posts&quot;<br> |   └── _posts<br>└── themes				    # 主题<br></code></pre></td></tr></table></figure>
+<h3 id="2-基础配置"><a href="#2-基础配置" class="headerlink" title="2. 基础配置"></a>2. 基础配置</h3><p>_config.yml 为全局配置文件，主题下的  _config.yml 具有最低的优先级。</p>
+<p><strong>Site</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">title</th>
+<th style="text-align:center">网站标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">subtitle</td>
+<td style="text-align:center">副标题</td>
+</tr>
+<tr>
+<td style="text-align:left">description</td>
+<td style="text-align:center">网站描述</td>
+</tr>
+<tr>
+<td style="text-align:left">keywords</td>
+<td style="text-align:center">关键词，支持多个</td>
+</tr>
+<tr>
+<td style="text-align:left">author</td>
+<td style="text-align:center">作者</td>
+</tr>
+<tr>
+<td style="text-align:left">language</td>
+<td style="text-align:center">语言，e.g.，en</td>
+</tr>
+<tr>
+<td style="text-align:left">timezone</td>
+<td style="text-align:center">时区，默认为当前计算机时区</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Url</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">url</th>
+<th style="text-align:center">网址，必须以 ‘http://’ 或 ‘https://’ 开头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">root</td>
+<td style="text-align:center">网站的根目录</td>
+</tr>
+<tr>
+<td style="text-align:left">permalink</td>
+<td style="text-align:center">文章的永久链接形式，:year/:month/:day/:title/</td>
+</tr>
+<tr>
+<td style="text-align:left">pretty_urls.trailing_index</td>
+<td style="text-align:center">文章链接跟随 ‘index.html’，设为 false 以删除</td>
+</tr>
+<tr>
+<td style="text-align:left">pretty_urls.trailing_html</td>
+<td style="text-align:center">文章链接跟随 ‘.html’，设为 false 以删除</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果网站是一个子目录，例如 ‘<a target="_blank" rel="noopener" href="http://example.com/blog‘，那么把">http://example.com/blog‘，那么把</a> url 设为 ’<a target="_blank" rel="noopener" href="http://example.com/blog‘，把">http://example.com/blog‘，把</a> ‘root’ 设为 ’/blog/‘。 </p>
+<p><strong>Directory</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>source_dir</th>
+<th>存放内容的目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public_dir</td>
+<td>生成的静态文件的目录</td>
+</tr>
+<tr>
+<td>tag_dir</td>
+<td>标签目录</td>
+</tr>
+<tr>
+<td>archive_dir</td>
+<td>归档目录</td>
+</tr>
+<tr>
+<td>category_dir</td>
+<td>分类目录</td>
+</tr>
+<tr>
+<td>code_dir</td>
+<td>包含的代码的目录</td>
+</tr>
+<tr>
+<td>i18n_dir</td>
+<td>国际化语言目录</td>
+</tr>
+<tr>
+<td>skip_render</td>
+<td>跳过渲染，直接拷贝到 ‘public_dir’ 的路径</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例如，skip_render: “mypage/*<em>/\</em>”，跳过 ‘source/mypage/’ 下的所有文件。</p>
+<p>skip_render: ”_posts/test-post.md”，跳过 ‘source/_posts/test_post.md’ 这篇文章。</p>
+<p><strong>Writing</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>new_post_name</th>
+<th>新的文章的文件名，:title.md</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default_layout</td>
+<td>默认布局，post</td>
+</tr>
+<tr>
+<td>titlecase</td>
+<td>将标题转为小写</td>
+</tr>
+<tr>
+<td>external_link.enable</td>
+<td>使用新标签打开外部链接</td>
+</tr>
+<tr>
+<td>external_link.field</td>
+<td>用于整个网站（site）还是仅该帖子（post）</td>
+</tr>
+<tr>
+<td>external_link.exclude</td>
+<td>排除的主机名</td>
+</tr>
+<tr>
+<td>filename_case</td>
+<td>文件名大小写，0: 不转些, 1: 转小写, 2: 转大写</td>
+</tr>
+<tr>
+<td>render_drafts</td>
+<td>渲染草稿</td>
+</tr>
+<tr>
+<td>post_asset_folder</td>
+<td>启用 Assert 目录</td>
+</tr>
+<tr>
+<td>relative_link</td>
+<td>使用相对路径</td>
+</tr>
+<tr>
+<td>future</td>
+<td>显示未来的帖子</td>
+</tr>
+<tr>
+<td>highlight</td>
+<td>代码语法高亮设置</td>
+</tr>
+<tr>
+<td>prismjs</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Extensions</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>theme</th>
+<th>使用主题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>theme_config</td>
+<td>主题配置，覆盖默认主题</td>
+</tr>
+<tr>
+<td>deploy</td>
+<td>部署设置</td>
+</tr>
+<tr>
+<td>meta_generator</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>更多信息：<a target="_blank" rel="noopener" href="https://hexo.io/docs/configuration">Configuration</a></p>
+<h3 id="3-icarus-主题配置"><a href="#3-icarus-主题配置" class="headerlink" title="3. icarus 主题配置"></a>3. icarus 主题配置</h3><p>基础配置和常见问题：<a target="_blank" rel="noopener" href="https://ppoffice.github.io/hexo-theme-icarus/tags/Icarus%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/">hexo-theme-icarus</a></p>
+<p>有问题先翻一翻官方说明和 issues，很多都已解决！</p>
+<p>其他优化配置：</p>
+<p>设置图片居中：<a target="_blank" rel="noopener" href="https://zazdream.com/2020/02/18/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E4%B9%8BIcarus%E7%9A%84%E8%AE%BE%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96%EF%BC%88%E8%BF%9B%E9%98%B6%EF%BC%89/">Hexo博客主题之Icarus的设置与美化（进阶）</a></p>
+<p>Latex 公式问题：<a target="_blank" rel="noopener" href="https://blog.luzy.top/posts/2968289947/">Hexo折腾系列（六）数学公式渲染优化</a></p>
+<p>夜间模式：<a target="_blank" rel="noopener" href="https://astrobear.top/2021/08/23/Hexo%E4%B8%BB%E9%A2%98Icarus%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89/#%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F">Hexo主题Icarus的自定义</a></p>
+<p>Mathjax 自动换行：<a target="_blank" rel="noopener" href="https://astrobear.top/2021/08/23/Hexo%E4%B8%BB%E9%A2%98Icarus%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89/#Mathjax%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C">Hexo主题Icarus的自定义</a></p>
+<h3 id="4-命令"><a href="#4-命令" class="headerlink" title="4. 命令"></a>4. 命令</h3><h4 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a><strong>初始化网站</strong></h4><p>初始化一个网站</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo init [folder]<br></code></pre></td></tr></table></figure>
+<h4 id="新建帖子"><a href="#新建帖子" class="headerlink" title="新建帖子"></a><strong>新建帖子</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo new [layout] &lt;title&gt;<br></code></pre></td></tr></table></figure>
+<p>layout 默认为 _config.yml 中的 default_layout。</p>
+<p>title 是不可少的，如果 title 中有空格，请将 title 用引号引起来。</p>
+<p>选项：</p>
+<ul>
+<li>-p, —path        自定义帖子路径</li>
+<li>-r, —replace    如果帖子存在，则替换</li>
+<li>-s, —slug          自定义帖子的 url</li>
+</ul>
+<p>默认情况下，hexo 将使用 post 的 title 来定义文件的路径。使用 —path 来覆盖此行为，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo new --path about/me &quot;About me&quot;<br></code></pre></td></tr></table></figure>
+<p>该命令会在 source/_posts/about/ 路径下生成 me.md 帖子，帖子标题为 “About me”。</p>
+<h4 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a><strong>生成静态文件</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo generate<br>hexo g	# 简写<br></code></pre></td></tr></table></figure>
+<p>选项：</p>
+<ul>
+<li>-d, —deploy            生成文件结束后部署</li>
+<li>-w, —watch             观察文件变化</li>
+<li>-b, —bail                  如果生成文件出错，则抛出错误</li>
+<li>-f, —force                强制重新生成文件</li>
+<li>-c, —concurrency  并行生成文件数，默认最大</li>
+</ul>
+<h4 id="发布草稿"><a href="#发布草稿" class="headerlink" title="发布草稿"></a><strong>发布草稿</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo publish [layout] &lt;filename&gt;<br></code></pre></td></tr></table></figure>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a><strong>启动服务</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo server<br>hexo s	# 简写<br></code></pre></td></tr></table></figure>
+<p>启动本地服务，默认网址为 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a> 。</p>
+<p>选项：</p>
+<ul>
+<li>-p, —port            端口号</li>
+<li>-s, —static           只使用静态文件</li>
+<li>-l, —log                开启日志记录</li>
+</ul>
+<h4 id="部署文件"><a href="#部署文件" class="headerlink" title="部署文件"></a>部署文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo deploy<br>hexo d	# 简写<br></code></pre></td></tr></table></figure>
+<p>选项：</p>
+<ul>
+<li>-g, —generate        部署浅先生成静态文件</li>
+</ul>
+<h4 id="清理缓存"><a href="#清理缓存" class="headerlink" title="清理缓存"></a>清理缓存</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo clean<br></code></pre></td></tr></table></figure>
+<p>清理缓存文件（db.json）和生成的文件（public）。</p>
+<h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo list &lt;type&gt;		# 列出所有路径<br>hexo version		      # 查看版本号<br>hexo --safe			      # 禁止加载插件和脚本<br>hexo --debug		    # 将详细信息记录到终端和 debug.log<br>hexo --silent			# 终端忽略输出<br>hexo --drafts		       # 发布草稿<br>hexo --config config.yml   # 设置配置路径<br>hexo --cwd /path/to/cwd  # 自定义当前工作目录<br></code></pre></td></tr></table></figure>
+<h3 id="5-开始写作"><a href="#5-开始写作" class="headerlink" title="5. 开始写作"></a>5. 开始写作</h3><p><strong>修改初始化头部信息</strong></p>
+<p>头部信息块是一个 YAML 或者 json 代码块，包含以下信息：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>layout</th>
+<th>Layout，config.default_layout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td></td>
+</tr>
+<tr>
+<td>updated</td>
+<td></td>
+</tr>
+<tr>
+<td>comments</td>
+<td>是否允许评论</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>标签</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>分类</td>
+</tr>
+<tr>
+<td>toc</td>
+<td>是否使用 toc，注意，如果想使用 toc 的话这个一定要设为 true</td>
+</tr>
+<tr>
+<td>cover</td>
+<td>封面图路径</td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td>缩略图路径</td>
+</tr>
+<tr>
+<td>excerpt</td>
+<td>简介</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注意：在生成新帖子时，会按照 scaffolds 目录中的模板生成头部信息，因此最好先定义好模板中的头部信息。</p>
+<p><strong>创建帖子</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">hexo new [layout] &lt;title&gt;<br></code></pre></td></tr></table></figure>
+<p>有三种 layout：</p>
+<ul>
+<li>post    source/_posts（默认）</li>
+<li>page   source</li>
+<li>draft   source/drafts</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>hexo-icarus 从零搭建个人博客</p><p><a href="https://brucehan98@github.io/2021/12/13/hexo-icarus 从零搭建个人博客/">https://brucehan98@github.io/2021/12/13/hexo-icarus 从零搭建个人博客/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-12-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-12-23</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/hexo/">hexo </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../../14/ffmpeg-%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">ffmpeg 使用记录</span></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "1442cb5fb77efd596c59f257404b3947",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#hexo-icarus-使用详解"><span class="level-left"><span class="level-item">1</span><span class="level-item">hexo-icarus 使用详解</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#0-安装"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">0. 安装</span></span></a></li><li><a class="level is-mobile" href="#1-初始化"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">1. 初始化</span></span></a></li><li><a class="level is-mobile" href="#2-基础配置"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">2. 基础配置</span></span></a></li><li><a class="level is-mobile" href="#3-icarus-主题配置"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">3. icarus 主题配置</span></span></a></li><li><a class="level is-mobile" href="#4-命令"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">4. 命令</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#初始化网站"><span class="level-left"><span class="level-item">1.5.1</span><span class="level-item">初始化网站</span></span></a></li><li><a class="level is-mobile" href="#新建帖子"><span class="level-left"><span class="level-item">1.5.2</span><span class="level-item">新建帖子</span></span></a></li><li><a class="level is-mobile" href="#生成静态文件"><span class="level-left"><span class="level-item">1.5.3</span><span class="level-item">生成静态文件</span></span></a></li><li><a class="level is-mobile" href="#发布草稿"><span class="level-left"><span class="level-item">1.5.4</span><span class="level-item">发布草稿</span></span></a></li><li><a class="level is-mobile" href="#启动服务"><span class="level-left"><span class="level-item">1.5.5</span><span class="level-item">启动服务</span></span></a></li><li><a class="level is-mobile" href="#部署文件"><span class="level-left"><span class="level-item">1.5.6</span><span class="level-item">部署文件</span></span></a></li><li><a class="level is-mobile" href="#清理缓存"><span class="level-left"><span class="level-item">1.5.7</span><span class="level-item">清理缓存</span></span></a></li><li><a class="level is-mobile" href="#其他命令"><span class="level-left"><span class="level-item">1.5.8</span><span class="level-item">其他命令</span></span></a></li></ul></li><li><a class="level is-mobile" href="#5-开始写作"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">5. 开始写作</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2021 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>
