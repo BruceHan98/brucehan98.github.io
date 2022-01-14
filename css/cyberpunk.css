@@ -10814,27 +10814,27 @@ article.article .article-meta {
 }
 article.article .content {
   word-wrap: break-word;
-  font-size: 1.125rem;
+  font-size: 1.2rem;
 }
 article.article .content h1 {
-  font-size: 1.625em;
-  font-weight: 550;
+  font-size: 1.55em;
+  font-weight: bold;
 }
 article.article .content h2 {
   font-size: 1.5em;
-  font-weight: 550;
+  font-weight: bold;
 }
 article.article .content h3 {
   font-size: 1.25em;
-  font-weight: 550;
+  font-weight: bold;
 }
 article.article .content h4 {
   font-size: 1.125em;
-  font-weight: 550;
+  font-weight: bold;
 }
 article.article .content h5 {
   font-size: 1em;
-  font-weight: 550;
+  font-weight: 500;
 }
 article.article .content pre {
   font-size: 0.85em;
@@ -10879,10 +10879,10 @@ article.article .article-tags {
 .table-overflow {
   overflow-x: auto;
 }
-.table-overflow table {
+.table-overflow table is-bordered is-striped is-narrow is-hoverable is-fullwidth !important {
   width: auto !important;
 }
-.table-overflow table th {
+.table-overflow table is-bordered is-striped is-narrow is-hoverable is-fullwidth !important th {
   word-break: keep-all;
 }
 .video-container {
