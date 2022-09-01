@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>预训练模型合集 - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="预训练语言模型整理"><meta property="og:type" content="blog"><meta property="og:title" content="预训练模型合集"><meta property="og:url" content="https://brucehan98@github.io/2022/02/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%90%88%E9%9B%86/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="预训练语言模型整理"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://s2.loli.net/2022/01/13/yl4g9wGosAj7ILp.png"><meta property="og:image" content="https://s2.loli.net/2022/02/09/lkzDLmRfoHvbJFE.png"><meta property="article:published_time" content="2022-02-19T12:45:48.000Z"><meta property="article:modified_time" content="2022-09-01T14:06:37.290Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="PLM"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://s2.loli.net/2022/01/13/yl4g9wGosAj7ILp.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2022/02/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%90%88%E9%9B%86/"},"headline":"预训练模型合集","image":["https://s2.loli.net/2022/01/13/yl4g9wGosAj7ILp.png","https://s2.loli.net/2022/02/09/lkzDLmRfoHvbJFE.png"],"datePublished":"2022-02-19T12:45:48.000Z","dateModified":"2022-09-01T14:06:37.290Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"预训练语言模型整理"}</script><link rel="canonical" href="https://brucehan98@github.io/2022/02/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%90%88%E9%9B%86/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-02-19T12:45:48.000Z" title="2022-02-19T12:45:48.000Z">2022-02-19</time>发表</span><span class="level-item"><time dateTime="2022-09-01T14:06:37.290Z" title="2022-09-01T14:06:37.290Z">2022-09-01</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/NLP/">NLP</a></span><span class="level-item">10 分钟读完 (大约2092个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">预训练模型合集</h1><div class="content"><h2 id="NLU"><a href="#NLU" class="headerlink" title="NLU"></a>NLU</h2><h3 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h3><p>2018 | BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</p>
+<p><strong>Previous work</strong></p>
+<ul>
+<li>ELMo (Peters et al., 2018):  Deep contextualized word representations.</li>
+</ul>
+<p>​         They extract context-sensitive features from a left-to-right and a right-to-left language model.</p>
+<ul>
+<li>GPT (Radford et al., 2018):  Improving language understanding with unsupervised learning.</li>
+<li>Cloze procedure (Taylor, 1953): A new tool for measuring readability.</li>
+<li>Transformer (Vaswani et al., 2017): Attention is all you need.</li>
+</ul>
+<p><strong>Contributions</strong></p>
+<ul>
+<li>demonstrate the importance of <strong>bidirectional pre-training</strong> for language representations.</li>
+<li>show that <strong>pre-trained representations</strong> reduce the need for many heavily-engineered task-specific architectures.</li>
+<li>BERT advances <strong>the state of the art</strong> for eleven NLP tasks.</li>
+</ul>
+<p><strong>Main concepts</strong></p>
+<ul>
+<li><p>There are two steps in this framework: <code>pre-training</code> and <code>fine-tuning</code>.</p>
+<p>During <code>pre-training</code>, the model is trained on unlabeled data over different pre-training tasks.</p>
+<p>For <code>fine-tuning</code>, the BERT model is first initialized with the pre-trained parameters, and all of the parameters are fine-tuned using labeled data from the downstream tasks.</p>
+</li>
+<li><p>BERT’s model architecture is a multi-layer bidirectional Transformer encoder.</p>
+</li>
+<li><p>we pre-train BERT using two <strong>unsupervised</strong> tasks: <strong>Masked LM</strong> and <strong>Next Sentence Prediction (NSP)</strong>.</p>
+<ul>
+<li>Masked LM: simply mask 15% of the input tokens at random, and then predict those masked tokens.</li>
+<li>NSP:  choose the sentences A and B for each pre-training example, and then predict whether B is the next sentence of A.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/01/13/yl4g9wGosAj7ILp.png" alt="image-20220113214434131" style="zoom:50%;" /></p>
+<h3 id="ERNIE"><a href="#ERNIE" class="headerlink" title="ERNIE"></a>ERNIE</h3><p>2019 | Ernie: Enhanced representation through knowledge integration</p>
+<p> Inspired by the masking strategy of BERT (Devlin et al., 2018), ERNIE is designed to learn language representation enhanced by knowledge masking strategies, which includes <strong>entity-level masking</strong> and <strong>phrase-level masking</strong>.</p>
+<h3 id="XLNet"><a href="#XLNet" class="headerlink" title="XLNet"></a>XLNet</h3><p>NIPS 2019 | XLNet: Generalized Autoregressive Pretraining for Language Understanding</p>
+<p><strong>AE vs AR</strong></p>
+<p>Autoregressive (AR) language modeling and autoencoding (AE) have been the two most successful pretraining objectives.</p>
+<p>AR language modeling seeks to estimate the probability distribution of a text corpus with an autoregressive model. Since an AR language model is only trained to encode a uni-directional context (either forward or backward), it is not effective at modeling deep bidirectional contexts.</p>
+<p>AE based pretraining does not perform explicit density estimation but instead aims to reconstruct the original data from corrupted input.</p>
+<p><strong>Contributions</strong></p>
+<ul>
+<li>we propose the <strong>permutation language modeling objective</strong> that not only retains the benefits of AR models but also allows models to capture bidirectional contexts.</li>
+<li>XLNet achieves substantial improvement over previous pretraining objectives on various tasks.</li>
+</ul>
+<h3 id="RoBERTa"><a href="#RoBERTa" class="headerlink" title="RoBERTa"></a>RoBERTa</h3><p>2019 | RoBERTa: A Robustly Optimized BERT Pretraining Approach</p>
+<p>We find that BERT was <strong>significantly undertrained</strong>, and can match or exceed the performance of every model published after it.</p>
+<p>Our modifications are simple, they include:</p>
+<ul>
+<li>training the model <strong>longer</strong>, with <strong>bigger batches</strong>, over <strong>more data</strong></li>
+<li>removing the next sentence prediction objective</li>
+<li>training on longer sequences</li>
+<li>dynamically changing the masking pattern applied to the training data</li>
+</ul>
+<h3 id="ZEN"><a href="#ZEN" class="headerlink" title="ZEN"></a>ZEN</h3><p>2019 | ZEN: Pre-training Chinese Text Encoder Enhanced by N-gram Representations</p>
+<p>ZEN incorporates the comprehensive information of both the character sequence and words or phrases it contains (<strong>N-gram Representations</strong>).</p>
+<h3 id="MacBERT"><a href="#MacBERT" class="headerlink" title="MacBERT"></a>MacBERT</h3><p>EMNLP 2020 | Revisiting Pre-trained Models for Chinese Natural Language Processing</p>
+<p><strong>Contributions</strong></p>
+<ul>
+<li>use <strong>whole word masking (wwm)</strong> as well as <strong>N-gram masking</strong> strategies for selecting candidate tokens for masking, with a percentage of 40%, 30%, 20%, 10% for word-level unigram to 4-gram.</li>
+<li>Instead of masking with [MASK] token, which never appears in the fine-tuning stage, we propose to use <strong>similar words</strong> for the masking purpose.</li>
+<li>we perform sentence-order prediction (SOP) task as introduced by ALBERT instead of NSP.</li>
+</ul>
+<h3 id="NEZHA"><a href="#NEZHA" class="headerlink" title="NEZHA"></a>NEZHA</h3><p>2019 | NEZHA: Neural Contextualized Representation for Chinese Language Understanding</p>
+<p>Based on BERT and trained on Chinese text. Some techniques: <strong>effective positional encoding scheme</strong>, <strong>Whole Word Masking</strong>, <strong>Mixed Precision Training</strong>, <strong>LAMB Optimizer</strong>.</p>
+<p><strong>Functional relative positional encoding</strong></p>
+<p>Each dimension of the positional encoding corresponds to a sinusoid, and the sinusoidal functions for different dimensions have different wavelengths.</p>
+<p><strong>Mixed Precision Training</strong></p>
+<p>The technique can speed up the training by 2-3 times and also reduce the space consumption of the model, as a result of which, a larger batch size could be utilized.</p>
+<p><strong>LAMB Optimizer</strong></p>
+<p>The LAMB optimizer is designed for the large batch-size synchronous distributed training of deep neuron networks. The optimizer speeds up the training of BERT by using a very large batch size (up to more than 30k) without incurring a loss of the performance and even obtains the state-of-the-art performance in many tasks.</p>
+<h3 id="RoFormer"><a href="#RoFormer" class="headerlink" title="RoFormer"></a>RoFormer</h3><p>2021 | RoFormer: Enhanced Transformer with Rotary Position Embedding</p>
+<p>We investigate various methods to encode positional information in transformer-based language models and propose a novel implementation named <strong>Rotary Position Embedding</strong>(RoPE).</p>
+<ul>
+<li>flexibility of being expand to any sequence lengths</li>
+<li>decaying inter-token dependency with increasing relative distances</li>
+<li>capability of equipping the linear self-attention with relative position information</li>
+</ul>
+<h3 id="WoBERT"><a href="#WoBERT" class="headerlink" title="WoBERT"></a>WoBERT</h3><p>2020 | 以词为基本单位的中文BERT（Word-based BERT）</p>
+<p>在哈工大开源的 <a target="_blank" rel="noopener" href="https://github.com/ymcui/Chinese-BERT-wwm">RoBERTa-wwm-ext</a> 基础上进行继续预训练，预训练任务为 MLM。此外，我们还提供了 WoNEZHA，这是基于华为开源的 <a target="_blank" rel="noopener" href="https://github.com/huawei-noah/Pretrained-Language-Model/tree/master/NEZHA-TensorFlow">NEZHA</a> 进行再预训练的，训练细节跟 WoBERT 基本一样。NEZHA的模型结构跟BERT相似，不同的是它使用了相对位置编码，而 BERT 用的是绝对位置编码，因此理论上 NEZHA 能处理的文本长度是无上限的。</p>
+<h3 id="ALBERT"><a href="#ALBERT" class="headerlink" title="ALBERT"></a>ALBERT</h3><p>ICLR 2020 | ALBERT: A Lite BERT for Self-Supervised Learning of Language Representations</p>
+<p>At some point further model increases become harder due to GPU/TPU memory limitations and longer training times. To address these problems, we present <strong>two parameter reduction techniques</strong> to lower memory consumption and increase the training speed of BERT.</p>
+<p>The first one is a factorized embedding parameterization. By decomposing the large vocabulary embedding matrix into two small matrices, we separate the size of the hidden layers from the size of vocabulary embedding.</p>
+<p>The second technique is cross-layer parameter sharing.</p>
+<p> An ALBERT configuration similar to BERT-large has <strong>18x fewer parameters</strong> and can be trained about <strong>1.7x faster</strong>.</p>
+<h3 id="ELECTRA"><a href="#ELECTRA" class="headerlink" title="ELECTRA"></a>ELECTRA</h3><p>ICLR 2020 | Electra: Pre-training text encoders as discriminators rather than generators</p>
+<p>We propose <strong>replaced token detection</strong>, a pre-training task in which the model learns to distinguish real input tokens from plausible but synthetically generated replacements.</p>
+<p>A key advantage of our discriminative task is that the model learns from <strong>all input tokens</strong> instead of just the small masked-out subset, making it more <strong>computationally efficient</strong>.</p>
+<h3 id="AMBERT"><a href="#AMBERT" class="headerlink" title="AMBERT"></a>AMBERT</h3><p>2021 | AMBERT: A Pre-trained Language Model with Multi-Grained Tokenization</p>
+<p>AMBERT adopts two encoders with the shared parameters for fine-grained token embedding and coarse-grained token embedding.</p>
+<p>For English, AMBERT takes both the sequence of words (fine-grained tokens) and the sequence of phrases (coarse-grained tokens) as input after tokenization.</p>
+<p>For Chinese, AMBERT takes both the sequence of characters (fine-grained tokens) and the sequence of word (coarse-grained tokens) as input after tokenization.</p>
+<h3 id="LBERT"><a href="#LBERT" class="headerlink" title="LBERT"></a>LBERT</h3><p>2021 | Lattice-BERT: Leveraging Multi-Granularity Representations in Chinese Pre-trained Language Models</p>
+<p>Lattice-BERT explicitly incorporates word representations along with characters, thus can model a sentence in a <strong>multi-granularity</strong> manner. We design a <strong>lattice position attention mechanism</strong> to exploit the lattice structures in self-attention layers. We further propose a <strong>masked segment prediction task</strong> to push the model to learn from rich but redundant information inherent in lattices, while avoiding learning unexpected tricks.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模型</th>
+<th style="text-align:center">作者</th>
+<th style="text-align:center">语言</th>
+<th style="text-align:center">规模</th>
+<th style="text-align:center">数据集</th>
+<th style="text-align:center">代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">BERT</td>
+<td style="text-align:center">Google AI Language</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">base (110M)<br />large (340M)</td>
+<td style="text-align:center">BooksCorpus (800M words)<br />English Wikipedia (2500M words)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/google-research/bert">tensorflow</a></td>
+</tr>
+<tr>
+<td style="text-align:center">ERNIE</td>
+<td style="text-align:center">Baidu</td>
+<td style="text-align:center">中文</td>
+<td style="text-align:center">base (110M)</td>
+<td style="text-align:center">Chinese Wikepedia<br />Baidu Baike<br />Baidu news<br />Baidu Tieba</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/">paddle</a></td>
+</tr>
+<tr>
+<td style="text-align:center">XLNet</td>
+<td style="text-align:center">Carnegie Mellon University<br />Google AI Brain Team</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">base<br />large</td>
+<td style="text-align:center">BooksCorpus<br />English Wikipedia<br />plain text (13GB)<br /> Giga5 (16GB)<br />ClueWeb 2012-B<br /> Common Crawl</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/zihangdai/xlnet">tensorflow</a></td>
+</tr>
+<tr>
+<td style="text-align:center">RoBERTa</td>
+<td style="text-align:center">Facebook AI</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">base</td>
+<td style="text-align:center">BOOKCORPUS<br />CC-NEWS<br />OPENWEBTEXT<br />STORIES</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/pytorch/fairseq">pytorch</a></td>
+</tr>
+<tr>
+<td style="text-align:center">MacBERT</td>
+<td style="text-align:center">HIT,  iFLYTEK</td>
+<td style="text-align:center">中文</td>
+<td style="text-align:center">base<br />large</td>
+<td style="text-align:center">Chinese Wikipedia (0.4B words)<br />extended training data (5.4B words)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">NEZHA</td>
+<td style="text-align:center">Huawei Technologies</td>
+<td style="text-align:center">中文</td>
+<td style="text-align:center">base<br />large</td>
+<td style="text-align:center">Chinese Wikipedia<br />Baidu Baike<br />Chinese News</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/huawei-noah/Pretrained-Language-Model/tree/master/NEZHA-PyTorch">pytorch</a><br /><a target="_blank" rel="noopener" href="https://github.com/huawei-noah/Pretrained-Language-Model/tree/master/NEZHA-Gen-TensorFlow">tensorflow</a></td>
+</tr>
+<tr>
+<td style="text-align:center">ALBERT</td>
+<td style="text-align:center">Google Research</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">base (12M)<br />large (18M)<br />xlarge (60M)<br />xxlarge (235M)</td>
+<td style="text-align:center">same as BERT</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/google-research/ALBERT">tensorflow</a></td>
+</tr>
+<tr>
+<td style="text-align:center">ELECTRA</td>
+<td style="text-align:center">Stanford University<br />Google Brain</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">small<br />base<br />large</td>
+<td style="text-align:center">BERT dataset<br />ClueWeb<br />CommonCrawl<br />Gigaword</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/google-research/electra">tensorflow</a></td>
+</tr>
+<tr>
+<td style="text-align:center">LBERT</td>
+<td style="text-align:center">Peking University<br />Alibaba Group</td>
+<td style="text-align:center">中文</td>
+<td style="text-align:center">base</td>
+<td style="text-align:center">Chinese Wikipedia<br />Zhihu<br />web news</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/alibaba/AliceMind/tree/main/LatticeBERT">tensorflow</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="NLG"><a href="#NLG" class="headerlink" title="NLG"></a>NLG</h2><h3 id="GPT-2"><a href="#GPT-2" class="headerlink" title="GPT-2"></a>GPT-2</h3><p>2019| Language Models are Unsupervised Multi-task Learners</p>
+<h3 id="GPT-3"><a href="#GPT-3" class="headerlink" title="GPT-3"></a>GPT-3</h3><p>2020 | Language Models are Few-Shot Learners</p>
+<h3 id="CPM"><a href="#CPM" class="headerlink" title="CPM"></a>CPM</h3><p>2020 | CPM: A large-scale generative Chinese Pre-trained language model</p>
+<p>CPM, with 2.6 billion parameters and 100 GB Chinese  training data, is the <strong>largest Chinese pre-trained language model</strong>, which could facilitate several downstream  Chinese NLP tasks, such as conversation, essay generation, cloze test, and language understanding.</p>
+<p>Our current model is a <strong>left-to-right Transformer decoder</strong>, which is  similar to the model architecture of GPT.</p>
+<h3 id="PanGu-α"><a href="#PanGu-α" class="headerlink" title="PanGu-α"></a>PanGu-α</h3><p>2021 | PanGu-α: Large-Scale Autoregressive Pretrained Chinese Language Models with Auto-Parallel Computation</p>
+<p>PanGu-α is a <strong>large-scale autoregressive language model</strong> (ALM) pretrained on a large corpus of text, mostly in Chinese language.  The architecture of PanGu-α is based on Transformer. Besides, we develop an <strong>additional query layer</strong> on top of Transformer layers to predict the next token.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模型</th>
+<th style="text-align:center">作者</th>
+<th style="text-align:center">语言</th>
+<th style="text-align:center">规模</th>
+<th style="text-align:center">数据集</th>
+<th style="text-align:center">代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GPT-2</td>
+<td style="text-align:center">Open AI</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">1.5 B</td>
+<td style="text-align:center">WebText (40 GB)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/openai/gpt-2">tensorflow</a></td>
+</tr>
+<tr>
+<td style="text-align:center">GPT-3</td>
+<td style="text-align:center">Open AI</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">175 B</td>
+<td style="text-align:center">WebText<br />books corpora<br />English-language Wikipedia<br />(570 GB)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">CPM</td>
+<td style="text-align:center">Tsinghua University</td>
+<td style="text-align:center">中文</td>
+<td style="text-align:center">Small (109 M)<br />Medium (224 M)<br />Large (2.6 B)</td>
+<td style="text-align:center">Encyclopedia<br />Webpage<br />Story<br />News<br />Dialogue<br />(100 GB)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/TsinghuaAI/CPM">pytorch</a></td>
+</tr>
+<tr>
+<td style="text-align:center">PanGu-α</td>
+<td style="text-align:center">Huawei</td>
+<td style="text-align:center">中文</td>
+<td style="text-align:center">200 B</td>
+<td style="text-align:center">1.1TB</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/huawei-noah/Pretrained-Language-Model/tree/master/PanGu-%CE%B1">mindspore</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="NLU-NLG"><a href="#NLU-NLG" class="headerlink" title="NLU-NLG"></a>NLU-NLG</h2><h3 id="UniLM"><a href="#UniLM" class="headerlink" title="UniLM"></a>UniLM</h3><p>NIPS 2019 | Unified Language Model Pre-training for Natural Language Understanding and Generation</p>
+<p>UniLM can be applied to both natural language understanding (NLU) and natural language generation (NLG) tasks.</p>
+<p>UNILM is a multi-layer Transformer network, jointly pre-trained on large amounts of text, optimized for three types of unsupervised language modeling objectives (Bidirectional encoding, Unidirectional decoding, Unidirectional decoding conditioned on bidirectional encoding).</p>
+<h3 id="T5"><a href="#T5" class="headerlink" title="T5"></a>T5</h3><p>2019 | Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer</p>
+<p>Our model is roughly equivalent to the original Transformer with the exception of removing the Layer Norm bias, placing the layer normalization outside the residual path, and using a different position embedding scheme.</p>
+<h3 id="BART"><a href="#BART" class="headerlink" title="BART"></a>BART</h3><p>2020 | BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension</p>
+<p>BART, a <strong>denoising autoencoder</strong> for pretraining <strong>sequence-to-sequence</strong> models. BART is trained by (1) corrupting text with an arbitrary noising function, and (2) learning a model to reconstruct the original text.</p>
+<p>BART uses a standard Tranformer-based neural machine translation architecture which can be seen as generalizing BERT (due to the <strong>bidirectional encoder</strong>), GPT (with the <strong>left-to-right autogressive decoder</strong>).</p>
+<h3 id="CPM-2"><a href="#CPM-2" class="headerlink" title="CPM-2"></a>CPM-2</h3><p>AI Open 2021 | CPM-2: Large-scale Cost-effective Pre-trained Language Models</p>
+<p>We introduce <strong>knowledge inheritance</strong> to accelerate the pretraining process by exploiting existing PLMs instead of training models from scratch.</p>
+<p>Compared with conventional fine-tuning, <strong>prompt tuning</strong> significantly reduces the number of task-specific parameters.</p>
+<p>CPM-2 is a standard Transformer-based model combined with a <strong>bidirectional encoder</strong> and a <strong>unidirectional decoder</strong>.</p>
+<h4 id="Prompt-tuning"><a href="#Prompt-tuning" class="headerlink" title="Prompt tuning"></a>Prompt tuning</h4><p><img src="https://s2.loli.net/2022/02/09/lkzDLmRfoHvbJFE.png" alt="image-20220209115547492" style="zoom:50%;" /></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模型</th>
+<th style="text-align:center">作者</th>
+<th style="text-align:center">语言</th>
+<th style="text-align:center">规模</th>
+<th style="text-align:center">数据集</th>
+<th style="text-align:center">代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">BART</td>
+<td style="text-align:center">Facebook AI</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">base</td>
+<td style="text-align:center">160 GB</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/pytorch/fairseq">pytorch</a></td>
+</tr>
+<tr>
+<td style="text-align:center">UniLM</td>
+<td style="text-align:center">Microsoft Research</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">large (340M)</td>
+<td style="text-align:center">English Wikipedia<br /> BookCorpus</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">T5</td>
+<td style="text-align:center">Google Research</td>
+<td style="text-align:center">English</td>
+<td style="text-align:center">base</td>
+<td style="text-align:center">C4 (750 GB)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/google-research/text-to-text-transfer-transformer">tensorflow</a></td>
+</tr>
+<tr>
+<td style="text-align:center">CPM-2</td>
+<td style="text-align:center">Tsinghua University &amp; BAAI</td>
+<td style="text-align:center">中文</td>
+<td style="text-align:center">11 B</td>
+<td style="text-align:center">WuDaoCorpus<br />(2.3 TB Chinese<br />300GB English)</td>
+<td style="text-align:center"><a target="_blank" rel="noopener" href="https://github.com/TsinghuaAI/CPM">pytorch</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Pre-trained-Dialogue-Systems"><a href="#Pre-trained-Dialogue-Systems" class="headerlink" title="Pre-trained Dialogue Systems"></a>Pre-trained Dialogue Systems</h2><h3 id="DialoGPT"><a href="#DialoGPT" class="headerlink" title="DialoGPT"></a>DialoGPT</h3><h3 id="Menna"><a href="#Menna" class="headerlink" title="Menna"></a>Menna</h3><h3 id="Blender"><a href="#Blender" class="headerlink" title="Blender"></a>Blender</h3><h3 id="CDial-GPT"><a href="#CDial-GPT" class="headerlink" title="CDial-GPT"></a>CDial-GPT</h3><h3 id="PLATO-2"><a href="#PLATO-2" class="headerlink" title="PLATO-2"></a>PLATO-2</h3><h3 id="EVA"><a href="#EVA" class="headerlink" title="EVA"></a>EVA</h3><p>2021 | EVA: An Open-Domain Chinese Dialogue System with Large-Scale Generative Pre-Training</p>
+<p>EVA, a Chinese dialogue system that contains the largest Chinese pre-trained dialogue model with 2.8B parameters. We collect the largest Chinese dialogue dataset named WDC-Dialogue.</p>
+<h3 id="GLUE-benchmark"><a href="#GLUE-benchmark" class="headerlink" title="GLUE benchmark"></a>GLUE benchmark</h3><p>The General Language Understanding Evaluation (GLUE) benchmark  is a collection of diverse natural language understanding tasks.</p>
+<h3 id="CLUE-benchmark"><a href="#CLUE-benchmark" class="headerlink" title="CLUE benchmark"></a>CLUE benchmark</h3><p>Organization of Language Understanding Evaluation benchmark for <strong>Chinese</strong>: tasks &amp; datasets, baselines, pre-trained Chinese models, corpus and leaderboard.</p>
+<h3 id="SQuAD-benchmark"><a href="#SQuAD-benchmark" class="headerlink" title="SQuAD benchmark"></a>SQuAD benchmark</h3></div><div class="article-licensing box"><div class="licensing-title"><p>预训练模型合集</p><p><a href="https://brucehan98@github.io/2022/02/19/预训练模型合集/">https://brucehan98@github.io/2022/02/19/预训练模型合集/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-02-19</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/PLM/">PLM </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../../../03/01/BERT%E5%AE%9E%E6%88%98/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">BERT实战</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="../../../01/11/PaddleOCR-C++%E6%8E%A8%E7%90%86%E9%83%A8%E7%BD%B2/"><span class="level-item">PaddleOCR C++ CPU 推理部署</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "77fd5e768aa8e230bc356ae635146ac5",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#NLU"><span class="level-left"><span class="level-item">1</span><span class="level-item">NLU</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#BERT"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">BERT</span></span></a></li><li><a class="level is-mobile" href="#ERNIE"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">ERNIE</span></span></a></li><li><a class="level is-mobile" href="#XLNet"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">XLNet</span></span></a></li><li><a class="level is-mobile" href="#RoBERTa"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">RoBERTa</span></span></a></li><li><a class="level is-mobile" href="#ZEN"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">ZEN</span></span></a></li><li><a class="level is-mobile" href="#MacBERT"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">MacBERT</span></span></a></li><li><a class="level is-mobile" href="#NEZHA"><span class="level-left"><span class="level-item">1.7</span><span class="level-item">NEZHA</span></span></a></li><li><a class="level is-mobile" href="#RoFormer"><span class="level-left"><span class="level-item">1.8</span><span class="level-item">RoFormer</span></span></a></li><li><a class="level is-mobile" href="#WoBERT"><span class="level-left"><span class="level-item">1.9</span><span class="level-item">WoBERT</span></span></a></li><li><a class="level is-mobile" href="#ALBERT"><span class="level-left"><span class="level-item">1.10</span><span class="level-item">ALBERT</span></span></a></li><li><a class="level is-mobile" href="#ELECTRA"><span class="level-left"><span class="level-item">1.11</span><span class="level-item">ELECTRA</span></span></a></li><li><a class="level is-mobile" href="#AMBERT"><span class="level-left"><span class="level-item">1.12</span><span class="level-item">AMBERT</span></span></a></li><li><a class="level is-mobile" href="#LBERT"><span class="level-left"><span class="level-item">1.13</span><span class="level-item">LBERT</span></span></a></li></ul></li><li><a class="level is-mobile" href="#NLG"><span class="level-left"><span class="level-item">2</span><span class="level-item">NLG</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#GPT-2"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">GPT-2</span></span></a></li><li><a class="level is-mobile" href="#GPT-3"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">GPT-3</span></span></a></li><li><a class="level is-mobile" href="#CPM"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">CPM</span></span></a></li><li><a class="level is-mobile" href="#PanGu-α"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">PanGu-α</span></span></a></li></ul></li><li><a class="level is-mobile" href="#NLU-NLG"><span class="level-left"><span class="level-item">3</span><span class="level-item">NLU-NLG</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#UniLM"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">UniLM</span></span></a></li><li><a class="level is-mobile" href="#T5"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">T5</span></span></a></li><li><a class="level is-mobile" href="#BART"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">BART</span></span></a></li><li><a class="level is-mobile" href="#CPM-2"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">CPM-2</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Prompt-tuning"><span class="level-left"><span class="level-item">3.4.1</span><span class="level-item">Prompt tuning</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#Pre-trained-Dialogue-Systems"><span class="level-left"><span class="level-item">4</span><span class="level-item">Pre-trained Dialogue Systems</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#DialoGPT"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">DialoGPT</span></span></a></li><li><a class="level is-mobile" href="#Menna"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">Menna</span></span></a></li><li><a class="level is-mobile" href="#Blender"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">Blender</span></span></a></li><li><a class="level is-mobile" href="#CDial-GPT"><span class="level-left"><span class="level-item">4.4</span><span class="level-item">CDial-GPT</span></span></a></li><li><a class="level is-mobile" href="#PLATO-2"><span class="level-left"><span class="level-item">4.5</span><span class="level-item">PLATO-2</span></span></a></li><li><a class="level is-mobile" href="#EVA"><span class="level-left"><span class="level-item">4.6</span><span class="level-item">EVA</span></span></a></li><li><a class="level is-mobile" href="#GLUE-benchmark"><span class="level-left"><span class="level-item">4.7</span><span class="level-item">GLUE benchmark</span></span></a></li><li><a class="level is-mobile" href="#CLUE-benchmark"><span class="level-left"><span class="level-item">4.8</span><span class="level-item">CLUE benchmark</span></span></a></li><li><a class="level is-mobile" href="#SQuAD-benchmark"><span class="level-left"><span class="level-item">4.9</span><span class="level-item">SQuAD benchmark</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>

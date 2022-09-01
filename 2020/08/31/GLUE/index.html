@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>GLUE - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="GLUE benchmark 介绍"><meta property="og:type" content="blog"><meta property="og:title" content="GLUE"><meta property="og:url" content="https://brucehan98@github.io/2020/08/31/GLUE/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="GLUE benchmark 介绍"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://pic4.zhimg.com/v2-2948db2c0d3a56b2282a01c954277d15_r.jpg"><meta property="article:published_time" content="2020-08-31T02:41:41.000Z"><meta property="article:modified_time" content="2022-09-01T15:45:21.638Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="GLUE"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://pic4.zhimg.com/v2-2948db2c0d3a56b2282a01c954277d15_r.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2020/08/31/GLUE/"},"headline":"GLUE","image":["https://pic4.zhimg.com/v2-2948db2c0d3a56b2282a01c954277d15_r.jpg"],"datePublished":"2020-08-31T02:41:41.000Z","dateModified":"2022-09-01T15:45:21.638Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"GLUE benchmark 介绍"}</script><link rel="canonical" href="https://brucehan98@github.io/2020/08/31/GLUE/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-31T02:41:41.000Z" title="2020-08-31T02:41:41.000Z">2020-08-31</time>发表</span><span class="level-item"><time dateTime="2022-09-01T15:45:21.638Z" title="2022-09-01T15:45:21.638Z">2022-09-01</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/NLP/">NLP</a></span><span class="level-item">12 分钟读完 (大约2429个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">GLUE</h1><div class="content"><h4 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h4><p>自然语言处理（NLP）主要自然语言理解（NLU）和自然语言生成（NLG）。为了让NLU任务发挥最大的作用，来自纽约大学、华盛顿大学等机构创建了一个多任务的自然语言理解基准和分析平台，也就是GLUE（General Language Understanding Evaluation）。</p>
+<p>GLUE的论文为：GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135283598#ref_1">[1]</a></p>
+<p>GLUE的官网为：<a target="_blank" rel="noopener" href="https://gluebenchmark.com/">https://gluebenchmark.com/</a></p>
+<h4 id="二、任务介绍"><a href="#二、任务介绍" class="headerlink" title="二、任务介绍"></a>二、任务介绍</h4><p>GLUE共有九个任务，分别是CoLA、SST-2、MRPC、STS-B、QQP、MNLI、QNLI、RTE、WNLI。如下图图2所示，可以分为三类，分别是单句任务，相似性和释义任务，</p>
+<p><img src="https://pic4.zhimg.com/v2-2948db2c0d3a56b2282a01c954277d15_r.jpg" alt="img"></p>
+<p><strong>2.1 CoLA</strong></p>
+<p>CoLA(The Corpus of Linguistic Acceptability，语言可接受性语料库)，单句子分类任务，语料来自语言理论的书籍和期刊，每个句子被标注为是否合乎语法的单词序列。本任务是一个二分类任务，标签共两个，分别是0和1，其中0表示不合乎语法，1表示合乎语法。</p>
+<p>样本个数：训练集8, 551个，开发集1, 043个，测试集1, 063个。</p>
+<p>任务：可接受程度，合乎语法与不合乎语法二分类。</p>
+<p>评价准则：Matthews correlation coefficient。</p>
+<p><strong>2.2 SST-2</strong></p>
+<p>SST-2(The Stanford Sentiment Treebank，斯坦福情感树库)，单句子分类任务，包含电影评论中的句子和它们情感的人类注释。这项任务是给定句子的情感，类别分为两类正面情感（positive，样本标签对应为1）和负面情感（negative，样本标签对应为0），并且只用句子级别的标签。也就是，本任务也是一个二分类任务，针对句子级别，分为正面和负面情感。</p>
+<p>样本个数：训练集67, 350个，开发集873个，测试集1, 821个。</p>
+<p>任务：情感分类，正面情感和负面情感二分类。</p>
+<p>评价准则：accuracy。</p>
+<p><strong>2.3 MRPC</strong></p>
+<p>MRPC(The Microsoft Research Paraphrase Corpus，微软研究院释义语料库)，相似性和释义任务，是从在线新闻源中自动抽取句子对语料库，并人工注释句子对中的句子是否在语义上等效。类别并不平衡，其中68%的正样本，所以遵循常规的做法，报告准确率（accuracy）和F1值。</p>
+<p>样本个数：训练集3, 668个，开发集408个，测试集1, 725个。</p>
+<p>任务：是否释义二分类，是释义，不是释义两类。</p>
+<p>评价准则：准确率（accuracy）和F1值。</p>
+<p><strong>2.4 STSB</strong></p>
+<p>STSB(The Semantic Textual Similarity Benchmark，语义文本相似性基准测试)，相似性和释义任务，是从新闻标题、视频标题、图像标题以及自然语言推断数据中提取的句子对的集合，每对都是由人类注释的，其相似性评分为0-5(大于等于0且小于等于5的浮点数，原始paper里写的是1-5，可能是作者失误）。任务就是预测这些相似性得分，本质上是一个回归问题，但是依然可以用分类的方法，可以归类为句子对的文本五分类任务。</p>
+<p>样本个数：训练集5, 749个，开发集1, 379个，测试集1, 377个。</p>
+<p>任务：回归任务，预测为1-5之间的相似性得分的浮点数。但是依然可以使用分类的方法，作为五分类。</p>
+<p>评价准则：Pearson and Spearman correlation coefficients。</p>
+<p><strong>2.5 QQP</strong></p>
+<p>QQP(The Quora Question Pairs, Quora问题对数集)，相似性和释义任务，是社区问答网站Quora中问题对的集合。任务是确定一对问题在语义上是否等效。与MRPC一样，QQP也是正负样本不均衡的，不同是的QQP负样本占63%，正样本是37%，所以我们也是报告准确率和F1值。我们使用标准测试集，为此我们从作者那里获得了专用标签。我们观察到测试集与训练集分布不同。</p>
+<p>样本个数：训练集363, 870个，开发集40, 431个，测试集390, 965个。</p>
+<p>任务：判定句子对是否等效，等效、不等效两种情况，二分类任务。</p>
+<p>评价准则：准确率（accuracy）和F1值。</p>
+<p><strong>2.6 MNLI</strong></p>
+<p><strong>MNLI(The Multi-Genre Natural Language Inference Corpus, 多类型自然语言推理数据库)，自然语言推断任务，是通过众包方式对句子对进行文本蕴含标注的集合。给定前提（premise）语句和假设（hypothesis）语句，任务是预测前提语句是否包含假设（蕴含, entailment），与假设矛盾（矛盾，contradiction）或者两者都不（中立，neutral）。前提语句是从数十种不同来源收集的，包括转录的语音，小说和政府报告。</strong></p>
+<p>样本个数：训练集392, 702个，开发集dev-matched 9, 815个，开发集dev-mismatched9, 832个，测试集test-matched 9, 796个，测试集test-dismatched9, 847个。因为MNLI是集合了许多不同领域风格的文本，所以又分为了matched和mismatched两个版本的数据集，matched指的是训练集和测试集的数据来源一致，mismached指的是训练集和测试集来源不一致。</p>
+<p>任务：句子对，一个前提，一个是假设。前提和假设的关系有三种情况：蕴含（entailment），矛盾（contradiction），中立（neutral）。句子对三分类问题。</p>
+<p>评价准则：matched accuracy/mismatched accuracy。</p>
+<p><strong>2.7 QNLI</strong></p>
+<p>QNLI(Qusetion-answering NLI，问答自然语言推断)，自然语言推断任务。QNLI是从另一个数据集The Stanford Question Answering Dataset(斯坦福问答数据集, SQuAD 1.0)<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135283598#ref_3">[3]</a>转换而来的。SQuAD 1.0是有一个问题-段落对组成的问答数据集，其中段落来自维基百科，段落中的一个句子包含问题的答案。这里可以看到有个要素，来自维基百科的段落，问题，段落中的一个句子包含问题的答案。通过将问题和上下文（即维基百科段落）中的每一句话进行组合，并过滤掉词汇重叠比较低的句子对就得到了QNLI中的句子对。相比原始SQuAD任务，消除了模型选择准确答案的要求；也消除了简化的假设，即答案适中在输入中并且词汇重叠是可靠的提示。</p>
+<p>样本个数：训练集104, 743个，开发集5, 463个，测试集5, 461个。</p>
+<p>任务：判断问题（question）和句子（sentence，维基百科段落中的一句）是否蕴含，蕴含和不蕴含，二分类。</p>
+<p>评价准则：准确率（accuracy）。</p>
+<p><strong>2.8 RTE</strong></p>
+<p>RTE(The Recognizing Textual Entailment datasets，识别文本蕴含数据集)，自然语言推断任务，它是将一系列的年度文本蕴含挑战赛的数据集进行整合合并而来的，包含RTE1<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135283598#ref_4">[4]</a>，RTE2，RTE3<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135283598#ref_5">[5]</a>，RTE5等，这些数据样本都从新闻和维基百科构建而来。将这些所有数据转换为二分类，对于三分类的数据，为了保持一致性，将中立（neutral）和矛盾（contradiction）转换为不蕴含（not entailment）。</p>
+<p>样本个数：训练集2, 491个，开发集277个，测试集3, 000个。</p>
+<p>任务：判断句子对是否蕴含，句子1和句子2是否互为蕴含，二分类任务。</p>
+<p>评价准则：准确率（accuracy）。</p>
+<p><strong>2.9 WNLI</strong></p>
+<p>WNLI(Winograd NLI，Winograd自然语言推断)，自然语言推断任务，数据集来自于竞赛数据的转换。Winograd Schema Challenge<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135283598#ref_6">[6]</a>，该竞赛是一项阅读理解任务，其中系统必须读一个带有代词的句子，并从列表中找到代词的指代对象。这些样本都是都是手动创建的，以挫败简单的统计方法：每个样本都取决于句子中单个单词或短语提供的上下文信息。为了将问题转换成句子对分类，方法是通过用每个可能的列表中的每个可能的指代去替换原始句子中的代词。任务是预测两个句子对是否有关（蕴含、不蕴含）。训练集两个类别是均衡的，测试集是不均衡的，65%是不蕴含。</p>
+<p>样本个数：训练集635个，开发集71个，测试集146个。</p>
+<p>任务：判断句子对是否相关，蕴含和不蕴含，二分类任务。</p>
+<p>评价准则：准确率（accuracy）。</p>
+<h4 id="数据集下载"><a href="#数据集下载" class="headerlink" title="数据集下载"></a>数据集下载</h4><p>使用以下几个官方的下载方法（需要科学上网）：</p>
+<ul>
+<li>官方的下载链接：<a target="_blank" rel="noopener" href="https://gluebenchmark.com/tasks">https://gluebenchmark.com/tasks</a></li>
+<li>官方下载脚本：<a target="_blank" rel="noopener" href="https://github.com/nyu-mll/jiant/blob/master/scripts/download_glue_data.py">https://github.com/nyu-mll/jiant/blob/master/scripts/download_glue_data.py</a></li>
+<li>下载数据的脚本：<a target="_blank" rel="noopener" href="https://gist.github.com/W4ngatang/60c2bdb54d156a41194446737ce03e2e">https://gist.github.com/W4ngatang/60c2bdb54d156a41194446737ce03e2e</a></li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>GLUE</p><p><a href="https://brucehan98@github.io/2020/08/31/GLUE/">https://brucehan98@github.io/2020/08/31/GLUE/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-08-31</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/GLUE/">GLUE </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../../../../2021/04/11/%E5%88%9D%E8%AF%86BERT/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">初识BERT</span></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "a55c6c025892684196862ab02ee8127c",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一、简介"><span class="level-left"><span class="level-item">1</span><span class="level-item">一、简介</span></span></a></li><li><a class="level is-mobile" href="#二、任务介绍"><span class="level-left"><span class="level-item">2</span><span class="level-item">二、任务介绍</span></span></a></li><li><a class="level is-mobile" href="#数据集下载"><span class="level-left"><span class="level-item">3</span><span class="level-item">数据集下载</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>

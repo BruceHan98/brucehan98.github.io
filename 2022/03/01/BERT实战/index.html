@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>BERT实战 - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="BERT 实战"><meta property="og:type" content="blog"><meta property="og:title" content="BERT实战"><meta property="og:url" content="https://brucehan98@github.io/2022/03/01/BERT%E5%AE%9E%E6%88%98/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="BERT 实战"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://brucehan98@github.io/img/og_image.png"><meta property="article:published_time" content="2022-03-01T15:28:36.000Z"><meta property="article:modified_time" content="2022-09-01T15:47:08.841Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="BERT"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="../../../../img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2022/03/01/BERT%E5%AE%9E%E6%88%98/"},"headline":"BERT实战","image":["https://brucehan98@github.io/img/og_image.png"],"datePublished":"2022-03-01T15:28:36.000Z","dateModified":"2022-09-01T15:47:08.841Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"BERT 实战"}</script><link rel="canonical" href="https://brucehan98@github.io/2022/03/01/BERT%E5%AE%9E%E6%88%98/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-03-01T15:28:36.000Z" title="2022-03-01T15:28:36.000Z">2022-03-01</time>发表</span><span class="level-item"><time dateTime="2022-09-01T15:47:08.841Z" title="2022-09-01T15:47:08.841Z">2022-09-01</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/PLM/">PLM</a></span><span class="level-item">7 分钟读完 (大约1495个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">BERT实战</h1><div class="content"><p>BERT 的任务有两个：</p>
+<ul>
+<li><p>Masked LM (MLM): 将句子转化为 tokens，并以一定概率随机选取部分 token 替换为 [MASK] 掩码。这里的 [MASK] 是广义的掩码，包括替换为 “[MASK]” token、替换为随机 token 和保持原 token。</p>
+</li>
+<li><p>Next Sentence Prediction (NSP): 将两个句子拼接起来，判断这两个句子是不是属于前后关系。</p>
+</li>
+</ul>
+<p>Google 官方提供了数据预处理的代码：<a target="_blank" rel="noopener" href="https://github.com/google-research/bert/blob/master/create_pretraining_data.py">create_pretraining_data.py</a>，其中输入文件包括原始文本和词汇表，输出文件为处理后的 tfrecord 格式文件（Tensorflow 可读取文件），用于后续对 BERT 的训练或微调。</p>
+<h4 id="1-1-参数"><a href="#1-1-参数" class="headerlink" title="1.1 参数"></a>1.1 参数</h4><p>一些输入参数如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">输入参数</th>
+<th style="text-align:center">含义</th>
+<th style="text-align:center">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">input_file</td>
+<td style="text-align:center">输入的原始文本，可以是多个文件，用 “,” 隔开</td>
+<td style="text-align:center">None</td>
+</tr>
+<tr>
+<td style="text-align:center">vocab_file</td>
+<td style="text-align:center">词汇表，可以使用官方提供的用于微调，或者自己生成</td>
+<td style="text-align:center">None</td>
+</tr>
+<tr>
+<td style="text-align:center">do_lower_case</td>
+<td style="text-align:center">将输入文本转为小写（针对英文）</td>
+<td style="text-align:center">True</td>
+</tr>
+<tr>
+<td style="text-align:center">do_whole_word_mask</td>
+<td style="text-align:center">2019 新增的 wwm 模式，将整个词掩码</td>
+<td style="text-align:center">Fasle</td>
+</tr>
+<tr>
+<td style="text-align:center">max_seq_length</td>
+<td style="text-align:center">序列最大长度</td>
+<td style="text-align:center">128</td>
+</tr>
+<tr>
+<td style="text-align:center">max_predictions_per_seq</td>
+<td style="text-align:center">每个序列最多掩码的数量</td>
+<td style="text-align:center">20</td>
+</tr>
+<tr>
+<td style="text-align:center">random_seed</td>
+<td style="text-align:center">随机种子，便于复现实验</td>
+<td style="text-align:center">12345</td>
+</tr>
+<tr>
+<td style="text-align:center">dupe_factor</td>
+<td style="text-align:center">对输入文本重复进行不同掩码操作的次数</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">short_seq_prob</td>
+<td style="text-align:center">创建小于最大长度的序列的概率</td>
+<td style="text-align:center">0.1</td>
+</tr>
+<tr>
+<td style="text-align:center">masked_lm_prob</td>
+<td style="text-align:center">掩码概率</td>
+<td style="text-align:center">0.15</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="1-2-流程"><a href="#1-2-流程" class="headerlink" title="1.2 流程"></a>1.2 流程</h4><p>首先，对于每一个输入文本，进入到 <code>create_training_instances</code>: </p>
+<p>官方提示的输入文本要求：</p>
+<ul>
+<li>每行一句话。理想情况下，这些应该是实际的句子，而不是整个段落或任意跨度的文本。（因为我们将句子边界用于“下一句预测”任务）。</li>
+<li>不同的文档段落之间用空行隔开。</li>
+</ul>
+<p><strong>create_training_instances</strong></p>
+<p>一、逐行读取文本，若该行不为空，则对该行使用 <code>tokenization.FullTokenizer().tokenize()</code> 转为 tokens。</p>
+<p>处理流程：</p>
+<ol>
+<li>调用 <code>BasicTokenizer().tokenize()</code> 处理文本行</li>
+</ol>
+<p>​        这里先将文本行转为 Unicode 来统一处理。</p>
+<p>​    1.1 清理文本行：<code>_clean_text()</code></p>
+<p>​        去除 control 字符和不合法字符，并将 <code>\t \n \r \s</code> 等字符转为一个空格字符，返回清理后的字符串。</p>
+<p>​    1.2 对于汉字，每个汉字前后添加空格字符：<code>_tokenize_chinese_chars()</code></p>
+<p>​    1.3 使用 <code>text.split()</code> 将不相连的字符分开：<code>whitespace_tokenize()</code></p>
+<p>​        至此，返回处理后的 token 列表。英文是按照单词分开，一个 token 是一个单词；中文实际上是按照字分开了，一个 token 是一个字。</p>
+<p>​    1.4 若 <code>do_lower_case</code> 为 True，则将字符串转为小写，并去除音调进行规范化。</p>
+<pre><code>2. 调用 `WordpieceTokenizer().tokenize()` 处理后的每一个 token
+</code></pre><p>​        使用最长匹配优先的贪心算法按照给定的词汇表将文本转为 <code>word pieces</code>。例如，将 “unaffable” 转为 [“un”, “##aff”, “## able”]。输入为一个 token 或者是空格分开的 token 序列，输出为 <code>word pieces</code> 列表。该方法对中文是无效的，因为前面已经把中文文本按字分开了。</p>
+<p>​        至此，完成了 tokenize，返回分隔后的 token 列表。</p>
+<p>二、将每行得到的 token 列表添加到文档列表 <code>all_documents = [[]]</code> 的最后一个文档中，一个文档包含多行的 token 列表。去除空列表（多余的空行导致）之后随机打乱文档顺序（shuffle）。</p>
+<p>三、从所有文档（all_documents）中的每篇文档，创建实例：<code>create_instances_from_document()</code>:</p>
+<p>​        官方提示：由于我们总是要将序列扩充（padding）到 <code>max_seq_length</code> ，因此我们通常想用句子填满整个序列，所以短句子会造成计算的浪费。然而，有时候（short_seq_prob == 0.1 代表 10% 的概率）也需要短句子来降低预训练和微调之间的不匹配问题。</p>
+<ol>
+<li>Next Sentence Prediction (NSP) 任务</li>
+</ol>
+<p>​    1.1 确定目标序列长度（target_seq_length）</p>
+<p>​        target_seq_length = max_seq_length - 3    [CLS] [SEP] [SEP] 占了三个</p>
+<p>​        并且以 10% 的概率，target_seq_length = rng.randint(2, max_num_tokens)</p>
+<p>​    1.2 选取句子 a 和句子 b</p>
+<p>​        以 50% 的概率选择一个文档中相邻的两个序列，另外 50% 的概率从不同的文档选择不相邻的两个序列。</p>
+<p>​        然后以列表的形式表示为 <code>[CLS] 句子 a [SEP] 句子 b [SEP]</code>，同时句子 b 之前的所有 token 的 id 记为 0，之后的所有 token 的id 记为 1。</p>
+<ol>
+<li>Masked LM (MLM) 任务：<code>create_masked_lm_predictions()</code></li>
+</ol>
+<p>​        输入：上述得到的 token 序列；输出：Mask 后的 token 序列。</p>
+<p>​    2.1 对 token 序列分组，如果 <code>do_whole_word_mask</code> 为 True，则将同一个 word pieces 的 token 分到一组。例如，[“un”, “##aff”, “## able”] 分到一组；否则每个 token 为 1 组。并打乱顺序。</p>
+<p>​    2.2 选择 <code>min(max_predictions_per_seq, max(1, int(round(len(tokens) * masked_lm_prob))))</code> 个 token 进行 Mask，其中，被选中的组中的所有 token 都要 Mask（wwm）。</p>
+<p>​    2.3 Mask 操作</p>
+<p>​        被选中的 token，80 % 的概率替换为 “[MASK]” token，10% 的概率替换为词汇表中的随机词，10% 的概率不变。</p>
+<p>​        然后，由 Mask 之后的 token 序列的位置和标签得到 <code>TrainingInstance</code> 类型的对象。</p>
+<p>四、重复 <code>dupe_factor</code> 次步骤三，得到所有创建的实例列表。</p>
+<p>到这里，预处理基本完成了，剩下的就是将得到的数据写入文件。</p>
+<p><strong>write_instance_to_example_files</strong></p>
+<p>将上述得到的 instance 列表写入文件，创建 TF example files，用于后续训练或微调。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>BERT实战</p><p><a href="https://brucehan98@github.io/2022/03/01/BERT实战/">https://brucehan98@github.io/2022/03/01/BERT实战/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-03-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/BERT/">BERT </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../../10/PaddleOCR-Docker%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">PaddleOCR Docker 服务部署</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="../../../02/19/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%90%88%E9%9B%86/"><span class="level-item">预训练模型合集</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "9bc53dd7716c1dc32871e309ca341206",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-参数"><span class="level-left"><span class="level-item">1</span><span class="level-item">1.1 参数</span></span></a></li><li><a class="level is-mobile" href="#1-2-流程"><span class="level-left"><span class="level-item">2</span><span class="level-item">1.2 流程</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>

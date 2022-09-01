@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Neo4j Cypher的基本用法 - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Neo4j Cypher 查询语言的基本使用"><meta property="og:type" content="blog"><meta property="og:title" content="Neo4j Cypher的基本用法"><meta property="og:url" content="https://brucehan98@github.io/2021/09/01/Neo4j%E4%BD%BF%E7%94%A8/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="Neo4j Cypher 查询语言的基本使用"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://atts.w3cschool.cn/attachments/day_161226/201612260847226397.png"><meta property="article:published_time" content="2021-09-01T15:36:27.000Z"><meta property="article:modified_time" content="2022-09-01T15:47:34.398Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="Neo4j"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://atts.w3cschool.cn/attachments/day_161226/201612260847226397.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2021/09/01/Neo4j%E4%BD%BF%E7%94%A8/"},"headline":"Neo4j Cypher的基本用法","image":["https://atts.w3cschool.cn/attachments/day_161226/201612260847226397.png"],"datePublished":"2021-09-01T15:36:27.000Z","dateModified":"2022-09-01T15:47:34.398Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"Neo4j Cypher 查询语言的基本使用"}</script><link rel="canonical" href="https://brucehan98@github.io/2021/09/01/Neo4j%E4%BD%BF%E7%94%A8/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-09-01T15:36:27.000Z" title="2021-09-01T15:36:27.000Z">2021-09-01</time>发表</span><span class="level-item"><time dateTime="2022-09-01T15:47:34.398Z" title="2022-09-01T15:47:34.398Z">2022-09-01</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/Neo4j/">Neo4j</a></span><span class="level-item">9 分钟读完 (大约1837个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">Neo4j Cypher的基本用法</h1><div class="content"><h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><ul>
+<li>没有SQL</li>
+<li>图形数据库 GDBMS</li>
+<li><p>关系检索快</p>
+</li>
+<li><p>表示节点，关系和属性中的数据</p>
+</li>
+<li>节点和关系都包含属性</li>
+<li>关系连接节点</li>
+<li>属性是键值对</li>
+<li>节点用圆圈表示，关系用方向键表示。</li>
+<li>关系具有方向：单向和双向。</li>
+</ul>
+<h3 id="2-构成"><a href="#2-构成" class="headerlink" title="2. 构成"></a>2. 构成</h3><p>Neo4j图数据库主要有以下构建块</p>
+<ul>
+<li>节点</li>
+<li>属性</li>
+<li>关系</li>
+<li>标签</li>
+<li>数据浏览器</li>
+</ul>
+<ol>
+<li><p><strong>节点</strong></p>
+<p>节点是图表的基本单位。 它包含具有键值对的属性。如下图：</p>
+<p><img src="https://atts.w3cschool.cn/attachments/day_161226/201612260847226397.png" style="zoom: 67%;" /></p>
+</li>
+<li><p><strong>属性</strong></p>
+<p>键值对，用来描述图像、关系。</p>
+</li>
+<li><p><strong>关系</strong></p>
+<p>表示两个节点之间的关系。有向。</p>
+</li>
+<li><p><strong>标签</strong></p>
+<p>Label将一个公共名称与一组节点或关系相关联。 节点或关系可以包含一个或多个标签。 我们可以为现有节点或关系创建新标签。 我们可以从现有节点或关系中删除现有标签。</p>
+<p><strong>注： </strong>Neo4j将数据存储在节点或关系的属性中。</p>
+</li>
+<li><p><strong>Neo4j 数据浏览器</strong></p>
+<p>neo4j start</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:7474/browser/">http://localhost:7474/browser/</a></p>
+</li>
+</ol>
+<h3 id="3-Cypher-查询语言"><a href="#3-Cypher-查询语言" class="headerlink" title="3. Cypher 查询语言"></a>3. Cypher 查询语言</h3><ul>
+<li>关键词</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">CQL</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CREATE</td>
+<td style="text-align:center">创建节点、关系和属性</td>
+</tr>
+<tr>
+<td style="text-align:center">MATCH</td>
+<td style="text-align:center">检索有关节点、关系和属性</td>
+</tr>
+<tr>
+<td style="text-align:center">RETURN</td>
+<td style="text-align:center">返回查询的结果</td>
+</tr>
+<tr>
+<td style="text-align:center">WHERE</td>
+<td style="text-align:center">查询条件</td>
+</tr>
+<tr>
+<td style="text-align:center">DELETE</td>
+<td style="text-align:center">删除节点、关系</td>
+</tr>
+<tr>
+<td style="text-align:center">REMOVE</td>
+<td style="text-align:center">删除节点、关系的属性</td>
+</tr>
+<tr>
+<td style="text-align:center">ORDER BY</td>
+<td style="text-align:center">排序</td>
+</tr>
+<tr>
+<td style="text-align:center">SET</td>
+<td style="text-align:center">添加或更新标签</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>数据类型</p>
+<p>| 数据类型 |        说明        |<br>| :———: | :————————: |<br>| boolean  |    True，False     |<br>|   byte   |  用于表示8位整数   |<br>|  short   |  用于表示16位整数  |<br>|   int    |  用于表示32位整数  |<br>|   long   |  用于表示64位整数  |<br>|  float   | 用于表示32位浮点数 |<br>|  double  | 用于表示64位浮点数 |<br>|   char   |  用于表示16位字符  |<br>|  string  |   用于表示字符串   |</p>
+</li>
+</ul>
+<h4 id="CREATE"><a href="#CREATE" class="headerlink" title="CREATE"></a>CREATE</h4><p>用于创建节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs CQL"># 单个标签<br>CREATE (&lt;node-name&gt;:&lt;label-name&gt;)<br># 多个标签<br>CREATE (&lt;node-name&gt;:&lt;label-name1&gt;:&lt;label-name2&gt;.....:&lt;label-namen&gt;)<br></code></pre></td></tr></table></figure>
+<p><node-name> : 节点名称</p>
+<p><label-name>: 标签名称</p>
+<p>创建时可以带有属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE (<br>   &lt;node-name&gt;:&lt;label-name&gt;<br>   &#123; 	<br>      &lt;Property1-name&gt;:&lt;Property1-Value&gt;<br>      ........<br>      &lt;Propertyn-name&gt;:&lt;Propertyn-Value&gt;<br>   &#125;<br>)<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE (dept:Dept &#123; deptno:10,dname:&quot;Accounting&quot;,location:&quot;Hyderabad&quot; &#125;)<br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>：属性以字典形式声明，属性名不用加引号，属性值数字不加引号，字符加引号。属性间用逗号间隔，属性、标签和属性值之间不用逗号隔开。</p>
+<h4 id="MATCH"><a href="#MATCH" class="headerlink" title="MATCH"></a>MATCH</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (&lt;node-name&gt;:&lt;label-name&gt;)<br></code></pre></td></tr></table></figure>
+<p><node-name> : 节点名称</p>
+<p><label-name>: 标签名称</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e: Employee) RETURN e<br></code></pre></td></tr></table></figure>
+<p><strong>注意：</strong>我们不能单独使用MATCH Command从数据库检索数据。</p>
+<p>​    MATCH (e: ‘Employee’) RETURN e</p>
+<p>​    MATCH (e: “Employee”) RETURN e</p>
+<p>​    MATCH (e: Employee) RETURN e</p>
+<p>三个命令相同，我们可以选择这些命令中的任何一个。</p>
+<h4 id="RETURN"><a href="#RETURN" class="headerlink" title="RETURN"></a>RETURN</h4><p>用于检索节点、关系的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs CQL">RETURN <br>   &lt;node-name&gt;.&lt;property1-name&gt;,<br>   ........<br>   &lt;node-name&gt;.&lt;propertyn-name&gt;<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">RETURN dept.deptno<br></code></pre></td></tr></table></figure>
+<p><strong>注意：</strong>同样，不能单独使用RETURN语句返回属性</p>
+<h4 id="MATCH-amp-RETURN"><a href="#MATCH-amp-RETURN" class="headerlink" title="MATCH &amp; RETURN"></a>MATCH &amp; RETURN</h4><p>match 和 return 联合使用才能完成查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (dept: Dept)<br>RETURN dept.deptno,dept.dname<br></code></pre></td></tr></table></figure>
+<p>查询节点所有属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (dept: Dept)<br>RETURN dept<br></code></pre></td></tr></table></figure>
+<h4 id="关系查询"><a href="#关系查询" class="headerlink" title="关系查询"></a>关系查询</h4><ul>
+<li>创建节点之间的关系</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE (&lt;node1-name&gt;:&lt;label1-name&gt;)-<br>		[(&lt;relationship-name&gt;:&lt;relationship-label-name&gt;)]<br>		-&gt;(&lt;node2-name&gt;:&lt;label2-name&gt;)<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE (p1:Profile1)-[r1:LIKES]-&gt;(p2:Profile2)<br></code></pre></td></tr></table></figure>
+<h4 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h4><p>简单条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">WHERE &lt;condition&gt;<br></code></pre></td></tr></table></figure>
+<p>复合条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">WHERE &lt;condition&gt; &lt;boolean-operator&gt; &lt;condition&gt;<br></code></pre></td></tr></table></figure>
+<ol>
+<li><condition> 用法</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">&lt;property-name&gt; &lt;comparison-operator&gt; &lt;value&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其中，比较运算符<comparison-operator>有：</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">=</td>
+<td style="text-align:center">等于</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&gt;</td>
+<td style="text-align:center">不等于</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center">小于</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center">大于</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;=</td>
+<td style="text-align:center">小于等于</td>
+</tr>
+<tr>
+<td style="text-align:center">>=</td>
+<td style="text-align:center">大于等于</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>条件之间的布尔操作有：</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">布尔操作</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">AND</td>
+<td style="text-align:center">与</td>
+</tr>
+<tr>
+<td style="text-align:center">OR</td>
+<td style="text-align:center">或</td>
+</tr>
+<tr>
+<td style="text-align:center">NOT</td>
+<td style="text-align:center">非</td>
+</tr>
+<tr>
+<td style="text-align:center">XOR</td>
+<td style="text-align:center">异或</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (emp:Employee) <br>WHERE emp.name = &#x27;Abc&#x27; OR emp.name = &#x27;Xyz&#x27;<br>RETURN emp<br></code></pre></td></tr></table></figure>
+<h4 id="创建关系"><a href="#创建关系" class="headerlink" title="创建关系"></a>创建关系</h4><p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (cust:Customer),(cc:CreditCard) <br>WHERE cust.id = &quot;1001&quot; AND cc.id= &quot;5001&quot; <br>CREATE (cust)-[r:DO_SHOPPING_WITH&#123;shopdate:&quot;12/12/2014&quot;,price:55000&#125;]-&gt;(cc) <br>RETURN r<br></code></pre></td></tr></table></figure>
+<h4 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h4><p>用于删除节点及其关联的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">DELETE &lt;node-name-list&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">DELETE &lt;node1-name&gt;,&lt;node2-name&gt;,&lt;relationship-name&gt;<br></code></pre></td></tr></table></figure>
+<p><strong>注意：</strong>我们应该使用逗号（，）运算符来分隔节点名。</p>
+<p>例如：</p>
+<ul>
+<li>删除节点</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e: Employee) DELETE e<br></code></pre></td></tr></table></figure>
+<ul>
+<li>删除关系</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (cc: CreditCard)-[rel]-(c:Customer) DELETE cc,c,rel<br></code></pre></td></tr></table></figure>
+<h4 id="REMOVE"><a href="#REMOVE" class="headerlink" title="REMOVE"></a>REMOVE</h4><p>用于删除现有节点或关系的属性</p>
+<p>Neo4j CQL DELETE和REMOVE命令之间的主要区别：</p>
+<ul>
+<li>DELETE操作用于删除节点和关联关系。</li>
+<li>REMOVE操作用于删除标签和属性。</li>
+</ul>
+<p><strong>注：</strong>两个命令都应该与MATCH命令一起使用。</p>
+<p><strong>删除节点属性：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">REMOVE &lt;property-name-list&gt;<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (book &#123; id:122 &#125;)<br>REMOVE book.price<br>RETURN book<br></code></pre></td></tr></table></figure>
+<p>等同于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (book: Book)<br><br>WHERE book.id = 122<br><br>REMOVE book.price<br><br>RETURN book<br></code></pre></td></tr></table></figure>
+<p>等同于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> BOOK <span class="hljs-keyword">WHERE</span> ID <span class="hljs-operator">=</span> <span class="hljs-number">122</span>;<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> BOOK REMOVE <span class="hljs-keyword">COLUMN</span> PRICE;<br></code></pre></td></tr></table></figure>
+<p><strong>删除节点、关系的某个标签</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">REMOVE &lt;label-name-list&gt; <br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (m:Movie) <br>REMOVE m:Picture<br></code></pre></td></tr></table></figure>
+<h4 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h4><p>用于为节点、关系添加或更新属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">SET  &lt;node-label-name&gt;.&lt;property1-name&gt;<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (book:Book)<br>SET book.title = &#x27;superstar&#x27;<br>RETURN book<br></code></pre></td></tr></table></figure>
+<h4 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h4><p>用于查询结果排序，默认是DESC（降序）</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (emp:Employee)<br>RETURN emp.empid,emp.name,emp.salary,emp.deptno<br>ORDER BY emp.name DESC<br></code></pre></td></tr></table></figure>
+<h4 id="UNION-amp-UNION-ALL"><a href="#UNION-amp-UNION-ALL" class="headerlink" title="UNION &amp; UNION ALL"></a>UNION &amp; UNION ALL</h4><p>UNION 用于将两组结果中的公共行组合并返回到一组结果中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">&lt;MATCH Command1&gt;<br>   UNION<br>&lt;MATCH Command2&gt;<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (cc:CreditCard) RETURN cc.id,cc.number<br>UNION<br>MATCH (dc:DebitCard) RETURN dc.id,dc.number<br></code></pre></td></tr></table></figure>
+<p>返回包含在两个查询结果中的<strong>不重复的行</strong>。</p>
+<p>UNION ALL 则返回两组结果中的<strong>所有行</strong>。</p>
+<h4 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h4><p>用来过滤或限制查询返回的行数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">LIMIT &lt;number&gt;<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (emp:Employee) <br>RETURN emp<br>LIMIT 2<br></code></pre></td></tr></table></figure>
+<p>只显示Top 2 的结果。</p>
+<p>对应地，<strong>SKIP</strong>用于跳过最前面的查询结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">SKIP &lt;number&gt;<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (emp:Employee) <br>RETURN emp<br>SKIP 2<br></code></pre></td></tr></table></figure>
+<p>返回从第3个开始的结果。</p>
+<h4 id="MERGE"><a href="#MERGE" class="headerlink" title="MERGE"></a>MERGE</h4><p>用于将新的节点添加到数据库，如果存在则返回该节点；否则创建新节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MERGE = CREATE + MATCH<br><br>MERGE (&lt;node-name&gt;:&lt;label-name&gt;<br>&#123;<br>   &lt;Property1-name&gt;:&lt;Pro&lt;rty1-Value&gt;<br>   .....<br>   &lt;Propertyn-name&gt;:&lt;Propertyn-Value&gt;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>与CREATE的区别：</p>
+<p>CREATE 在创建新节点时，不检查数据库中是否已存在相同节点；因此会创建重复数据。</p>
+<h4 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a>NULL</h4><p>空属性用NULL填充</p>
+<h4 id="IN"><a href="#IN" class="headerlink" title="IN"></a>IN</h4><p>类似于 AND 操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e:Employee) <br>WHERE e.id IN [123,124]<br>RETURN e.id,e.name,e.sal,e.deptno<br></code></pre></td></tr></table></figure>
+<h3 id="4-Neo4j-函数"><a href="#4-Neo4j-函数" class="headerlink" title="4. Neo4j 函数"></a>4. Neo4j 函数</h3><h4 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">UPPER</td>
+<td style="text-align:center">所有字母改为大写</td>
+</tr>
+<tr>
+<td style="text-align:center">LOWER</td>
+<td style="text-align:center">所有字母转为小写</td>
+</tr>
+<tr>
+<td style="text-align:center">SUBSTRING</td>
+<td style="text-align:center">字串</td>
+</tr>
+<tr>
+<td style="text-align:center">REPLACE</td>
+<td style="text-align:center">替换</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">UPPER (&lt;input-string&gt;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">SUBSTRING(&lt;input-string&gt;,&lt;startIndex&gt; ,&lt;endIndex&gt;)<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e:Employee) <br>RETURN e.id,UPPER(e.name),LOWER(e.sal),e.deptno<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e:Employee) <br>RETURN e.id,SUBSTRING(e.name,0,2),e.sal,e.deptno<br></code></pre></td></tr></table></figure>
+<h4 id="AGGERGATION-聚合"><a href="#AGGERGATION-聚合" class="headerlink" title="AGGERGATION 聚合"></a>AGGERGATION 聚合</h4><p>类似于SQL中的GROUP BY子句。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">功能</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">COUNT</td>
+<td style="text-align:center">返回行数</td>
+</tr>
+<tr>
+<td style="text-align:center">MAX</td>
+<td style="text-align:center">返回最大值</td>
+</tr>
+<tr>
+<td style="text-align:center">MIN</td>
+<td style="text-align:center">返回最小值</td>
+</tr>
+<tr>
+<td style="text-align:center">SUM</td>
+<td style="text-align:center">求和</td>
+</tr>
+<tr>
+<td style="text-align:center">AVG</td>
+<td style="text-align:center">平均</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e:Employee) RETURN COUNT(*)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e:Employee) <br>RETURN MAX(e.sal),MIN(e.sal)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (e:Employee) <br>RETURN SUM(e.sal),AVG(e.sal)<br></code></pre></td></tr></table></figure>
+<h4 id="关系函数"><a href="#关系函数" class="headerlink" title="关系函数"></a>关系函数</h4><p><strong>STARTNODE、ENDNODE</strong></p>
+<p>返回关系的开始节点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">STARTNODE (&lt;relationship-label-name&gt;)<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (a)-[movie:ACTION_MOVIES]-&gt;(b) <br>RETURN STARTNODE(movie),ENDNODE(movie)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">MATCH (a)-[movie:ACTION_MOVIES]-&gt;(b) <br>RETURN ID(movie),TYPE(movie)<br></code></pre></td></tr></table></figure>
+<p>关系的ID和类型（名称）</p>
+<h3 id="5-Neo4j-Admin"><a href="#5-Neo4j-Admin" class="headerlink" title="5. Neo4j Admin"></a>5. Neo4j Admin</h3><p><strong>索引</strong></p>
+<p>Neo4j SQL支持节点或关系属性上的索引，以提高应用程序的性能。</p>
+<p>我们可以为具有相同标签名称的所有节点的属性创建索引。</p>
+<ul>
+<li>Create Index 创建索引</li>
+<li>Drop Index 丢弃索引</li>
+</ul>
+<p>创建索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE INDEX ON :&lt;label_name&gt; (&lt;property_name&gt;)<br></code></pre></td></tr></table></figure>
+<p>上述语法描述它在节点或关系的<label_name>的<property_name>上创建一个新索引。</p>
+<p>删除索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs CQL">DROP INDEX ON :&lt;label_name&gt; (&lt;property_name&gt;)<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE INDEX ON :Customer (name)<br>DROP INDEX ON :Customer (name)<br></code></pre></td></tr></table></figure>
+<p><strong>UNIQUE</strong></p>
+<ul>
+<li>创建UNIQUE约束</li>
+<li>丢弃UNIQUE约束</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE CONSTRAINT ON (&lt;label_name&gt;)<br>ASSERT &lt;property_name&gt; IS UNIQUE<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">CREATE CONSTRAINT ON (cc:CreditCard)<br>ASSERT cc.number IS UNIQUE<br></code></pre></td></tr></table></figure>
+<p>创建新的节点时，如果被UNIQUE约束的属性已存在，则会创建失败。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs CQL">DROP CONSTRAINT ON (&lt;label_name&gt;)<br>ASSERT &lt;property_name&gt; IS UNIQUE<br></code></pre></td></tr></table></figure>
+<p>删除约束</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Neo4j Cypher的基本用法</p><p><a href="https://brucehan98@github.io/2021/09/01/Neo4j使用/">https://brucehan98@github.io/2021/09/01/Neo4j使用/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-09-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/Neo4j/">Neo4j </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../../../10/02/git%E4%BD%BF%E7%94%A8/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">git使用</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="../../../05/01/XLNet/"><span class="level-item">XLNet</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "63dcf806d8ef6eb0eabcd88c49aa2f58",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-简介"><span class="level-left"><span class="level-item">1</span><span class="level-item">1. 简介</span></span></a></li><li><a class="level is-mobile" href="#2-构成"><span class="level-left"><span class="level-item">2</span><span class="level-item">2. 构成</span></span></a></li><li><a class="level is-mobile" href="#3-Cypher-查询语言"><span class="level-left"><span class="level-item">3</span><span class="level-item">3. Cypher 查询语言</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#CREATE"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">CREATE</span></span></a></li><li><a class="level is-mobile" href="#MATCH"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">MATCH</span></span></a></li><li><a class="level is-mobile" href="#RETURN"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">RETURN</span></span></a></li><li><a class="level is-mobile" href="#MATCH-amp-RETURN"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">MATCH &amp; RETURN</span></span></a></li><li><a class="level is-mobile" href="#关系查询"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">关系查询</span></span></a></li><li><a class="level is-mobile" href="#WHERE"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">WHERE</span></span></a></li><li><a class="level is-mobile" href="#创建关系"><span class="level-left"><span class="level-item">3.7</span><span class="level-item">创建关系</span></span></a></li><li><a class="level is-mobile" href="#DELETE"><span class="level-left"><span class="level-item">3.8</span><span class="level-item">DELETE</span></span></a></li><li><a class="level is-mobile" href="#REMOVE"><span class="level-left"><span class="level-item">3.9</span><span class="level-item">REMOVE</span></span></a></li><li><a class="level is-mobile" href="#SET"><span class="level-left"><span class="level-item">3.10</span><span class="level-item">SET</span></span></a></li><li><a class="level is-mobile" href="#ORDER-BY"><span class="level-left"><span class="level-item">3.11</span><span class="level-item">ORDER BY</span></span></a></li><li><a class="level is-mobile" href="#UNION-amp-UNION-ALL"><span class="level-left"><span class="level-item">3.12</span><span class="level-item">UNION &amp; UNION ALL</span></span></a></li><li><a class="level is-mobile" href="#LIMIT"><span class="level-left"><span class="level-item">3.13</span><span class="level-item">LIMIT</span></span></a></li><li><a class="level is-mobile" href="#MERGE"><span class="level-left"><span class="level-item">3.14</span><span class="level-item">MERGE</span></span></a></li><li><a class="level is-mobile" href="#NULL"><span class="level-left"><span class="level-item">3.15</span><span class="level-item">NULL</span></span></a></li><li><a class="level is-mobile" href="#IN"><span class="level-left"><span class="level-item">3.16</span><span class="level-item">IN</span></span></a></li></ul></li><li><a class="level is-mobile" href="#4-Neo4j-函数"><span class="level-left"><span class="level-item">4</span><span class="level-item">4. Neo4j 函数</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#字符串函数"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">字符串函数</span></span></a></li><li><a class="level is-mobile" href="#AGGERGATION-聚合"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">AGGERGATION 聚合</span></span></a></li><li><a class="level is-mobile" href="#关系函数"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">关系函数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#5-Neo4j-Admin"><span class="level-left"><span class="level-item">5</span><span class="level-item">5. Neo4j Admin</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>

@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>XLNet - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="XLNet 与 BERT 的联系与区别"><meta property="og:type" content="blog"><meta property="og:title" content="XLNet"><meta property="og:url" content="https://brucehan98@github.io/2021/05/01/XLNet/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="XLNet 与 BERT 的联系与区别"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://img-blog.csdnimg.cn/201906241015176.jpg"><meta property="article:published_time" content="2021-05-01T15:39:40.000Z"><meta property="article:modified_time" content="2022-09-01T15:44:13.772Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="XLNet"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://img-blog.csdnimg.cn/201906241015176.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2021/05/01/XLNet/"},"headline":"XLNet","image":["https://img-blog.csdnimg.cn/201906241015176.jpg"],"datePublished":"2021-05-01T15:39:40.000Z","dateModified":"2022-09-01T15:44:13.772Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"XLNet 与 BERT 的联系与区别"}</script><link rel="canonical" href="https://brucehan98@github.io/2021/05/01/XLNet/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-05-01T15:39:40.000Z" title="2021-05-01T15:39:40.000Z">2021-05-01</time>发表</span><span class="level-item"><time dateTime="2022-09-01T15:44:13.772Z" title="2022-09-01T15:44:13.772Z">2022-09-01</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/PLM/">PLM</a></span><span class="level-item">8 分钟读完 (大约1670个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">XLNet</h1><div class="content"><h4 id="0-简介"><a href="#0-简介" class="headerlink" title="0. 简介"></a>0. 简介</h4><blockquote>
+<p><strong>XLNet</strong> is a new unsupervised language representation learning method based on a novel generalized permutation language modeling objective. Additionally, XLNet employs Transformer-XL as the backbone model, exhibiting excellent performance for language tasks involving long context.</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>MNLI</th>
+<th>QNLI</th>
+<th>QQP</th>
+<th>RTE</th>
+<th>SST-2</th>
+<th>MRPC</th>
+<th>CoLA</th>
+<th>STS-B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT</td>
+<td>86.6</td>
+<td>92.3</td>
+<td>91.3</td>
+<td>70.4</td>
+<td>93.2</td>
+<td>88.0</td>
+<td>60.6</td>
+<td>90.0</td>
+</tr>
+<tr>
+<td>XLNet</td>
+<td><strong>89.8</strong></td>
+<td><strong>93.9</strong></td>
+<td><strong>91.8</strong></td>
+<td><strong>83.8</strong></td>
+<td><strong>95.6</strong></td>
+<td><strong>89.2</strong></td>
+<td><strong>63.6</strong></td>
+<td><strong>91.8</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>XLNet是BERT的升级模型，在以下三方面进行了优化：</p>
+<ul>
+<li>采用AR模型替代AE模型，解决mask带来的负面影响</li>
+<li>双流 (two-stream) 注意力机制</li>
+<li>引入transformer-xl</li>
+</ul>
+<h4 id="1-AR-v-s-AE"><a href="#1-AR-v-s-AE" class="headerlink" title="1. AR v.s. AE"></a>1. AR v.s. AE</h4><ul>
+<li>AR (Auto-Regressive) Language Modeling</li>
+</ul>
+<blockquote>
+<p>自回归语言模型，主要任务在于评估语料的概率分布，例如，给定一个序列X=(x1,…,xT)，AR模型就是在计算其极大似然估计p(X)，即已知xt之前的序列，预测xt的值。当然也可以反着来，即已知xt之后的序列，预测xt的值。(<strong>Unidirectional Transformer</strong>)</p>
+<p>问题：单向建模，不能捕捉双向的语义信息。</p>
+</blockquote>
+<ul>
+<li>AE (Auto-Encoding) (BERT)</li>
+</ul>
+<blockquote>
+<p>对输入进行编码并解码，Masked Language Model采用了一个标志位[MASK]来随机替换一些词，再用[MASK]的上下文来预测[MASK]的真实值。(<strong>Bidirectional Transformer</strong>)</p>
+<p>问题：1.独立假设 (假设每个MASK的词是独立的)，事实上MASK的词是有关的。</p>
+<p>​            2.人工噪声：预训练和微调数据的不统一，从而引入了一些人为误差。</p>
+</blockquote>
+<p><strong>XLNet</strong>：对上面的问题进行了优化，AR + 无MASK噪声 + 双向上下文语义</p>
+<h4 id="2-Premutation-Language-Modeling"><a href="#2-Premutation-Language-Modeling" class="headerlink" title="2. Premutation Language Modeling"></a>2. Premutation Language Modeling</h4><p>​        为了解决上文提到的问题，作者提出了排列语言模型，该模型不再对传统的AR模型的序列的值按顺序进行建模，而是最大化所有可能的序列的因式分解顺序的期望对数似然。</p>
+<p>​        举例来说，对于一个序列[1,2,3,4]，如果我们的预测目标是3，传统的AR模型，结果是：</p>
+<script type="math/tex; mode=display">
+p(3)=
+∏_{t=1} ^ 3
+p(3∣x _{<t})</script><p>采用本文的方法，先对该序列进行因式分解，最终会有4!种排列方式，下图是其中可能的四种情况：</p>
+<p><img src="https://img-blog.csdnimg.cn/201906241015176.jpg" alt="img" style="zoom:50%;" /></p>
+<p>​        第二种情况3的左边还包括了2与4，所以得到的结果是：</p>
+<script type="math/tex; mode=display">
+p(3)=p(3∣2)∗p(3∣2,4)</script><p>​        这样处理过后不但保留了序列的上下文信息，也避免了采用mask标记位，巧妙的改进了bert与传统AR模型的缺点。</p>
+<h4 id="3-Two-stream-Self-Attention"><a href="#3-Two-stream-Self-Attention" class="headerlink" title="3. Two-stream Self Attention"></a>3. Two-stream Self Attention</h4><p>​        虽然排列语言模型能保留上下文信息并且没有人为噪声，但在普通的transformer结构里存在一定的问题的。</p>
+<p>对于一个对数似然，</p>
+<script type="math/tex; mode=display">
+p_θ(X_{zt}∣x_{z<t})= 
+\frac{exp(e(x)^Th_θ(x_{z<t}))}{∑_{x′}exp(e(x′)^Thθ(x_{z<t}))}</script><p>其中$hθ(x_{z&lt;t})$并不依赖于其要预测的内容的位置信息，<strong>因此无论目标位置怎么变都能得到相同的分布结果</strong>。</p>
+<p>​        为了解决这个问题，论文使用下面的计算方法，来实现目标位置感知：</p>
+<script type="math/tex; mode=display">
+p_θ(X_{zt}∣x_{z<t})= 
+\frac{exp(e(x)^Tg_θ(x_{z<t},z_t))}{∑_{x′}exp(e(x′)^Tgθ(x_{z<t},z_t))}</script><p>其中$gθ(x_{z&lt;t},z_t)$加入了位置信息${z_t}$，即双流注意力机制：</p>
+<ul>
+<li>如果目标是预测${z_t}$，那$gθ(x_{z&lt;t},z_t)$那么只能有其位置信息而不能包含内容信息${x_{zt}}$</li>
+<li>如果目标是预测其他tokens，即${x_{zj}}$，${j&gt;t}$，那么同时包含${x_{zt}}$的内容信息和位置信息。</li>
+</ul>
+<h4 id="4-Transformer-XL"><a href="#4-Transformer-XL" class="headerlink" title="4. Transformer-XL"></a>4. Transformer-XL</h4><p>作者还将Transformer-XL的两个最重要的技术<strong>相对位置编码</strong>与<strong>片段循环机制</strong>应用了进来。</p>
+<ul>
+<li>片段循环机制</li>
+</ul>
+<p>transformer-xl的提出主要是为了解决超长序列的依赖问题，对于普通的transformer由于有一个最长序列的超参数控制其长度，对于特别长的序列就会导致丢失一些信息。假设我们有一个长度为1000的序列，如果我们设置transformer的最大序列长度是100，那么这个1000长度的序列需要计算十次，并且每一次的计算都没法考虑到每一个段之间的关系。如果采用transformer-xl，首先取第一个段进行计算，然后把得到的结果的隐藏层的值进行缓存，第二个段计算的过程中，把缓存的值拼接起来再进行计算。该机制不但能保留长依赖关系还能加快训练，因为每一个前置片段都保留了下来，不需要再重新计算。</p>
+<p>在XLNet中的应用：</p>
+<script type="math/tex; mode=display">
+h_{zt}^{(m)} = Attention(Q=h_{zt}^{(m-1)},KV=[\tilde{h}^{(m-1)},h_{z≤t}^{(m-1)}];θ)</script><p>其中$\tilde{h}^{(m-1)}$表示的是缓存值。</p>
+<ul>
+<li>相对位置编码</li>
+</ul>
+<p>bert的position embedding采用的是绝对位置编码，但是绝对位置编码在transformer-xl中有一个致命的问题，因为没法区分到底是哪一个片段里的，这就导致了一些位置信息的损失。</p>
+<p>假设给定一对位置i与j，如果i和j是同一个片段里的那么我们令这个片段编码${s_{ij}=s_+}$，如果不在一个片段里则令这个片段编码为${s_{ij}=s_-}$，这个值是在训练的过程中得到的，也是用来计算attention weight时候用到的。</p>
+<h4 id="5-实验"><a href="#5-实验" class="headerlink" title="5. 实验"></a>5. 实验</h4><p>pre-trained models:</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="https://storage.googleapis.com/xlnet/released_models/cased_L-24_H-1024_A-16.zip"><code>XLNet-Large, Cased</code></a></strong>: 24-layer, 1024-hidden, 16-heads</li>
+<li><strong><a target="_blank" rel="noopener" href="https://storage.googleapis.com/xlnet/released_models/cased_L-12_H-768_A-12.zip"><code>XLNet-Base, Cased</code></a></strong>: 12-layer, 768-hidden, 12-heads.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">|- xlnet_model.ckpt      # 模型权重<br>|- xlnet_model.meta      # 模型meta信息<br>|- xlnet_model.index     # 模型index信息<br>|- xlnet_config.json     # 模型参数<br>|- spiece.model          # 词表<br></code></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>Text Classification/Regression</strong></p>
+</li>
+<li><p><strong>SQuAD2.0</strong></p>
+</li>
+<li><p><strong>RACE reading comprehension</strong></p>
+</li>
+<li><p><strong>Custom Usage of XLNet</strong></p>
+</li>
+</ul>
+<p><strong>预训练：</strong></p>
+<ul>
+<li><p>生成词表</p>
+<p>首先需要使用<a target="_blank" rel="noopener" href="https://github.com/google/sentencepiece">Sentence Piece</a>生成词表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">spm_train<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>生成tf_records</p>
+<p>生成词表后，开始利用原始文本语料生成训练用的tf_records文件。原始文本的构造方式:</p>
+<ul>
+<li>每行都是一个句子</li>
+<li>空行代表文档末尾</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python data_utils.py<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>预训练</p>
+<p>获得以上数据后，正式开始预训练XLNet。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python train.py<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>下游任务微调</p>
+</li>
+</ul>
+<h4 id="Sentence-Transformers"><a href="#Sentence-Transformers" class="headerlink" title="Sentence Transformers"></a>Sentence Transformers</h4><ul>
+<li><strong>Setup</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pip install <br>transformers&gt;=3.0.2<br>tqdm<br>torch&gt;=1.2.0<br>numpy<br>scikit-learn<br>scipy<br>nltk<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>Sentences Embedding with a Pretrained Model</strong></li>
+</ul>
+<p>First download a pretrained model.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer<br>model = SentenceTransformer(<span class="hljs-string">&#x27;bert-base-nli-mean-tokens&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>Then provide some sentences to the model.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">sentences = [<span class="hljs-string">&#x27;This framework generates embeddings for each input sentence&#x27;</span>,<br>    <span class="hljs-string">&#x27;Sentences are passed as a list of string.&#x27;</span>, <br>    <span class="hljs-string">&#x27;The quick brown fox jumps over the lazy dog.&#x27;</span>]<br>sentence_embeddings = model.encode(sentences)<br></code></pre></td></tr></table></figure>
+<p>And that’s it already. We now have a list of numpy arrays with the embeddings.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> sentence, embedding <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(sentences, sentence_embeddings):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sentence:&quot;</span>, sentence)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embedding:&quot;</span>, embedding)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&quot;</span>)<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>Training</strong></li>
+</ul>
+<p>fine-tune your own sentence embedding methods for your specific task.</p>
+<ol>
+<li><p>Dataset Download</p>
+</li>
+<li><p>Model Training from Scratch</p>
+<p>First, we define a sequential model of how a sentence is mapped to a fixed size sentence embedding:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Use XLNet/BERT/... for mapping tokens to embeddings</span><br>word_embedding_model = models.Transformer(<span class="hljs-string">&#x27;xlnet-base-cased&#x27;</span>)  <span class="hljs-comment"># bert-base-cased..</span><br><br><span class="hljs-comment"># Apply mean pooling to get one fixed sized sentence vector</span><br>pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())<br><br>model = SentenceTransformer(modules=[word_embedding_model, pooling_model])<br></code></pre></td></tr></table></figure>
+<p>Next, we specify a train dataloader:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">nli_reader = NLIDataReader(<span class="hljs-string">&#x27;datasets/AllNLI&#x27;</span>)<br><br>train_data = SentencesDataset(nli_reader.get_examples(<span class="hljs-string">&#x27;train.gz&#x27;</span>), model=model)<br>train_dataloader = DataLoader(train_data, shuffle=<span class="hljs-literal">True</span>, batch_size=batch_size)<br>train_loss = losses.SoftmaxLoss(model=model, sentence_embedding_dimension=model.get_sentence_embedding_dimension(), num_labels=train_num_labels)<br></code></pre></td></tr></table></figure>
+<p>The training then looks like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">model.fit(train_objectives=[(train_dataloader, train_loss)],<br>         evaluator=evaluator,<br>         epochs=num_epochs,<br>         evaluation_steps=<span class="hljs-number">1000</span>,<br>         warmup_steps=warmup_steps,<br>         output_path=model_save_path<br>         )<br></code></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># load model</span><br>model = SentenceTransformer(<span class="hljs-string">&#x27;name_of_model&#x27;</span>)<br><br><span class="hljs-comment"># load embedder</span><br>embedder = SentenceTransformer(<span class="hljs-string">&#x27;bert-base-nli-mean-tokens&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1906.08237.pdf">https://arxiv.org/pdf/1906.08237.pdf</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012526436/article/details/93196139">https://blog.csdn.net/u012526436/article/details/93196139</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/UKPLab/sentence-transformers">https://github.com/UKPLab/sentence-transformers</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zihangdai/xlnet">https://github.com/zihangdai/xlnet</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>XLNet</p><p><a href="https://brucehan98@github.io/2021/05/01/XLNet/">https://brucehan98@github.io/2021/05/01/XLNet/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-05-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/XLNet/">XLNet </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../../../09/01/Neo4j%E4%BD%BF%E7%94%A8/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Neo4j Cypher的基本用法</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="../../../04/11/%E5%88%9D%E8%AF%86BERT/"><span class="level-item">初识BERT</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "138caec2bf47b3e4da826388e93cdfee",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#0-简介"><span class="level-left"><span class="level-item">1</span><span class="level-item">0. 简介</span></span></a></li><li><a class="level is-mobile" href="#1-AR-v-s-AE"><span class="level-left"><span class="level-item">2</span><span class="level-item">1. AR v.s. AE</span></span></a></li><li><a class="level is-mobile" href="#2-Premutation-Language-Modeling"><span class="level-left"><span class="level-item">3</span><span class="level-item">2. Premutation Language Modeling</span></span></a></li><li><a class="level is-mobile" href="#3-Two-stream-Self-Attention"><span class="level-left"><span class="level-item">4</span><span class="level-item">3. Two-stream Self Attention</span></span></a></li><li><a class="level is-mobile" href="#4-Transformer-XL"><span class="level-left"><span class="level-item">5</span><span class="level-item">4. Transformer-XL</span></span></a></li><li><a class="level is-mobile" href="#5-实验"><span class="level-left"><span class="level-item">6</span><span class="level-item">5. 实验</span></span></a></li><li><a class="level is-mobile" href="#Sentence-Transformers"><span class="level-left"><span class="level-item">7</span><span class="level-item">Sentence Transformers</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>

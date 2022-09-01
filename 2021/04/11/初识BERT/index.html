@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>初识BERT - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Attention is all you need."><meta property="og:type" content="blog"><meta property="og:title" content="初识BERT"><meta property="og:url" content="https://brucehan98@github.io/2021/04/11/%E5%88%9D%E8%AF%86BERT/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="Attention is all you need."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193133441.gif"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193205893.gif"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193306430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/2019040719332630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193344547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193410827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193428125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193445308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193506971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190625100244308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193730682.png"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193742137.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193756162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193820725.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193916505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407194002495.png"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407193953348.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/2019040719394179.png"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407194033648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407194054634.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="og:image" content="https://jalammar.github.io/images/t/transformer_decoding_1.gif"><meta property="og:image" content="https://jalammar.github.io/images/t/transformer_decoding_2.gif"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407194141481.png"><meta property="og:image" content="https://img-blog.csdnimg.cn/20190407194245766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70"><meta property="article:published_time" content="2021-04-11T06:38:45.000Z"><meta property="article:modified_time" content="2022-09-01T15:28:06.468Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="BERT"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://img-blog.csdnimg.cn/20190407193133441.gif"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2021/04/11/%E5%88%9D%E8%AF%86BERT/"},"headline":"初识BERT","image":["https://img-blog.csdnimg.cn/20190407193133441.gif","https://img-blog.csdnimg.cn/20190407193205893.gif","https://img-blog.csdnimg.cn/20190407193730682.png","https://img-blog.csdnimg.cn/20190407194002495.png","https://img-blog.csdnimg.cn/2019040719394179.png","https://jalammar.github.io/images/t/transformer_decoding_1.gif","https://jalammar.github.io/images/t/transformer_decoding_2.gif","https://img-blog.csdnimg.cn/20190407194141481.png"],"datePublished":"2021-04-11T06:38:45.000Z","dateModified":"2022-09-01T15:28:06.468Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"Attention is all you need."}</script><link rel="canonical" href="https://brucehan98@github.io/2021/04/11/%E5%88%9D%E8%AF%86BERT/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-04-11T06:38:45.000Z" title="2021-04-11T06:38:45.000Z">2021-04-11</time>发表</span><span class="level-item"><time dateTime="2022-09-01T15:28:06.468Z" title="2022-09-01T15:28:06.468Z">2022-09-01</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/PLM/">PLM</a></span><span class="level-item">25 分钟读完 (大约5020个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">初识BERT</h1><div class="content"><h4 id="0-NLP-发展史"><a href="#0-NLP-发展史" class="headerlink" title="0. NLP 发展史"></a>0. NLP 发展史</h4><ul>
+<li>2001 - Neural language models（神经语言模型）</li>
+<li>2008 - Multi-task learning（多任务学习）</li>
+<li>2013 - Word embeddings（词嵌入）</li>
+<li>2013 - Neural networks for NLP（NLP神经网络）</li>
+<li>2014 - Sequence-to-sequence models</li>
+<li>2015 - Attention（注意力机制）</li>
+<li>2015 - Memory-based networks（基于记忆的网络）</li>
+<li>2018 - Pretrained language models（预训练语言模型）</li>
+</ul>
+<h4 id="1-NLP-任务分类"><a href="#1-NLP-任务分类" class="headerlink" title="1. NLP 任务分类"></a>1. NLP 任务分类</h4><ul>
+<li><strong>SRL</strong> (语义角色标注)</li>
+<li><strong>Coref</strong> (指代消歧) </li>
+<li><strong>SNLI</strong> (自然语言推理)</li>
+<li><strong>SQuAD</strong> (阅读理解，问答系统)</li>
+<li><strong>SST-S</strong> (情感分析)</li>
+<li><strong>NER </strong>(命名实体识别)</li>
+</ul>
+<h4 id="2-Seq2Seq"><a href="#2-Seq2Seq" class="headerlink" title="2. Seq2Seq"></a>2. <strong>Seq2Seq</strong></h4><p><img src="https://img-blog.csdnimg.cn/20190407193133441.gif" alt="Seq2Seq"></p>
+<p>在encode阶段，第一个节点输入一个词，之后的节点输入的是下一个词与前一个节点的hidden state，最终encoder会输出一个context，这个context又作为decoder的输入，每经过一个decoder的节点就输出一个翻译后的词，并把decoder的hidden state作为下一层的输入。该模型对于短文本的翻译来说效果很好，但是其也存在一定的缺点，如果文本稍长一些，就很容易丢失文本的一些信息，为了解决这个问题，Attention应运而生。</p>
+<p><strong>Attention</strong></p>
+<p>Attention与传统的Seq2Seq模型主要有以下两点不同。</p>
+<p>1）encoder提供了更多的数据给到decoder，encoder会把所有的节点的hidden state提供给decoder，而不仅仅只是encoder最后一个节点的hidden state。<br><img src="https://img-blog.csdnimg.cn/20190407193205893.gif" alt="在这里插入图片描述"><br>2）decoder并不是直接把所有encoder提供的hidden state作为输入，而是采取一种选择机制，把最符合当前位置的hidden state选出来，具体的步骤如下</p>
+<ul>
+<li>确定哪一个hidden state与当前节点关系最为密切</li>
+<li>计算每一个hidden state的分数值（具体怎么计算我们下文讲解）</li>
+<li>对每个分数值做一个softmax的计算，这能让相关性高的hidden state的分数值更大，相关性低的hidden state的分数值更低</li>
+</ul>
+<p>Attention模型并不只是盲目地将输出的第一个单词与输入的第一个词对齐。实际上，它在训练阶段学习了如何在该语言对中对齐单词(示例中是法语和英语)。Attention函数的本质可以被描述为一个查询（query）到一系列（键key-值value）对的映射。</p>
+<h3 id="3-Transformer"><a href="#3-Transformer" class="headerlink" title="3. Transformer"></a>3. Transformer</h3><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">《Attention Is All You Need》</a>是一篇Google提出的将Attention思想发挥到极致的论文。这篇论文中提出一个全新的模型，叫 Transformer，抛弃了以往深度学习任务里面使用到的 CNN 和 RNN ，Bert就是基于Transformer构建的，这个模型广泛应用于NLP领域，例如机器翻译，问答系统，文本摘要和语音识别等等方向。关于Transrofmer模型的理解特别推荐一位国外博主文章<a target="_blank" rel="noopener" href="https://jalammar.github.io/illustrated-transformer/">《The Illustrated Transformer》</a>。</p>
+<p><strong>总体结构</strong></p>
+<p>和Attention模型一样，Transformer模型中也采用了 encoer-decoder 架构。但其结构相比于Attention更加复杂，论文中encoder层由6个encoder堆叠在一起，decoder层也一样。  </p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193306430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom: 50%;" /></p>
+<p>每一个encoder和decoder的内部简版结构如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/2019040719332630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom: 67%;" /></p>
+<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p>对于encoder，包含两层，一个self-attention层和一个前馈神经网络，self-attention能帮助当前节点不仅仅只关注当前的词，从而能获取到上下文的语义。decoder也包含encoder提到的两层网络，但是在这两层中间还有一层attention层，帮助当前节点获取到当前需要关注的重点内容。</p>
+<p>首先，模型需要对输入的数据进行一个embedding操作，（也可以理解为类似w2c的操作），enmbedding结束之后，输入到encoder层，self-attention处理完数据后把数据送给前馈神经网络，前馈神经网络的计算可以并行，得到的输出会输入到下一个encoder。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193344547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom: 50%;" /></p>
+<p><strong>Self-Attention</strong></p>
+<p>1、首先，self-attention会计算出三个新的向量，在论文中，向量的维度是512维，我们把这三个向量分别称为Query、Key、Value，这三个向量是用embedding向量与一个矩阵相乘得到的结果，这个矩阵是随机初始化的，维度为（64，512）注意第二个维度需要和embedding的维度一样，其值在BP的过程中会一直进行更新，得到的这三个向量的维度是64低于embedding维度的。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193410827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom: 67%;" /></p>
+<p>​                $q = x⋅W^q$</p>
+<p>​                $k = x⋅W^k$</p>
+<p>​                $v = x⋅W^v$</p>
+<p>2、计算self-attention的分数值，该分数值决定了当我们在某个位置encode一个词时，对输入句子的其他部分的关注程度。这个分数值的计算方法是Query与Key做点乘，以下图为例，首先我们需要针对Thinking这个词，计算出其他词对于该词的一个分数值，首先是针对于自己本身即q1·k1，然后是针对于第二个词即q1·k2.</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193428125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom: 67%;" /></p>
+<p>3、接下来，把点成的结果除以一个常数，这里我们除以8，这个值一般是采用上文提到的矩阵的第一个维度的开方即64的开方8，当然也可以选择其他的值，然后把得到的结果做一个softmax的计算。得到的结果即是每个词对于当前位置的词的相关性大小，当然，当前位置的词相关性肯定会会很大.</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193445308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom:67%;" /></p>
+<p>4、下一步就是把Value和softmax得到的值进行相乘，并相加，得到的结果即是self-attetion在当前节点的值。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193506971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom:67%;" /></p>
+<p>这种通过 query 和 key 的相似性程度来确定 value 的权重分布的方法被称为scaled dot-product attention。其实scaled dot-Product attention就是我们常用的使用点积进行相似度计算的attention，只是多除了一个（为K的维度）起到调节作用，使得内积不至于太大。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190625100244308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>对于使用自注意力机制的原因，论文中提到主要从三个方面考虑（每一层的复杂度，是否可以并行，长距离依赖学习），并给出了和RNN，CNN计算复杂度的比较。可以看到，如果输入序列n小于表示维度d的话，每一层的时间复杂度self-attention是比较有优势的。当n比较大时，作者也给出了一种解决方案self-attention（restricted）即每个词不是和所有词计算attention，而是只与限制的r个词去计算attention。在并行方面，多头attention和CNN一样不依赖于前一时刻的计算，可以很好的并行，优于RNN。在长距离依赖上，由于self-attention是每个词和所有词都要计算attention，所以不管他们中间有多长距离，最大的路径长度也都只是1。可以捕获长距离依赖关系。</p>
+<p><strong>Positional Encoding</strong></p>
+<p>到目前为止，transformer模型中还缺少一种解释输入序列中单词顺序的方法。为了处理这个问题，transformer给encoder层和decoder层的输入添加了一个额外的向量Positional Encoding，维度和embedding的维度一样，这个向量采用了一种很独特的方法来让模型学习到这个值，这个向量能决定当前词的位置，或者说在一个句子中不同的词之间的距离。这个位置向量的具体计算方法有很多种，论文中的计算方法如下<br><img src="https://img-blog.csdnimg.cn/20190407193730682.png" alt="在这里插入图片描述"><br>其中pos是指当前词在句子中的位置，i是指向量中每个值的index，可以看出，在偶数位置，使用正弦编码，在奇数位置，使用余弦编码。最后把这个Positional Encoding与embedding的值相加，作为输入送到下一层。<br><img src="https://img-blog.csdnimg.cn/20190407193742137.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom:67%;" /><br>为了让模型捕捉到单词的顺序信息，我们添加位置编码向量信息（POSITIONAL ENCODING），位置编码向量不需要训练，它有一个规则的产生方式（上图公式）。</p>
+<p>如果我们的嵌入维度为4，那么实际上的位置编码就如下图所示：<br><img src="https://img-blog.csdnimg.cn/20190407193756162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom:67%;" /></p>
+<p><strong>Layer Normalization</strong></p>
+<p>在transformer中，每一个子层（self-attetion，ffnn）之后都会接一个残差模块，并且有一个Layer normalization.</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193820725.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom:67%;" /></p>
+<p>Normalization有很多种，但是它们都有一个共同的目的，那就是把输入转化成均值为0方差为1的数据。我们在把数据送入激活函数之前进行normalization（归一化），因为我们不希望输入数据落在激活函数的饱和区。</p>
+<p> <a target="_blank" rel="noopener" href="https://terrifyzhao.github.io/2018/02/08/Batch-Normalization浅析.html">Batch Normalization</a> 的主要思想就是：在每一层的每一批数据上进行归一化。我们可能会对输入数据进行归一化，但是经过该网络层的作用后，我们的数据已经不再是归一化的了。随着这种情况的发展，数据的偏差越来越大，我的反向传播需要考虑到这些大的偏差，这就迫使我们只能使用较小的学习率来防止梯度消失或者梯度爆炸。</p>
+<p>BN的具体做法就是对每一小批数据，在批这个方向上做归一化。如下图所示：<br><img src="https://img-blog.csdnimg.cn/20190407193916505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以看到，右半边求均值是沿着数据 batch_size的方向进行的，其计算公式如下：<br><img src="https://img-blog.csdnimg.cn/20190407194002495.png" alt="在这里插入图片描述"></p>
+<p>那么Layer normalization 呢？它也是归一化数据的一种方式，不过 LN 是在每一个样本上计算均值和方差，而不是BN那种在批方向计算均值和方差！</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407193953348.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>下面看一下 LN 的公式：<br><img src="https://img-blog.csdnimg.cn/2019040719394179.png" alt="在这里插入图片描述"></p>
+<p>在self-attention需要强调的最后一点是其采用了残差网络中的short-cut结构，目的是解决深度学习中的退化问题。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407194033648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="https://img-blog.csdnimg.cn/20190407194054634.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="img" style="zoom:80%;" /></p>
+<p>可以看到decoder部分其实和encoder部分大同小异，不过在最下面额外多了一个masked mutil-head attetion，这里的mask也是transformer一个很关键的技术，我们一起来看一下。</p>
+<p><strong>Mask</strong></p>
+<p>mask 表示掩码，它对某些值进行掩盖，使其在参数更新时不产生效果。Transformer 模型里面涉及两种 mask，分别是 padding mask 和 sequence mask。其中，padding mask 在所有的 scaled dot-product attention 里面都需要用到，而 sequence mask 只有在 decoder 的 self-attention 里面用到。</p>
+<p><code>Padding mask</code></p>
+<p>什么是 padding mask 呢？因为每个批次输入序列长度是不一样的也就是说，我们要对输入序列进行对齐。具体来说，就是给在较短的序列后面填充 0。但是如果输入的序列太长，则是截取左边的内容，把多余的直接舍弃。因为这些填充的位置，其实是没什么意义的，所以我们的attention机制不应该把注意力放在这些位置上，所以我们需要进行一些处理。</p>
+<p>具体的做法是，把这些位置的值加上一个非常大的负数(负无穷)，这样的话，经过 softmax，这些位置的概率就会接近0！</p>
+<p>而我们的 padding mask 实际上是一个张量，每个值都是一个Boolean，值为 false 的地方就是我们要进行处理的地方。</p>
+<p><code>Sequence mask</code></p>
+<p>sequence mask 是为了使得 decoder 不能看见未来的信息。也就是对于一个序列，在 time_step 为 t 的时刻，我们的解码输出应该只能依赖于 t 时刻之前的输出，而不能依赖 t 之后的输出。因此我们需要想一个办法，把 t 之后的信息给隐藏起来。</p>
+<p>那么具体怎么做呢？也很简单：产生一个上三角矩阵，上三角的值全为0。把这个矩阵作用在每一个序列上，就可以达到我们的目的。</p>
+<ul>
+<li>对于 decoder 的 self-attention，里面使用到的 scaled dot-product attention，同时需要padding mask 和 sequence mask 作为 attn_mask，具体实现就是两个mask相加作为attn_mask。</li>
+<li>其他情况，attn_mask 一律等于 padding mask。</li>
+</ul>
+<p>编码器通过处理输入序列启动。然后将顶部编码器的输出转换为一组注意向量k和v。每个解码器将在其“encoder-decoder attention”层中使用这些注意向量，这有助于解码器将注意力集中在输入序列中的适当位置：<br><img src="https://jalammar.github.io/images/t/transformer_decoding_1.gif" alt="在这里插入图片描述"></p>
+<p>完成编码阶段后，我们开始解码阶段。解码阶段的每个步骤从输出序列（本例中为英语翻译句）输出一个元素。<br>以下步骤重复此过程，一直到达到表示解码器已完成输出的符号。每一步的输出在下一个时间步被送入底部解码器，解码器像就像我们对编码器输入所做操作那样，我们将位置编码嵌入并添加到这些解码器输入中，以表示每个字的位置。<br><img src="https://jalammar.github.io/images/t/transformer_decoding_2.gif" alt="在这里插入图片描述"></p>
+<h4 id="输出层"><a href="#输出层" class="headerlink" title="输出层"></a>输出层</h4><p>当decoder层全部执行完毕后，怎么把得到的向量映射为我们需要的词呢，很简单，只需要在结尾再添加一个全连接层和softmax层，假如我们的词典是1w个词，那最终softmax会输入1w个词的概率，概率值最大的对应的词就是我们最终的结果。</p>
+<h3 id="4-BERT"><a href="#4-BERT" class="headerlink" title="4. BERT"></a>4. BERT</h3><p><strong>模型结构</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190407194141481.png" alt="img" style="zoom:67%;" /></p>
+<p>L表示的是transformer的层数，H表示输出的维度，A表示mutil-head attention的个数，uncased和cased的区别在于uncased将全部样本变为小写，而cased则要区分大小写。</p>
+<p><strong>预训练模型</strong></p>
+<p>首先我们要了解一下什么是预训练模型，举个例子，假设我们有大量的维基百科数据，那么我们可以用这部分巨大的数据来训练一个泛化能力很强的模型，当我们需要在特定场景使用时，例如做文本相似度计算，那么，只需要简单的修改一些输出层，再用我们自己的数据进行一个增量训练，对权重进行一个轻微的调整。</p>
+<p>预训练的好处在于在特定场景使用时不需要用大量的语料来进行训练，节约时间效率高效，bert就是这样的一个泛化能力较强的预训练模型。</p>
+<p>BERT的预训练阶段包括两个任务，一个是<code>Masked Language Model</code>，还有一个是<code>Next Sentence Prediction</code>。</p>
+<p><strong>Masked Language Model</strong></p>
+<p>MLM可以理解为完形填空，作者会随机mask每一个句子中15%的词，用其上下文来做预测，例如：<code>my dog is hairy → my dog is [MASK]</code></p>
+<p>此处将hairy进行了mask处理，然后采用非监督学习的方法预测mask位置的词是什么，但是该方法有一个问题，因为是mask15%的词，其数量已经很高了，这样就会导致某些词在fine-tuning阶段从未见过，为了解决这个问题，作者做了如下的处理：</p>
+<ul>
+<li>80%的时间是采用[mask]，my dog is hairy → my dog is [MASK]</li>
+<li>10%的时间是随机取一个词来代替mask的词，my dog is hairy -&gt; my dog is apple</li>
+<li>10%的时间保持不变，my dog is hairy -&gt; my dog is hairy</li>
+</ul>
+<p><strong>Next Sentence Prediction</strong></p>
+<p>选择一些句子对A与B，其中50%的数据B是A的下一条句子，剩余50%的数据B是语料库中随机选择的，学习其中的相关性，添加这样的预训练的目的是目前很多NLP的任务比如QA和NLI都需要理解两个句子之间的关系，从而能让预训练的模型更好的适应这样的任务。</p>
+<p><strong>输入</strong></p>
+<p>BERT的输入词向量是三个向量之和：</p>
+<p>Token Embedding：WordPiece tokenization subword词向量。<br>Segment Embedding：表明这个词属于哪个句子（NSP需要两个句子）。<br>Position Embedding：学习出来的embedding向量。这与Transformer不同，Transformer中是预先设定好的值。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190407194245766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW93b3Nob3V6aQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom:80%;" /></p>
+<p><strong>输出</strong></p>
+<p>BERT预训练模型的输出结果，无非就是一个或多个向量。下游任务可以通过精调（改变预训练模型参数）或者特征抽取（不改变预训练模型参数，只是把预训练模型的输出作为特征输入到下游任务）两种方式进行使用。BERT原论文使用了精调方式，但也尝试了特征抽取方式的效果，比如在NER任务上，最好的特征抽取方式只比精调差一点点。但特征抽取方式的好处可以预先计算好所需的向量，存下来就可重复使用，极大提升下游任务模型训练的速度。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>BERT优点</strong></p>
+<ul>
+<li>Transformer Encoder因为有Self-attention机制，因此BERT自带双向功能</li>
+<li>因为双向功能以及多层Self-attention机制的影响，使得BERT必须使用Cloze版的语言模型Masked-LM来完成token级别的预训练</li>
+<li>为了获取比词更高级别的句子级别的语义表征，BERT加入了Next Sentence Prediction来和Masked-LM一起做联合训练</li>
+<li>为了适配多任务下的迁移学习，BERT设计了更通用的输入层和输出层</li>
+<li>微调成本小</li>
+</ul>
+<p><strong>BERT缺点</strong></p>
+<ul>
+<li>task1的随机遮挡策略略显粗犷，推荐阅读《Data Nosing As Smoothing In Neural Network Language Models》</li>
+<li>[MASK]标记在实际预测中不会出现，训练时用过多[MASK]影响模型表现;</li>
+<li>每个batch只有15%的token被预测，所以BERT收敛得比left-to-right模型要慢（它们会预测每个token）</li>
+<li>BERT对硬件资源的消耗巨大（大模型需要16个tpu，历时四天；更大的模型需要64个tpu，历时四天。</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>初识BERT</p><p><a href="https://brucehan98@github.io/2021/04/11/初识BERT/">https://brucehan98@github.io/2021/04/11/初识BERT/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-04-11</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/BERT/">BERT </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../../../05/01/XLNet/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">XLNet</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="../../../../2020/08/31/GLUE/"><span class="level-item">GLUE</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "769c4f0936953f776d89af7e3a8749b8",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><ul class="menu-list"><li><a class="level is-mobile" href="#0-NLP-发展史"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">0. NLP 发展史</span></span></a></li><li><a class="level is-mobile" href="#1-NLP-任务分类"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">1. NLP 任务分类</span></span></a></li><li><a class="level is-mobile" href="#2-Seq2Seq"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">2. Seq2Seq</span></span></a></li></ul><li><a class="level is-mobile" href="#3-Transformer"><span class="level-left"><span class="level-item">2</span><span class="level-item">3. Transformer</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Encoder"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">Encoder</span></span></a></li><li><a class="level is-mobile" href="#Decoder"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">Decoder</span></span></a></li><li><a class="level is-mobile" href="#输出层"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">输出层</span></span></a></li></ul></li><li><a class="level is-mobile" href="#4-BERT"><span class="level-left"><span class="level-item">3</span><span class="level-item">4. BERT</span></span></a></li><li><a class="level is-mobile" href="#总结"><span class="level-left"><span class="level-item">4</span><span class="level-item">总结</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>
