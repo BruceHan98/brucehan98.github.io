@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>数据结构与算法 - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="数据结构与算法——学习笔记"><meta property="og:type" content="blog"><meta property="og:title" content="数据结构与算法"><meta property="og:url" content="https://brucehan98@github.io/2022/10/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="数据结构与算法——学习笔记"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://img-blog.csdn.net/20180623181944815?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHTl8yMDE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"><meta property="og:image" content="https://img-blog.csdn.net/20180623190006962?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHTl8yMDE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"><meta property="og:image" content="https://img-blog.csdn.net/20180623191514908?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHTl8yMDE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"><meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8e21b14d47e64afa958506d49972827b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"><meta property="og:image" content="https://raw.githubusercontent.com/dunwu/images/dev/snap/20220404201713.png"><meta property="og:image" content="https://img-blog.csdn.net/20160714161107576"><meta property="og:image" content="https://images0.cnblogs.com/blog/94031/201403/252248450292152.png"><meta property="og:image" content="https://images0.cnblogs.com/blog/94031/201403/270024403113529.png"><meta property="og:image" content="https://images0.cnblogs.com/blog/94031/201403/290047034539184.png"><meta property="og:image" content="https://images0.cnblogs.com/blog/94031/201403/290050048129679.png"><meta property="og:image" content="https://pic4.zhimg.com/v2-33a947c71ad62b254cab62e5364d2813_b.webp"><meta property="og:image" content="https://pic1.zhimg.com/v2-1c7e20f306ddc02eb4e3a50fa7817ff4_b.webp"><meta property="og:image" content="https://pic3.zhimg.com/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp"><meta property="og:image" content="https://pic3.zhimg.com/v2-cdda3f11c6efbc01577f5c29a9066772_b.webp"><meta property="og:image" content="https://pic1.zhimg.com/v2-c411339b79f92499dcb7b5f304c826f4_b.webp"><meta property="og:image" content="https://pic3.zhimg.com/v2-f14e4169ff39bad42c3dd6c385ad9c72_b.webp"><meta property="og:image" content="https://pic4.zhimg.com/v2-3c7ddb59df2d21b287e42a7b908409cb_b.webp"><meta property="og:image" content="https://pic1.zhimg.com/80/v2-465190477b7fb90d17aef27c2a213368_720w.jpg"><meta property="og:image" content="https://pic3.zhimg.com/v2-3a6f1e5059386523ed941f0d6c3a136e_b.webp"><meta property="article:published_time" content="2022-10-20T10:45:48.000Z"><meta property="article:modified_time" content="2022-10-25T09:36:36.292Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="算法"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://img-blog.csdn.net/20180623181944815?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHTl8yMDE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2022/10/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"},"headline":"数据结构与算法","image":["https://raw.githubusercontent.com/dunwu/images/dev/snap/20220404201713.png","https://images0.cnblogs.com/blog/94031/201403/252248450292152.png","https://images0.cnblogs.com/blog/94031/201403/270024403113529.png","https://images0.cnblogs.com/blog/94031/201403/290047034539184.png","https://images0.cnblogs.com/blog/94031/201403/290050048129679.png","https://pic4.zhimg.com/v2-33a947c71ad62b254cab62e5364d2813_b.webp","https://pic1.zhimg.com/v2-1c7e20f306ddc02eb4e3a50fa7817ff4_b.webp","https://pic3.zhimg.com/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp","https://pic3.zhimg.com/v2-cdda3f11c6efbc01577f5c29a9066772_b.webp","https://pic1.zhimg.com/v2-c411339b79f92499dcb7b5f304c826f4_b.webp","https://pic3.zhimg.com/v2-f14e4169ff39bad42c3dd6c385ad9c72_b.webp","https://pic4.zhimg.com/v2-3c7ddb59df2d21b287e42a7b908409cb_b.webp","https://pic1.zhimg.com/80/v2-465190477b7fb90d17aef27c2a213368_720w.jpg","https://pic3.zhimg.com/v2-3a6f1e5059386523ed941f0d6c3a136e_b.webp"],"datePublished":"2022-10-20T10:45:48.000Z","dateModified":"2022-10-25T09:36:36.292Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"数据结构与算法——学习笔记"}</script><link rel="canonical" href="https://brucehan98@github.io/2022/10/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-10-20T10:45:48.000Z" title="2022-10-20T10:45:48.000Z">2022-10-20</time>发表</span><span class="level-item"><time dateTime="2022-10-25T09:36:36.292Z" title="2022-10-25T09:36:36.292Z">2022-10-25</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">2 小时读完 (大约19764个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">数据结构与算法</h1><div class="content"><h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><blockquote>
+<p>程序 = 数据结构 + 算法</p>
+</blockquote>
+<h3 id="1-时间复杂度-与-空间复杂度"><a href="#1-时间复杂度-与-空间复杂度" class="headerlink" title="1. 时间复杂度 与 空间复杂度"></a>1. 时间复杂度 与 空间复杂度</h3><p><strong>时间复杂度</strong></p>
+<p><code>时间复杂度</code> 的全称是 渐进时间复杂度，表示算法的<strong>执行时间与数据规模之间的增长关系</strong>。时间复杂度表示法并不能真正反映一个算法的执行时间，反映的是程序执行时间随数据规模变化的增长趋势。</p>
+<ul>
+<li>常数阶 O(1)</li>
+</ul>
+<p>这里的 <code>1</code> 是用来代指常量，也就是说这个算法的效率是固定的，无论你的数据量如何变化，效率都一样，这种复杂度也是最优的一种算法。</p>
+<p>只要代码不存在<strong>循环</strong>，<strong>递归</strong>等循环类调用，不论代码有多少行，其复杂度都是常数阶。</p>
+<ul>
+<li>线性阶 O(n)</li>
+</ul>
+<p>程序的执行时间随数据量的变化线性增长。</p>
+<ul>
+<li>对数阶 O(logn)</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>    i = i * <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>线性对数阶 O(nlogn)</li>
+</ul>
+<p>将时间复杂度为 O(logn) 的代码循环 n 次的话，那么它的时间复杂度就是 n * O(logn)，也就是 O(nlogn)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i =<span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>    <span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span>(i &lt; n) &#123;<br>        j = j * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>平方阶 $O(n^2)$</li>
+</ul>
+<p>循环中嵌套循环</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, world!&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其他时间复杂度：</p>
+<p>$O(1) &lt; O(logN) &lt; O(n) &lt; O(nlogN) &lt; O(n^2) &lt; O(n^3) &lt; O(n^k) &lt; O(2^n) &lt; O(n!)$</p>
+<p><strong>时间复杂度类型</strong></p>
+<p>上面分析的时间复杂度都是比较简单的，实际算法中可能会比示例中复杂的多，有时候并不需要从头循环到尾，可能中途就会结束循环，所以根据实际情况，又可以将时间复杂度从以下四个方面来进一步分析：</p>
+<ul>
+<li>最好时间复杂度</li>
+</ul>
+<p>程序执行最好的情况，比如在一个指定数组中找到指定元素的下标，时间复杂度为 O(n)，如果算法是顺序遍历数据，要查找的元素刚好在数组的第一个位置，此时最好时间复杂度就为 O(1)。</p>
+<ul>
+<li>最坏时间复杂度</li>
+</ul>
+<p>类似地，比如循环遍历到最后。</p>
+<ul>
+<li>平均时间复杂度</li>
+</ul>
+<p>平均时间复杂度只有在特殊时候才会使用。每种情况的时间复杂度的平均。</p>
+<p><strong>空间复杂度</strong></p>
+<p><code>空间复杂度</code> 全称就是渐进空间复杂度，用来表示算法的<strong>存储空间与数据规模之间的增长关系</strong>。</p>
+<ul>
+<li>如果申请的是有限个数（常量）的变量，空间复杂度为 <code>O(1)</code>。</li>
+<li>如果申请的是一维数组，队列或者链表等，那么空间复杂度为 <code>O(n)</code>。</li>
+<li>如果申请的是二维数组，那么空间复杂度为 <code>O(n²)</code>。</li>
+<li>如果是在循环体中申请的数组等，可能就需要取嵌套的乘积来作为空间复杂度，这种就需要具体的进一步分析。</li>
+</ul>
+<h3 id="2-基本算法思想"><a href="#2-基本算法思想" class="headerlink" title="2. 基本算法思想"></a>2. 基本算法思想</h3><h4 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h4><p>贪心算法，又名贪婪法，是寻找<strong>最优解问题</strong>的常用方法，一般将求解过程分成<strong>若干个步骤</strong>，但每个步骤都应用<strong>贪心原则</strong>，选取当前状态下<strong>最好/最优的选择</strong>（局部最优策略），并以此希望最后堆叠出的结果也是最好/最优的解。</p>
+<p><strong>1. 找零钱问题</strong></p>
+<blockquote>
+<p>假设你开了间小店，要找给客户 41 分钱的硬币，钱柜里的货币只有 <strong>25 分、10 分、5 分和 1 分</strong>四种硬币，如何安排才能找给客人的钱既<strong>正确</strong>且硬币的<strong>个数最少</strong>？</p>
+</blockquote>
+<p>思路：从币值大的开始选，能找大的不找小的。</p>
+<p>25 + 10 + 5 + 1</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ONEFEN    1</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> FIVEFEN    5</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TENFEN    10</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TWENTYFINEFEN 25</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> sum_money = <span class="hljs-number">41</span>;<br>    <span class="hljs-keyword">int</span> num_25 = <span class="hljs-number">0</span>, num_10 = <span class="hljs-number">0</span>, num_5 = <span class="hljs-number">0</span>, num_1 = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-comment">//不断尝试每一种硬币</span><br>    <span class="hljs-keyword">while</span> (money &gt;= TWENTYFINEFEN) &#123; num_25++; sum_money -= TWENTYFINEFEN; &#125;<br>    <span class="hljs-keyword">while</span> (money &gt;= TENFEN) &#123; num_10++; sum_money -= TENFEN; &#125;<br>    <span class="hljs-keyword">while</span> (money &gt;= FIVEFEN)  &#123; num_5++;  sum_money -= FIVEFEN; &#125;<br>    <span class="hljs-keyword">while</span> (mone y&gt;= ONEFEN)  &#123; num_1++;  sum_money -= ONEFEN; &#125;<br><br>    <span class="hljs-comment">//输出结果</span><br>    cout &lt;&lt; <span class="hljs-string">&quot;25分硬币数：&quot;</span> &lt;&lt; num_25 &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;10分硬币数：&quot;</span> &lt;&lt; num_10 &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;5分硬币数：&quot;</span> &lt;&lt; num_5 &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;1分硬币数：&quot;</span> &lt;&lt; num_1 &lt;&lt; endl;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>2. 背包问题</strong></p>
+<p>有一个背包，最多能承载重量为 <strong>C=150的物品</strong>，现在有<strong>7个物品</strong>，重量分别是 wi=[35,30,60,50,40,10,25]，价值分别是 pi=[10,40,30,50,35,40,30]，现在从这 7 个物品中选择一个或多个装入背包，要求在物品总重量不超过 C 的前提下，所装入的物品总价值最高。</p>
+<p>思路：优先选择质量密度最大的物品。</p>
+<p><strong>3. 贪心算法的优缺点</strong></p>
+<blockquote>
+<p>对于找零钱问题，如果现有的硬币有25 分、20分、10 分、5 分和 1 分五种，贪心算法就不能得到最优解。</p>
+<p>25 + 10 + 5 + 1：四枚硬币；20 + 20 + 1：三枚硬币</p>
+</blockquote>
+<p>优点：简单，高效，省去了为了找最优解可能需要穷举操作，通常作为其它算法的辅助算法来使用。</p>
+<p>缺点：不从总体上考虑其它可能情况，每次选取局部最优解，不再进行回溯处理，所以很少情况下得到最优解。</p>
+<h4 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h4><p>分治，即分而治之，就是把一个复杂的问题分成两个或更多的<strong>相同或相似的子问题</strong>，再把子问题分成更小的子问题（分）……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并（治）。</p>
+<p>分治算法是很多高效算法的基础，如排序算法(快速排序，归并排序)，傅立叶变换(快速傅立叶变换)等。</p>
+<p>分治法所能解决的问题一般具有以下几个特征：</p>
+<ul>
+<li>该问题的规模缩小到一定的程度就可以容易地解决</li>
+<li>该问题可以分解为若干个规模较小的<strong>相同问题</strong>，即该问题具有最优子结构性质</li>
+<li>利用该问题分解出的子问题的解<strong>可以合并</strong>为该问题的解</li>
+<li>该问题所分解出的各个子问题是相互独立的，即<strong>子问题之间不包含公共的子问题</strong></li>
+</ul>
+<p>注：第三条特征是关键，能否利用分治法完全取决于问题是否具有第三条特征，如果具备了第一条和第二条特征，而不具备第三条特征，则可以考虑用贪心法或动态规划法。</p>
+<p>第四条特征涉及到分治法的效率，如果各子问题是不独立的则分治法要做许多不必要的工作，重复地解公共的子问题，此时虽然可用分治法，但一般用动态规划法较好。</p>
+<p><strong>1. 二分搜索</strong></p>
+<p>二分搜索是一种在<strong>有序数组</strong>中查找某一特定元素的搜索算法。搜索过程从数组的中间元素开始，如果中间元素正好是要查找的元素，则搜索过程结束；如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。如果在某一步骤数组为空，则代表找不到。这种搜索算法每一次比较都使搜索范围缩小一半。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">BinarySearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> value)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> right = n - <span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">while</span> (left &lt;= right) &#123;<br>        <span class="hljs-keyword">int</span> middle = left + ((right - left) &gt;&gt; <span class="hljs-number">1</span>);  <span class="hljs-comment">// 防止溢出，移位也更高效。同时，每次循环都需要更新。</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">array</span>[middle] &gt; value)<br>            right = middle - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">array</span>[middle] &lt; value)<br>            left = middle + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> middle;<br>    &#125;<br>  <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>2. 大数乘法</strong></p>
+<p>在计算机上处理一些大数据相乘时，由于计算机硬件的限制，不能直接进行相乘得到想要的结果。可以将一个大的整数乘法分而治之，将大问题变成小问题，变成简单的小数乘法再进行合并，从而解决上述问题。</p>
+<p>给定两个大数 X，Y 和位数 n，我们先把 X 和 Y 拆成两半，分别由高几位和低几位数字组成。例如，X = 61438521，Y = 94736407，将 X 拆为 A = 6143 和 B = 8521，Y 拆分为 C = 9473，D = 6407，则</p>
+<p>$X \times Y = (A \times 10^{n/2} + B) \times (C \times 10^{n/2} + D) = AC \times 10^n + (AD + BC) \times 10^{n/2} + BD$</p>
+<p>递归地调用该算法进行四项乘法的计算，在一个适当的情形下停止（如数字位数为2），并对结果进行合并。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SIGN(A) ((A &gt; 0) ? 1 : -1) </span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">divideConquer</span><span class="hljs-params">(<span class="hljs-keyword">int</span> X, <span class="hljs-keyword">int</span> Y, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> sign = SIGN(X) * SIGN(Y);<br>    <span class="hljs-keyword">int</span> x = <span class="hljs-built_in">abs</span>(X);<br>    <span class="hljs-keyword">int</span> y = <span class="hljs-built_in">abs</span>(Y);<br>    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span> || y == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">return</span> sign * x * y;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">int</span> A = (<span class="hljs-keyword">int</span>) x / <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, (<span class="hljs-keyword">int</span>)(n / <span class="hljs-number">2</span>));<br>        <span class="hljs-keyword">int</span> B = x - A * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, n / <span class="hljs-number">2</span>);<br>        <span class="hljs-keyword">int</span> C = (<span class="hljs-keyword">int</span>) y / <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, (<span class="hljs-keyword">int</span>)(n / <span class="hljs-number">2</span>));<br>        <span class="hljs-keyword">int</span> D = y - C * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, n / <span class="hljs-number">2</span>);<br>        <span class="hljs-keyword">int</span> AC = divideConquer(A, C, n / <span class="hljs-number">2</span>);<br>        <span class="hljs-keyword">int</span> BD = divideConquer(B, D, n / <span class="hljs-number">2</span>);<br>        <span class="hljs-keyword">int</span> ABDC = divideConquer((A - B), (D - C), n / <span class="hljs-number">2</span>) + AC + BD;<br>        <span class="hljs-keyword">return</span> sign * (AC * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span> , n) + ABDC * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, (<span class="hljs-keyword">int</span>)(n / <span class="hljs-number">2</span>)) + BD); <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>3. 最近点问题</strong></p>
+<p>在二维坐标轴上有 N 个点，求出最近的两个点的距离（欧氏距离）。如果暴力枚举，时间复杂度为 $O(n^2)$，计算量非常大。我们通常采用分治的方法来优化这种问题。</p>
+<p>首先对所有的点按照 x 轴升序排列。</p>
+<p>分：</p>
+<ul>
+<li><p>点数小于等于二时：直接计算，求该两点之间的距离 d。</p>
+</li>
+<li><p>集合中有三个点：两两比较，求三个点中的最近的两个点距离 d。</p>
+</li>
+<li>点数大于三时：将集合 S 划分为集合 L 和集合 R，使得 L 中的每一个点位于 R 中所有点的左边，并且 L 的点数与 R 的点数之差最小。</li>
+</ul>
+<p>按以上步骤递归计算，求得集合内的最小距离 d。</p>
+<p>治：</p>
+<ul>
+<li>最近距离的两个点位于划分集内部，则最小点对距离为 d</li>
+<li>最近距离的两个点分别在左右两个点集中，这时要处理左右集合相邻区域之间的几个点（下图中绿色的点）。</li>
+</ul>
+<p>由于以求得左右点集的最小点对距离为 d，我们可以把左侧集合最靠右的点的横坐标记为 midx，因此只需要考虑横坐标位于 [midx - d, midx + d] 之间的点（绿色点）。对于这部分点，暴力枚举计算距离的话复杂度还是很高，我们还可以进行进一步的优化：如果两个点的 y 坐标的差的绝对值大于 d，那么它们间的距离也一定大于 d。于是我们可以把这些点按照 y 坐标排序，按照 y 坐标从小到大依次考虑每个点i与它后面（即 y 坐标大于等于它的点）的所有点 j 之间的距离，如果 i 与 j 的 y 坐标差大于等于 d 就退出循环，计算出这些点的最小距离 $d’$，最后取 $min(d, d’)$ 作为该左右集合的最小点对距离返回，进行与上一层的合并。</p>
+<p><img src="https://img-blog.csdn.net/20180623181944815?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHTl8yMDE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="竖条" style="zoom: 67%;" /></p>
+<p>这里，其实对于每个绿色点，考虑的点的范围为左右”日“字区域内（红色区域），纳入计算的点最多为 6 个。下面可以证明这一点。</p>
+<p><img src="https://img-blog.csdn.net/20180623190006962?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHTl8yMDE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="日字形" style="zoom:67%;" /></p>
+<p>我们将“日”字区域等分为 6 份，每份内的最大距离为 5/6 d &lt; d，而我们在之前已经计算了左右集合内点对的最小距离为 d，因此“日”字区域的每 1/6 区域内不可能存在两个点，因此“日”字区域内最多包含 6 个点。所以，对于中间区域的每个绿色点，我们最多只需考虑 6 × 2 = 12 个点（左右“日”字区域），这部分的时间复杂度为 O(n)。因此，算法的最终时间复杂度为 O(nlogn)。</p>
+<p><img src="https://img-blog.csdn.net/20180623191514908?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dHTl8yMDE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="六等分" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">point</span> &#123;</span><br>    <span class="hljs-keyword">double</span> x, y;<br>&#125; p[maxn];<br> <br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">dis</span><span class="hljs-params">(point a, point b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sqrt</span>((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmpx</span><span class="hljs-params">(point a, point b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a.x &lt; b.x;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmpy</span><span class="hljs-params">(point a,point b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a.y &lt; b.y;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a, <span class="hljs-keyword">int</span> *b)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> t;<br>    t = *a;<br>    *a = *b;<br>    *b = t;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">cal</span><span class="hljs-params">(point a[], <span class="hljs-keyword">int</span> len)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(len==<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> inf;<br>    <span class="hljs-keyword">if</span>(len==<span class="hljs-number">2</span>)<br>        <span class="hljs-keyword">return</span> dis(a[<span class="hljs-number">0</span>], a[<span class="hljs-number">1</span>]);<br>    <span class="hljs-keyword">double</span> p = a[len / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>].x;<br>    <span class="hljs-keyword">int</span> mid = len / <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">double</span> d = min(cal(a, mid), cal(a + mid, len - mid));<br>    <span class="hljs-keyword">int</span> tot = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i)<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fabs</span>(p - a[i].x) &lt;= d)<br>            swap(a[tot++], a[i]);<br>    sort(a, a + tot, cmpy);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; tot; ++i) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; tot; ++j) &#123;<br>            <span class="hljs-keyword">if</span> (a[j].y - a[i].y &gt; d)<br>                <span class="hljs-keyword">break</span>;<br>            d = min(d, dis(a[i], a[j]));<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> d;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><p>动态规划（Dynamic Programming, DP）是运筹学的一个分支，是求解决策过程 (decision process) 最优化的数学方法。</p>
+<p>计算机归根结底只会做一件事：穷举。所有的算法都是在让计算机【如何聪明地穷举】而已，动态规划也是如此。</p>
+<p><strong>动态规划与递归</strong></p>
+<p>动态规划是<strong>自底向上</strong>，递归树是<strong>自顶向下</strong>。</p>
+<p>例如，对于求解斐波那契数列问题，递归的做法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Fibonacci</span><span class="hljs-params">(<span class="hljs-keyword">size_t</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span> || n == <span class="hljs-number">2</span>)<br>	<span class="hljs-keyword">return</span> n;<br>    <span class="hljs-keyword">return</span> Fibonacci1(n - <span class="hljs-number">1</span>) + Fibonacci1(n - <span class="hljs-number">2</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>动态对话的做法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">int</span> N)</span> </span>&#123;<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(N + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>    dp[<span class="hljs-number">1</span>] = dp[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= N; i++)<br>        dp[i] = dp[i - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">return</span> dp[N];<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这也是为什么动态规划一般都脱离了递归，而是由循环迭代完成计算。</p>
+<p>动态规划最核心的思想，就在于<strong>拆分子问题，记住过往，减少重复计算</strong>。</p>
+<p><strong>青蛙跳台阶问题</strong></p>
+<blockquote>
+<p>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 10 级的台阶总共有多少种跳法？</p>
+</blockquote>
+<p>思路：要想跳到第10级台阶，要么是先跳到第9级，然后再跳1级台阶上去; 要么是先跳到第8级，然后一次迈2级台阶上去。</p>
+<p>同理，要想跳到第9级台阶，要么是先跳到第8级，然后再跳1级台阶上去; 要么是先跳到第7级，然后一次迈2级台阶上去。</p>
+<p>……</p>
+<p>假设跳到第 n 级台阶的跳数我们定义为 f(n)，很显然就可以得出以下公式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">f(10) = f(9) + f(8)<br>f(9) = f(8) + f(7)<br>......<br>f(3) = f(2) + f(1)<br>通用公式为：f(n) = f(n-1) + f(n-2)<br></code></pre></td></tr></table></figure>
+<p>又有 f(2) = 2, f(1) = 1。</p>
+<ol>
+<li>如果采用<strong>递归</strong>算法：</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numWays</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> numWays(n<span class="hljs-number">-1</span>) + numWays(n<span class="hljs-number">-2</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>代码很简单，但是时间复杂度非常高：$O(2^n)$，会超出时间限制。</p>
+<p>分析：</p>
+<ul>
+<li>要计算原问题 f(10)，就需要先计算出子问题 f(9) 和 f(8)</li>
+<li>要计算 f(9)，又要先算出子问题 f(8) 和 f(7)</li>
+<li>以此类推</li>
+</ul>
+<p>递归时间复杂度 = 解决一个子问题时间 * 子问题个数</p>
+<p>一个子问题时间 = f（n-1）+f（n-2），也就是一个加法的操作，所以复杂度是 O(1)；</p>
+<p>问题个数 = 递归树节点的总数，递归树的总节点 = $2^n-1$，所以是复杂度 $O(2^n)$。</p>
+<p>因此，青蛙跳阶的递归解法的时间复杂度为 $O(1) * O(2^n) = O(2^n)。</p>
+<ol>
+<li>采用<strong>动态规划</strong>算法：</li>
+</ol>
+<p>递归，是从 f(10) 往 f(1) 方向延伸求解的，所以也称为<strong>自顶向下</strong>的解法。这种方法无法利用已经求得的结果。</p>
+<p>而动态规划是<strong>自底向上</strong>的方法，已经计算的结果可以被使用，减少重复计算。</p>
+<p>动态规划有几个典型特征，<strong>最优子结构、状态转移方程、边界、重叠子问题</strong>。在青蛙跳阶问题中：</p>
+<ul>
+<li>f(n-1) 和 f(n-2) 称为 f(n) 的最优子结构</li>
+<li>f(n) = f(n-1) + f(n-2) 称为状态转移方程</li>
+<li>f(1) = 1, f(2) = 2 就是边界</li>
+<li>比如 f(10)= f(9) + f(8), f(9) = f(8) + f(7) , 这里 f(8)就是重叠子问题</li>
+</ul>
+<p>动态规划的优点就是对重叠子问题的重复利用。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8e21b14d47e64afa958506d49972827b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img" style="zoom: 50%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numWays</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n&lt;= <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;<br>    &#125;<br>    <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> b = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">int</span> temp = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++) &#123;<br>        temp = (a + b);<br>        a = b;<br>        b = temp;<br>     &#125;<br>         <span class="hljs-keyword">return</span> temp;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>时间复杂度为 O(n)，空间复杂度为 O(1)。</p>
+<p><strong>动态规划的解题思路：</strong></p>
+<p>如果一个问题，可以把所有可能的答案穷举出来，并且穷举出来后，发现存在重叠子问题，就可以考虑使用动态规划。如<strong>最长递增子序列、最小编辑距离、背包问题、找零钱问题</strong>等等，都是动态规划的经典应用场景。</p>
+<p>动态规划的核心思想就是<strong>拆分子问题，记住过往，减少重复计算。</strong> 并且动态规划一般都是自底向上的。动态规划的思路：</p>
+<ul>
+<li>穷举分析</li>
+<li>确定边界</li>
+<li>找出规律，确定最优子结构</li>
+<li>写出状态转移方程</li>
+</ul>
+<h4 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h4><p><strong>回溯法（back tracking）</strong>是一种选优搜索法，又称为试探法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。</p>
+<p><strong>八皇后问题</strong></p>
+<blockquote>
+<p>在 8X8 格的国际象棋上摆放八个皇后（棋子），使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上。亦即，每行、每列上只能有且只有一个皇后。</p>
+</blockquote>
+<p>思路：在第一行放置一枚皇后；遍历剩下行的每个位置，如果可放置，更新放置数据，如果没有可放置的点，返回上一步；最后判断边界。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_NUM 8   <span class="hljs-comment">//皇后数量</span></span><br><br><span class="hljs-keyword">int</span> queen[MAX_NUM][MAX_NUM] = &#123; <span class="hljs-number">0</span> &#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>&#123;  <span class="hljs-comment">//检查一个坐标是否可以放置</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; y; i++) &#123;<br>    <span class="hljs-keyword">if</span> (queen[x][i] == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">//这一行是否可以存在</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (x - <span class="hljs-number">1</span> - i &gt; <span class="hljs-number">0</span> &amp;&amp; queen[x - <span class="hljs-number">1</span> - i][y - <span class="hljs-number">1</span> - i] == <span class="hljs-number">1</span>) &#123;  <span class="hljs-comment">//检查左斜列</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (x + <span class="hljs-number">1</span> + i &lt; MAX_NUM &amp;&amp; queen[x + <span class="hljs-number">1</span> + i][y + <span class="hljs-number">1</span> + i] == <span class="hljs-number">1</span>) &#123;  <span class="hljs-comment">//检查右斜列</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>  &#125;<br>  queen[x][y] = <span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">settleQueen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;<br>  <span class="hljs-keyword">if</span> (x == MAX_NUM) &#123; <span class="hljs-comment">//遍历完毕，找到答案</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>  &#125;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_NUM; i++) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> y = <span class="hljs-number">0</span>; y &lt; MAX_NUM; y++)<br>      queen[y][x] = <span class="hljs-number">0</span>;  <span class="hljs-comment">//清空当前列，省的回溯的时候被打扰</span><br>    <span class="hljs-keyword">if</span> (check(i,x)) &#123; <span class="hljs-comment">//如果这行找着了</span><br>      queen[i][x] = <span class="hljs-number">1</span>;<br>      showQueen();  <span class="hljs-comment">//直观测试结果</span><br>      <span class="hljs-keyword">if</span> (settleQueen(x + <span class="hljs-number">1</span>)) &#123; <span class="hljs-comment">//是时候往左了</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;  <span class="hljs-comment">//一路往左</span><br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">//如果不行，就退回来</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>背包问题</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">int</span> weight[<span class="hljs-number">4</span>] = &#123; <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span> &#125;;<br><span class="hljs-keyword">int</span> value[<span class="hljs-number">4</span>] = &#123; <span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span> &#125;;<br><span class="hljs-keyword">int</span> flag[<span class="hljs-number">4</span>] = &#123; <span class="hljs-number">0</span> &#125;;<br><span class="hljs-keyword">int</span> maxvalue = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">int</span> packweight = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">int</span> packvalue = <span class="hljs-number">0</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> node)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (node == <span class="hljs-number">4</span>) &#123;<br>        <span class="hljs-keyword">if</span> (maxvalue &lt; packvalue)<br>            maxvalue = packvalue;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">2</span>; i++) &#123;<br>            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) &#123;<br>                backtrack(node + <span class="hljs-number">1</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (packweight + weight[node] &lt;= <span class="hljs-number">8</span>) &#123;	<span class="hljs-comment">// 小于背包总容量</span><br>                    packweight += weight[node];<br>                    packvalue += value[node];<br>                    backtrack(node + <span class="hljs-number">1</span>);	<span class="hljs-comment">// 继续进行深度搜索</span><br>                    packweight -= weight[node];	<span class="hljs-comment">// 把当前物品从背包中删除</span><br>                    packvalue -= value[node];	<span class="hljs-comment">// 因为计算下一条路径时需要把前一次的清空</span><br>                 &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>回溯法属于<strong>深度优先搜索</strong>，由于是全局搜索，复杂度相对高。</p>
+<h3 id="3-线性表"><a href="#3-线性表" class="headerlink" title="3. 线性表"></a>3. 线性表</h3><p><strong>数组与链表</strong></p>
+<p><strong>数组：</strong></p>
+<p>数组设计之初是在形式上依赖内存分配而成的，所以必须在使用前预先分配好空间大小。这使得数组有以下特性：</p>
+<ul>
+<li>用连续的内存空间来存储数据</li>
+<li>数组支持随机访问，根据下标随机访问的时间复杂度为 <code>O(1)</code></li>
+<li>数组的插入、删除操作，平均时间复杂度为 <code>O(n)</code></li>
+<li>空间大小固定，一旦建立，不能再改变。扩容只能采用复制数组的方式</li>
+</ul>
+<p><strong>链表：</strong></p>
+<p>链表用不连续的内存空间来存储数据；并通过一个指针按顺序将这些空间串起来，形成一条链。链表的每一个结点除了存储数据以外，还保存了到下一个节点的指针。由于不必按顺序存储，链表在插入数据的时候可以达到 <code>O(1)</code> 的复杂度，但是查找一个节点或者访问特定编号的节点则需要 <code>O(n)</code> 的时间。</p>
+<p>链表具有以下特性：</p>
+<ul>
+<li>链表允许插入和移除任意位置上的节点，其时间复杂度为 <code>O(1)</code></li>
+<li>链表没有数组的随机访问特性，<strong>链表只支持顺序访问</strong>，其时间复杂度为 <code>O(n)</code></li>
+<li>数组的空间大小是固定的，而<strong>链表的空间大小可以动态增长</strong>。相比于数组，链表支持扩容，显然更为灵活，但是由于多了指针域，空间开销也更大</li>
+<li>链表相比于数组，多了头指针、尾指针（非必要），合理使用可以大大提高访问效率</li>
+</ul>
+<p>链表有多种类型：</p>
+<ul>
+<li>单链表</li>
+<li>双链表</li>
+<li>循环链表</li>
+</ul>
+<h3 id="4-树"><a href="#4-树" class="headerlink" title="4. 树"></a>4. 树</h3><p>树是非线性数据结构的一种，由结点和边组成，且不存在着任何环。</p>
+<ul>
+<li>节点的度：树中某个节点的子树的个数</li>
+<li>树的度：树中各节点的度的最大值</li>
+<li>分支节点：度不为零的节点</li>
+<li>叶子节点：度为零的节点</li>
+<li>树的高度（深度）：树中节点的最大层次</li>
+<li>有序树：树中节点子树按次序从左向右安排，区分左右节点</li>
+<li>森林：互不相交的树的集合</li>
+<li>树的节点数：数的所有节点度数加1（根节点）</li>
+<li>度为 m 的树中第 i 层最多有 $m^{i-1}$个节点</li>
+<li>高度为 h 的 m 次树至多有 $\dfrac{m^{h-1}}{m-1}$个节点</li>
+<li>具有 n 个节点的 m 次树的最小高度为 $log_m( n(m-1) + 1 )$ 向上取整</li>
+</ul>
+<p><strong>二叉树</strong></p>
+<p>满足以下两个条件的树就是二叉树：</p>
+<ul>
+<li>本身是有序树</li>
+<li>树中包含的各个节点的度不超过 2</li>
+</ul>
+<p>二叉树的性质：</p>
+<ul>
+<li>第 i 层最多有 $2^{i-1}$ 个结点</li>
+<li>如果二叉树的深度为 K，那么此二叉树最多有 $2^K-1$ 个结点</li>
+<li>二叉树中，叶子结点数为 n0，度为 2 的结点数为 n2，则 n0 = n2+1</li>
+</ul>
+<p>满二叉树：如果二叉树中除了叶子结点，每个结点的度都为 2，则此二叉树称为满二叉树</p>
+<p>完全二叉树：如果二叉树中除去最后一层节点为满二叉树，且最后一层的结点依次从左到右分布，则此二叉树被称为完全二叉树。</p>
+<p><strong>二叉树的遍历</strong></p>
+<ul>
+<li>前序（先序）遍历：（1）访问当前节点；（2）访问当前节点的左子树；（3）访问当前节点的右子树。</li>
+<li>中序遍历：（1）访问当前节点的左子树；（2）访问当前节点；（3）访问当前节点的右子树。</li>
+<li>后序遍历：（1）访问当前节点的左子树；（2）访问当前节点的右子树；（3）访问当前节点。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/dunwu/images/dev/snap/20220404201713.png" alt="img" style="zoom:67%;" /></p>
+<p><strong>二叉查找树</strong></p>
+<p>二叉查找树是二叉树中最常用的一种类型，也叫二叉搜索树。顾名思义，二叉查找树是为了实现快速查找而生的。不过，它不仅仅支持快速查找一个数据，还支持快速插入、删除一个数据。</p>
+<p>二叉查找树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值。即二叉查找树的中序遍历结果为升序序列。</p>
+<p>第一，哈希表中的数据是无序存储的，如果要输出有序的数据，需要先进行排序。而对于二叉查找树来说，我们只需要中序遍历，就可以在 O(n) 的时间复杂度内，输出有序的数据序列。</p>
+<p>第二，哈希表扩容耗时很多，而且当遇到散列冲突时，性能不稳定，尽管二叉查找树的性能不稳定，但是在工程中，我们最常用的平衡二叉查找树的性能非常稳定，时间复杂度稳定在 O(logn)。</p>
+<p>第三，笼统地来说，尽管哈希表的查找等操作的时间复杂度是常量级的，但因为哈希冲突的存在，这个常量不一定比 logn 小，所以实际的查找速度可能不一定比 O(logn) 快。加上哈希函数的耗时，也不一定就比平衡二叉查找树的效率高。</p>
+<p>第四，哈希表的构造比二叉查找树要复杂，需要考虑的东西很多。比如散列函数的设计、冲突解决办法、扩容、缩容等。平衡二叉查找树只需要考虑平衡性这一个问题，而且这个问题的解决方案比较成熟、固定。</p>
+<p>最后，为了避免过多的散列冲突，哈希表装载因子不能太大，特别是基于开放寻址法解决冲突的哈希表，不然会浪费一定的存储空间。</p>
+<p><strong>堆</strong></p>
+<p>堆（Heap）是一个可以被看成近似完全二叉树的数组。</p>
+<ul>
+<li>堆是一个完全二叉树</li>
+<li>堆中每一个节点的值都必须大于等于（或小于等于）其子树中每个节点的值</li>
+</ul>
+<p>堆可以分为大顶堆和小顶堆。</p>
+<ul>
+<li>对于每个节点的值都大于等于子树中每个节点值的堆，叫作“<strong>大顶堆</strong>”</li>
+<li>对于每个节点的值都小于等于子树中每个节点值的堆，叫作“<strong>小顶堆</strong>”</li>
+</ul>
+<p>完全二叉树比较适合用数组来存储。用数组来存储完全二叉树是非常节省存储空间的。因为我们不需要存储左右子节点的指针，单纯地通过数组的下标，就可以找到一个节点的左右子节点和父节点。</p>
+<p>堆常见的操作：</p>
+<ul>
+<li>建堆：把一个乱序的数组变成堆结构的数组，时间复杂度为 O(n)</li>
+<li>把一个数值放进已经是堆结构的数组中，并保持堆结构，时间复杂度为 O(logN)</li>
+<li>从最大堆中取出最大值或从最小堆中取出最小值，并将剩余的数组保持堆结构，时间复杂度为 O(logN)</li>
+<li>借由 HEAPFY 建堆和 HEAPPOP 堆数组进行排序，时间复杂度为 <script type="math/tex">O(N log N)</script>，空间复杂度为 O(1)</li>
+</ul>
+<h3 id="5-图"><a href="#5-图" class="headerlink" title="5. 图"></a>5. 图</h3><p>图是由顶点和边组成的另一种非线性数据结构。</p>
+<p><strong>强连通图</strong>：有向图中，若任意两个顶点 Vi 和 Vj，满足从 Vi 到 Vj 以及从 Vj 到 Vi 都连通，也就是都含有至少一条通路，则称此有向图为强连通图。</p>
+<p>若有向图本身不是强连通图，但其包含的最大连通子图具有强连通图的性质，则称该子图为强连通分量。</p>
+<p><strong>生成树</strong>：对连通图进行遍历，过程中所经过的边和顶点的组合可看做是一棵普通树，通常称为生成树。</p>
+<p>连通图中，由于任意两顶点之间可能含有多条通路，遍历连通图的方式有多种，往往一张连通图可能有多种不同的生成树与之对应。</p>
+<p><strong>深度优先搜索</strong></p>
+<p>深度优先搜索，是从图中的一个顶点出发，每次遍历当前访问顶点的临界点，一直到访问的顶点没有未被访问过的临界点为止。然后采用依次回退的方式，查看来的路上每一个顶点是否有其它未被访问的临界点。访问完成后，判断图中的顶点是否已经全部遍历完成，如果没有，以未访问的顶点为起始点，重复上述过程。</p>
+<p><strong>广度有限搜索</strong></p>
+<p>广度优先搜索类似于树的层次遍历。从图中的某一顶点出发，遍历每一个顶点时，依次遍历其所有的邻接点，然后再从这些邻接点出发，同样依次访问它们的邻接点。按照此过程，直到图中所有被访问过的顶点的邻接点都被访问到。最后还需要做的操作就是查看图中是否存在尚未被访问的顶点，若有，则以该顶点为起始点，重复上述遍历的过程。</p>
+<h4 id="最小生成树算法"><a href="#最小生成树算法" class="headerlink" title="最小生成树算法"></a>最小生成树算法</h4><p><strong>最小生成树</strong>是一个连通加权无向图中一棵权值之和最小的生成树。</p>
+<p><strong>Prim 算法</strong></p>
+<p>此算法可以称为“加点法”，基于<strong>贪心</strong>的策略，每次迭代选择权重最小的边对应的点，加入到最小生成树中。算法从某一个顶点 s 开始，逐渐覆盖整个连通网的所有顶点。</p>
+<p>1）图的所有顶点的集合为 $V$；初始令集合 $u = \{s\}, v = V−u$。</p>
+<p>2）在两个集合 $u, v$ 能够组成的边中，选择一条代价最小的边 $(u_0,v_0)$，加入到最小生成树中，并把 $v_0$ 并入到集合 $u$ 中。</p>
+<p>3）重复步骤 2，直到最小生成树有 $n-1$ 条边或者 n 个顶点为止。</p>
+<p><img src="https://img-blog.csdn.net/20160714161107576" alt="这里写图片描述"></p>
+<p><strong>时间复杂度</strong>：$O(n^2)$</p>
+<p><strong>Kruskal 算法</strong></p>
+<p>Kruskal 算法是基于<strong>贪心</strong>的思想得到的。首先我们把所有的边按照权值先从小到大排列，接着按照顺序选取每条边，如果这条边的两个端点不属于同一集合，那么就将它们合并，直到所有的点都属于同一个集合为止。</p>
+<p>1）将图 G 看做一个森林，每个顶点为一棵独立的树。<br>2）将所有的边加入集合 S，即一开始 S = E。<br>3）从 S 中选择权重最小的边 (u, v)，如果 (u, v) 不在同一棵树内，则连接 u, v 合并这两棵树，同时将 (u, v) 加入生成树的边集E’。<br>4）重复 (3) 直到所有点属于同一棵树，边集 E’ 就是一棵最小生成树。</p>
+<p><strong>时间复杂度</strong>：$O(eloge)$</p>
+<p>Prim 算法更适合与解决边的绸密度更高的连通网。Kruskal 算法更适合于求边稀疏的网的最小生成树。</p>
+<h4 id="最短路径算法"><a href="#最短路径算法" class="headerlink" title="最短路径算法"></a>最短路径算法</h4><p><strong>Dijkstra 算法</strong></p>
+<p>Dijkstra 算法使用了<strong>广度优先搜索</strong>解决带权有向图的<strong>单源最短路径</strong>问题。</p>
+<p>Dijkstra 算法采用的是一种<strong>贪心</strong>的策略。</p>
+<p>1）首先，声明一个数组 dis 保存从源点 s 到其他各点的最短距离；集合 T 保存已经找到最短路径的顶点。初始时，源点的路径权重赋为 0（dis[0] = 0）。对于顶点 s 能够到达的边 (s, t)，将 dis[t] 设为该条边的权重值，同时把不可达的顶点的路径长度设置为无穷大。初始时，集合 T 只包含源点 s。</p>
+<p>2）从 dis 数组中选择最小值，则该值就是源点 s 到对应顶点的最短路径，并将该点添加到集合 T 中。</p>
+<p>3）查看新加入的顶点可以到达的其他顶点，并比较经过新加入的顶点到达其他顶点的路径长度是否比从源点直接到达短，如果是，则将该较短路径长度更新到 dis 数组。</p>
+<p>4）从 dis 数组选择其他最小值，重复上述步骤，直到 T 中包含图中所有顶点。</p>
+<p><strong>Floyd-Warshall 算法</strong></p>
+<p>Floyd-Warshall算法（Floyd-Warshall algorithm）是解决<strong>任意两点间的最短路径</strong>的一种算法，可以正确处理<strong>带权有向图</strong>最短路径问题，同时也被用于计算有向图的传递闭包。</p>
+<p>时间复杂度为 $O(N^3)$，空间复杂度为 $O(N^2)$。</p>
+<p>Floyd 算法是一个经典的<strong>动态规划</strong>算法，目标是寻找从点 i 到点 j 的最短路径。其核心思想是，在两个顶点之间插入一个或一个以上的中转点，比较经过与不经过中转点的距离哪个更短。</p>
+<p>通过 Floyd 算法计算图 G = (V, E) 中任意两个顶点之间的最短路径时，需要引入两个矩阵，矩阵 D 中的元素 $a[i][j]$ 表示顶点 i (第 i 个顶点) 到顶点 j (第 j 个顶点) 的距离。矩阵 P 中的元素 $b[i][j]$，表示顶点 i 到顶点 j 经过了 $b[i][j]$ 记录的值所表示的顶点。</p>
+<p>假设图 G 中顶点个数为 N，则需要对矩阵 D 和矩阵 P 进行 N 次更新。初始时，矩阵 D 中顶点 $a[i][j]$ 的距离为顶点 i 到顶点 j 的权值；如果 i 和 j 不相邻，则 $a[i][j]=∞$，矩阵 P 的值为顶点 $b[i][j]$ 的 j 的值。接下来开始，对矩阵 D 进行 N 次更新。第 1 次更新时，如果”$a[i][j]$ 的距离” &gt; “$a[i][0]+a[0][j]$”($a[i][0]+a[0][j]$ 表示” i 与 j 之间经过第 1 个顶点的距离”)，则更新 $a[i][j]$ 为”$a[i][0]+a[0][j]$”,更新 $b[i][j]=b[i][0]$。 同理，第 k 次更新时，如果”$a[i][j]$ 的距离” &gt; “$a[i][k-1]+a[k-1][j]$”，则更新 $a[i][j]$ 为”$a[i][k-1]+a[k-1][j]$”, $b[i][j]=b[i][k-1]$。更新 N 次之后，操作完成。</p>
+<p><strong>SPFA 算法</strong></p>
+<p>SPFA 算法是求解<strong>单源最短路径</strong>问题的一种算法，是对 Dijkstra 算法的优化。采取的方法是动态逼近法：设立一个先进先出的队列用来保存待优化的结点，优化时每次取出队首结点 u，并且用 u 点当前的最短路径估计值对离开 u 点所指向的结点 v 进行松弛操作，如果 v 点的最短路径估计值有所调整，且 v 点不在当前的队列中，就将 v 点放入队尾。这样不断从队列中取出结点来进行松弛操作，直至队列空为止。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35644234/article/details/61614581">https://blog.csdn.net/qq_35644234/article/details/61614581</a></p>
+<h3 id="6-哈希表"><a href="#6-哈希表" class="headerlink" title="6. 哈希表"></a>6. 哈希表</h3><p><strong>哈希表</strong>（散列表）是一种使用 <strong>哈希函数</strong> 组织数据，以支持快速插入和搜索的数据结构。</p>
+<p>有两种不同类型的哈希表：<strong>哈希集合</strong> 和 <strong>哈希映射</strong>。</p>
+<ul>
+<li><strong>哈希集合</strong> 是集合数据结构的实现之一，用于存储非重复值。</li>
+<li><strong>哈希映射</strong> 是映射数据结构的实现之一，用于存储(key, value)键值对。</li>
+</ul>
+<p>哈希表通过散列函数把元素的键值映射为下标，然后将数据存储在数组中对应下标的位置。按照键值查询元素时，用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据。</p>
+<p>散列函数，可以把它定义成 <strong>hash(key)</strong>，其中 key 表示元素的键值，hash(key) 的值表示经过散列函数计算得到的散列值。</p>
+<p><strong>散列函数设计的基本要求</strong>：</p>
+<ul>
+<li><p>散列函数计算得到的散列值是一个非负整数；</p>
+</li>
+<li><p>如果 key1 = key2，那 hash(key1) == hash(key2)；</p>
+</li>
+<li><p>如果 key1 ≠ key2，那 hash(key1) ≠ hash(key2)。</p>
+</li>
+</ul>
+<p><strong>散列冲突</strong></p>
+<p>即便像业界著名的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/MD5">MD5</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/SHA家族">SHA</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/循環冗餘校驗">CRC</a>等哈希算法，也会出现不满足以上要求的情况，即发生 散列冲突。</p>
+<p>常用的散列冲突解决方法有两类，开放寻址法（open addressing）和链表法（chaining）。</p>
+<p>当哈希表中空闲位置不多的时候，散列冲突的概率就会大大提高。为了尽可能保证哈希表的操作效率，一般情况下，我们会尽可能保证哈希表中有一定比例的空闲槽位。我们用<strong>装载因子</strong>（load factor）来表示空位的多少。</p>
+<p>装载因子的计算公式是：哈希表的装载因子 = 填入表中的元素个数 / 哈希表的长度</p>
+<p><strong>装载因子越大，说明空闲位置越少，冲突越多</strong>，哈希表的性能会下降。当装载因子过大时，就需要对哈希表扩容。新申请一个更大的哈希表，将数据搬移到这个新哈希表中。针对数组的扩容，数据搬移操作比较简单。但是，针对哈希表的扩容，数据搬移操作要复杂很多。因为哈希表的大小变了，数据的存储位置也变了，所以我们需要通过散列函数重新计算每个数据的存储位置。</p>
+<p>插入一个数据，最好情况下，不需要扩容，最好时间复杂度是 O(1)。最坏情况下，哈希表装载因子过高，启动扩容，我们需要重新申请内存空间，重新计算哈希位置，并且搬移数据，所以时间复杂度是 O(n)。用摊还分析法，均摊情况下，时间复杂度接近最好情况，就是 O(1)。</p>
+<p>装载因子阈值需要选择得当。如果太大，会导致冲突过多；如果太小，会导致内存浪费严重。</p>
+<p><strong>开放寻址法</strong>：开放寻址法的核心思想是，如果出现了散列冲突，我们就重新探测一个空闲位置，将其插入。<strong>当数据量比较小、装载因子小的时候，适合采用开放寻址法。</strong></p>
+<p><strong>线性探测</strong>（Linear Probing）：当我们往哈希表中插入数据时，如果某个数据经过散列函数散列之后，存储位置已经被占用了，我们就从当前位置开始，依次往后查找，看是否有空闲位置，直到找到为止。线性探测法其实存在很大问题。当哈希表中插入的数据越来越多时，散列冲突发生的可能性就会越来越大，空闲位置会越来越少，线性探测的时间就会越来越久。</p>
+<p><strong>链表法</strong>：在哈希表中，每个“桶（bucket）”或者“槽（slot）”会对应一条链表，所有散列值相同的元素我们都放到相同槽位对应的链表中。链表法比起开放寻址法，对大装载因子的容忍度更高。开放寻址法只能适用装载因子小于 1 的情况。接近 1 时，就可能会有大量的散列冲突，导致大量的探测、再散列等，性能会下降很多。但是对于链表法来说，只要散列函数的值随机均匀，即便装载因子变成 10，也就是链表的长度变长了而已，虽然查找效率有所下降，但是比起顺序查找还是快很多。</p>
+<p><strong>哈希表的应用场景</strong>：</p>
+<ul>
+<li><strong>安全加密</strong>：如：MD5、SHA</li>
+<li><strong>唯一标识</strong>：UUID</li>
+<li>数据校验：数字签名</li>
+<li><strong>负载均衡</strong>：会话粘滞（session sticky）负载均衡算法。可以通过哈希算法，对客户端 IP 地址或者会话 ID 计算哈希值，将取得的哈希值与服务器列表的大小进行取模运算，最终得到的值就是应该被路由到的服务器编号</li>
+<li>数据分片</li>
+<li>分布式存储：一致性哈希算法、虚拟哈希槽</li>
+</ul>
+<h3 id="7-查找"><a href="#7-查找" class="headerlink" title="7. 查找"></a>7. 查找</h3><p><strong>查找定义：</strong>根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。</p>
+<p><strong>查找算法分类：</strong></p>
+<p>1）静态查找和动态查找</p>
+<p>注：静态或者动态都是针对查找表而言的。动态表指查找表中有删除和插入操作的表。</p>
+<p>2）无序查找和有序查找</p>
+<p>无序查找：被查找数列有序无序均可；</p>
+<p>有序查找：被查找数列必须为有序数列。</p>
+<p>查找成功的<strong>平均查找长度</strong>为：ASL = Pi * Ci。</p>
+<p>Pi：查找表中第 i 个数据元素的概率。<br>Ci：找到第 i 个数据元素时已经比较过的次数。</p>
+<p><strong>七大查找算法：</strong></p>
+<h4 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h4><p>顺序查找适合于存储结构为顺序存储或链接存储的线性表。</p>
+<p><strong>基本思想：</strong>顺序查找也称为线形查找，属于无序查找算法。从数据结构线形表的一端开始，顺序扫描，依次将扫描到的结点关键字与给定值 k 相比较，若相等则表示查找成功；若扫描结束仍没有找到关键字等于 k 的结点，表示查找失败。</p>
+<p><strong>复杂度分析：</strong>　</p>
+<p>查找成功时的平均查找长度为：（假设每个数据元素的概率相等） $ASL = (1/n) * (1+2+3+…+n) = (n+1)/2$;<br>当查找不成功时，需要 n+1 次比较，时间复杂度为 O(n);</p>
+<p>所以，<strong>顺序查找的时间复杂度为O(n)</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SequenceSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> value, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>        <span class="hljs-keyword">if</span> (a[i] == value)<br>            <span class="hljs-keyword">return</span> i;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>元素必须是<strong>有序</strong>的，如果是无序的则要先进行排序操作。</p>
+<p><strong>基本思想：</strong>也称为折半查找，属于有序查找算法。用给定值 k 先与中间结点的关键字比较，中间结点把线形表分成两个子表，若相等则查找成功；若不相等，再根据 k 与该中间结点关键字的比较结果确定下一步查找哪个子表，这样递归进行，直到查找到或查找结束发现表中没有这样的结点。</p>
+<p><strong>复杂度分析：</strong>最坏情况下，关键词比较次数为 $log_2(n+1)$，且<strong>期望时间复杂度为 $O(log_2n)$</strong>；</p>
+<p>注：折半查找的前提条件是需要有序表顺序存储，对于静态查找表，一次排序后不再变化，折半查找能得到不错的效率。但对于需要频繁执行插入或删除操作的数据集来说，维护有序的排序会带来不小的工作量，那就不建议使用。——《大话数据结构》</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// 二分查找（折半查找）</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">BinarySearch1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> value, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> low, high, mid;<br>    low = <span class="hljs-number">0</span>;<br>    high = n<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">while</span>(low &lt;= high) &#123;<br>        mid = (low + high) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> (a[mid] == value)<br>            <span class="hljs-keyword">return</span> mid;<br>        <span class="hljs-keyword">if</span> (a[mid] &gt; value)<br>            high = mid<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">if</span> (a[mid] &lt; value)<br>            low = mid+<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br><br><span class="hljs-comment">// 二分查找，递归版本</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">BinarySearch2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> value, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> mid = low + (high - low) / <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (a[mid] == value)<br>        <span class="hljs-keyword">return</span> mid;<br>    <span class="hljs-keyword">if</span> (a[mid] &gt; value)<br>        <span class="hljs-keyword">return</span> BinarySearch2(a, value, low, mid<span class="hljs-number">-1</span>);<br>    <span class="hljs-keyword">if</span> (a[mid] &lt; value)<br>        <span class="hljs-keyword">return</span> BinarySearch2(a, value, mid+<span class="hljs-number">1</span>, high);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="插值查找"><a href="#插值查找" class="headerlink" title="插值查找"></a>插值查找</h4><p>在介绍插值查找之前，首先考虑一个新问题，为什么上述算法一定要是折半，而不是折四分之一或者折更多呢？</p>
+<p>打个比方，在英文字典里面查“apple”，你下意识翻开字典是翻前面的书页还是后面的书页呢？如果再让你查“zoo”，你又怎么查？很显然，这里你绝对不会是从中间开始查起，而是有一定目的的往前或往后翻。又比如要在取值范围1 ~ 10000 之间 100 个元素从小到大均匀分布的数组中查找5， 我们自然会考虑从数组下标较小的开始查找。</p>
+<p>经过以上分析，折半查找这种查找方式，不是自适应的（也就是说是傻瓜式的），我们可以将查找的点改进为如下：</p>
+<p>$mid = low + (key - a[low]) / (a[high] - a[low]) * (high - low)$</p>
+<p>也就是将上述的比例参数1/2改进为自适应的，根据关键字在整个有序表中所处的位置，让mid值的变化更靠近关键字key，这样也就间接地减少了比较次数。当然，差值查找也属于<strong>有序查找</strong>。</p>
+<p><strong>复杂度分析：查找成功或者失败的时间复杂度均为 $O(log_2(log_2n))$。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">InsertionSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> value, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> mid = low + (value - a[low]) / (a[high] - a[low]) * (high-low);<br>    <span class="hljs-keyword">if</span> (a[mid] == value)<br>        <span class="hljs-keyword">return</span> mid;<br>    <span class="hljs-keyword">if</span> (a[mid] &gt; value)<br>        <span class="hljs-keyword">return</span> InsertionSearch(a, value, low, mid<span class="hljs-number">-1</span>);<br>    <span class="hljs-keyword">if</span> (a[mid] &lt; value)<br>        <span class="hljs-keyword">return</span> InsertionSearch(a, value, mid+<span class="hljs-number">1</span>, high);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="斐波那契查找"><a href="#斐波那契查找" class="headerlink" title="斐波那契查找"></a>斐波那契查找</h4><p><strong>基本思想：</strong>也是二分查找的一种提升算法，通过运用<strong>黄金比例</strong>的概念在数列中选择查找点进行查找，提高查找效率。同样地，斐波那契查找也属于一种<strong>有序查找</strong>算法。</p>
+<p>斐波那契查找与折半查找很相似，他是根据斐波那契序列的特点对有序表进行分割的。他要求开始表中记录的个数为某个斐波那契数小 1，及 n = F(k) - 1; 开始将 k 值与第 F(k-1) 位置的记录进行比较 (即 mid = low + F(k-1) - 1)，比较结果也分为三种：</p>
+<p>1）相等，mid位置的元素即为所求</p>
+<p>2）>，low = mid + 1, k -= 2;</p>
+<p>说明：low = mid + 1说明待查找的元素在 [mid + 1, high] 范围内，k -= 2 说明范围 [mid+1, high] 内的元素个数为 n - (F(k-1)) = Fk-1 - F(k-1) = Fk - F(k-1) - 1 = F(k-2) - 1个，所以可以递归的应用斐波那契查找。</p>
+<p>3）&lt;，high = mid-1, k -= 1。</p>
+<p>说明：low = mid - 1说明待查找的元素在 [low, mid - 1] 范围内，k -= 1 说明范围 [low, mid - 1] 内的元素个数为 F(k-1) - 1 个，所以可以递归的应用斐波那契查找。</p>
+<p><strong>复杂度分析：最坏情况下，时间复杂度为 $O(log_2n)$，且其期望复杂度也为 $O(log_2n)$。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;stdafx.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;memory&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span>  <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> max_size=<span class="hljs-number">20</span>; <span class="hljs-comment">// 斐波那契数组的长度</span><br><br><span class="hljs-comment">/*构造一个斐波那契数组*/</span> <br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Fibonacci</span><span class="hljs-params">(<span class="hljs-keyword">int</span> * F)</span> </span>&#123;<br>    F[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>    F[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt; max_size; ++i)<br>        F[i] = F[i<span class="hljs-number">-1</span>] + F[i<span class="hljs-number">-2</span>];<br>&#125;<br><br><span class="hljs-comment">/*定义斐波那契查找法*/</span>  <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">FibonacciSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> key)</span> </span>&#123;  <span class="hljs-comment">// a为要查找的数组,n为要查找的数组长度,key为要查找的关键字</span><br>  <span class="hljs-keyword">int</span> low = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">int</span> high = n<span class="hljs-number">-1</span>;<br>  <span class="hljs-keyword">int</span> F[max_size];<br>  <span class="hljs-built_in">Fibonacci</span>(F);  <span class="hljs-comment">// 构造一个斐波那契数组F </span><br><br>  <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">while</span> (n &gt; F[k] - <span class="hljs-number">1</span>)  <span class="hljs-comment">// 计算n位于斐波那契数列的位置</span><br>      ++k;<br><br>  <span class="hljs-keyword">int</span>  * temp;  <span class="hljs-comment">// 将数组a扩展到F[k]-1的长度</span><br>  temp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span> [F[k] - <span class="hljs-number">1</span>];<br>  <span class="hljs-built_in">memcpy</span>(temp, a, n * <span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(<span class="hljs-keyword">int</span>));<br><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n; i &lt; F[k] - <span class="hljs-number">1</span>; ++i)<br>     temp[i] = a[n<span class="hljs-number">-1</span>];<br>  <br>  <span class="hljs-keyword">while</span> (low &lt;= high) &#123;<br>    <span class="hljs-keyword">int</span> mid = low + F[k<span class="hljs-number">-1</span>] - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (key &lt; temp[mid]) &#123;<br>      high = mid - <span class="hljs-number">1</span>;<br>      k -= <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; temp[mid]) &#123;<br>     low = mid + <span class="hljs-number">1</span>;<br>     k -= <span class="hljs-number">2</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>       <span class="hljs-keyword">if</span> (mid &lt; n)<br>           <span class="hljs-keyword">return</span> mid;  <span class="hljs-comment">// 若相等则说明mid即为查找到的位置</span><br>       <span class="hljs-keyword">else</span><br>           <span class="hljs-keyword">return</span> n - <span class="hljs-number">1</span>;  <span class="hljs-comment">// 若mid&gt;=n则说明是扩展的数值,返回n-1</span><br>    &#125;<br>  &#125;  <br>  <span class="hljs-keyword">delete</span> [] temp;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> a[] = &#123;<span class="hljs-number">0</span>,<span class="hljs-number">16</span>,<span class="hljs-number">24</span>,<span class="hljs-number">35</span>,<span class="hljs-number">47</span>,<span class="hljs-number">59</span>,<span class="hljs-number">62</span>,<span class="hljs-number">73</span>,<span class="hljs-number">88</span>,<span class="hljs-number">99</span>&#125;;<br>    <span class="hljs-keyword">int</span> key = <span class="hljs-number">100</span>;<br>    <span class="hljs-keyword">int</span> index = <span class="hljs-built_in">FibonacciSearch</span>(a, <span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(a) / <span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(<span class="hljs-keyword">int</span>), key);<br>    cout &lt;&lt; key &lt;&lt; <span class="hljs-string">&quot; is located at:&quot;</span> &lt;&lt; index;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="树表查找"><a href="#树表查找" class="headerlink" title="树表查找"></a>树表查找</h4><p><strong>最简单的树表查找算法——二叉树查找算法</strong></p>
+<p><strong>基本思想：</strong>二叉查找树是先对待查找的数据进行生成树，确保树的左分支的值小于右分支的值，然后在就行和每个节点的父节点比较大小，查找最适合的范围。 这个算法的查找效率很高，但是如果使用这种查找方法要首先创建树。</p>
+<p><strong>二叉查找树</strong>（BinarySearch Tree，也叫二叉搜索树，或称二叉排序树Binary Sort Tree）或者是一棵空树，或者是具有下列性质的二叉树：</p>
+<p>1）若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</p>
+<p>2）若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</p>
+<p>3）任意节点的左、右子树也分别为二叉查找树。</p>
+<p><strong>二叉查找树性质</strong>：<strong>对二叉查找树进行中序遍历，即可得到有序的数列。</strong></p>
+<p><strong>复杂度分析</strong>：它和二分查找一样，插入和查找的时间复杂度均为O(logn)，但是在最坏的情况下仍然会有O(n)的时间复杂度。原因在于插入和删除元素的时候，树没有保持平衡。我们追求的是在最坏的情况下仍然有较好的时间复杂度，这就是平衡查找树设计的初衷。</p>
+<p><strong>平衡查找树之 2-3 查找树（2-3 Tree）</strong></p>
+<p><strong>2-3查找树定义</strong>：和二叉树不一样，2-3 树运行每个节点保存 1 个或者两个的值。对于普通的 2 节点 (2-node)，他保存 1 个 key 和左右两个自己点。对应 3 节点 (3-node)，保存两个 Key，2-3 查找树的定义如下：</p>
+<p>1）要么为空，要么：</p>
+<p>2）对于 2 节点，该节点保存一个 key 及对应 value，以及两个指向左右节点的节点，左节点也是一个 2-3 节点，所有的值都比 key 要小，右节点也是一个 2-3 节点，所有的值比 key 要大。</p>
+<p>3）对于 3 节点，该节点保存两个 key 及对应 value，以及三个指向左中右的节点。左节点也是一个 2-3 节点，所有的值均比两个 key 中的最小的 key 还要小；中间节点也是一个 2-3 节点，中间节点的 key 值在两个跟节点 key 值之间；右节点也是一个 2-3 节点，节点的所有 key 值比两个 key 中的最大的 key 还要大。</p>
+<p><img src="https://images0.cnblogs.com/blog/94031/201403/252248450292152.png" alt="Definition of 2-3 tree" style="zoom:67%;" /></p>
+<p><strong>2-3查找树的性质：</strong></p>
+<p>1）如果中序遍历 2-3 查找树，就可以得到排好序的序列；</p>
+<p>2）在一个完全平衡的 2-3 查找树中，根节点到每一个为空节点的距离都相同。（这也是平衡树中“平衡”一词的概念，根节点到叶节点的最长距离对应于查找算法的最坏情况，而平衡树中根节点到叶节点的距离都一样，最坏情况也具有对数复杂度）</p>
+<p><strong>复杂度分析：</strong></p>
+<p>2-3 树的查找效率与树的高度是息息相关的。</p>
+<ul>
+<li>在最坏的情况下，也就是所有的节点都是 2-node 节点，查找效率为 lgN</li>
+<li>在最好的情况下，所有的节点都是 3-node 节点，查找效率为 log3N 约等于 0.631lgN</li>
+</ul>
+<p>距离来说，对于 1 百万个节点的 2-3 树，树的高度为 12-20 之间，对于 10 亿个节点的 2-3 树，树的高度为 18-30 之间。</p>
+<p>对于插入来说，只需要常数次操作即可完成，因为他只需要修改与该节点关联的节点即可，不需要检查其他节点，所以效率和查找类似。</p>
+<p><strong>平衡查找树之红黑树（Red-Black Tree）</strong></p>
+<p>2-3 查找树能保证在插入元素之后能保持树的平衡状态，最坏情况下即所有的子节点都是 2-node，树的高度为 lgn，从而保证了最坏情况下的时间复杂度。但是 2-3 树实现起来比较复杂，于是就有了一种简单实现 2-3 树的数据结构，即红黑树（Red-Black Tree）。</p>
+<p><strong>基本思想：</strong>红黑树的思想就是对 2-3 查找树进行编码，尤其是对 2-3 查找树中的 3-node 节点添加额外的信息。红黑树中将节点之间的链接分为两种不同类型，红色链接，他用来链接两个 2-node 节点来表示一个 3-node 节点。黑色链接用来链接普通的 2-3 节点。特别的，使用红色链接的两个 2-node来表示一个 3-node 节点，并且向左倾斜，即一个 2-node 是另一个 2-node 的左子节点。这种做法的好处是查找的时候不用做任何修改，和普通的二叉查找树相同。</p>
+<p><strong>红黑树的定义：</strong></p>
+<p>红黑树是一种具有红色和黑色链接的平衡查找树，同时满足：</p>
+<ul>
+<li>红色节点向左倾斜</li>
+<li>一个节点不可能有两个红色链接</li>
+<li>整个树完全黑色平衡，即从根节点到所以叶子结点的路径上，黑色链接的个数都相同。</li>
+</ul>
+<p><img src="https://images0.cnblogs.com/blog/94031/201403/270024403113529.png" alt="1-1 correspondence between 2-3 and LLRB" style="zoom:67%;" /></p>
+<p><strong>红黑树的性质</strong>：<strong>整个树完全黑色平衡，即从根节点到所以叶子结点的路径上，黑色链接的个数都相同（2-3树的第2）性质，从根节点到叶子节点的距离都相等）。</strong></p>
+<p><strong>复杂度分析：</strong>最坏的情况就是，红黑树中除了最左侧路径全部是由 3-node 节点组成，即红黑相间的路径长度是全黑路径长度的 2 倍。</p>
+<p>红黑树的平均高度大约为 logn。</p>
+<p><strong>B树和B+树（B Tree/B+ Tree）</strong></p>
+<p>B树，概括来说是一个节点可以拥有多于 2 个子节点的二叉查找树。与自平衡二叉查找树不同，B树为系统最优化<strong>大块数据的读和写操作</strong>。B-tree 算法减少定位记录时所经历的中间过程，从而加快存取速度。普遍运用在<strong>数据库</strong>和<strong>文件系统</strong>。</p>
+<p><strong>B树定义：</strong></p>
+<p>B树可以看作是对 2-3 查找树的一种扩展，即他允许每个节点有 M-1 个子节点。</p>
+<ul>
+<li>根节点至少有两个子节点</li>
+<li>每个节点有 M-1 个 key，并且以升序排列</li>
+<li>位于 M-1 和 M key 的子节点的值位于 M-1 和 M key 对应的 Value 之间</li>
+<li>其它节点至少有 M/2 个子节点</li>
+</ul>
+<p><img src="https://images0.cnblogs.com/blog/94031/201403/290047034539184.png" alt="img"></p>
+<p><strong>B+ 树定义：</strong></p>
+<p>B+ 树是对 B树的一种变形树，它与 B树的差异在于：</p>
+<ul>
+<li>有 k 个子结点的结点必然有 k 个关键码；</li>
+<li>非叶结点仅具有索引作用，跟记录有关的信息均存放在叶结点中。</li>
+<li>树的所有叶结点构成一个有序链表，可以按照关键码排序的次序遍历全部记录。</li>
+</ul>
+<p><img src="https://images0.cnblogs.com/blog/94031/201403/290050048129679.png" alt="B Plus tree" style="zoom:67%;" /></p>
+<p>B树和B+树的区别在于，B+树的非叶子结点只包含导航信息，不包含实际的值，所有的叶子结点和相连的节点使用链表相连，便于区间查找和遍历。</p>
+<p>B+ 树的优点在于：</p>
+<ul>
+<li>由于 B+树在内部节点上不好含数据信息，因此在内存页中能够存放更多的 key。 数据存放的更加紧密，具有更好的空间局部性。因此访问叶子几点上关联的数据也具有更好的缓存命中率。</li>
+<li>B+树的叶子结点都是相链的，因此对整棵树的便利只需要一次线性遍历叶子结点即可。而且由于数据顺序排列并且相连，所以便于区间查找和搜索。而B树则需要进行每一层的递归遍历。相邻的元素可能在内存中不相邻，所以缓存命中性没有B+树好。</li>
+</ul>
+<p>但是B树也有优点，其优点在于，由于 B树的每一个节点都包含 key 和 value，因此经常访问的元素可能离根节点更近，因此访问也更迅速。</p>
+<h4 id="分块查找"><a href="#分块查找" class="headerlink" title="分块查找"></a>分块查找</h4><p>分块查找又称索引顺序查找，它是顺序查找的一种改进方法。</p>
+<p><strong>算法思想：</strong>将 n 个数据元素”按块有序”划分为 m 块（m ≤ n）。每一块中的结点不必有序，但块与块之间必须”按块有序”；即第 1 块中任一元素的关键字都必须小于第 2 块中任一元素的关键字；而第 2 块中任一元素又都必须小于第 3 块中的任一元素，……</p>
+<p><strong>算法流程：</strong><br>step1 先选取各块中的最大关键字构成一个索引表；<br>step2 查找分两个部分：先对索引表进行二分查找或顺序查找，以确定待查记录在哪一块中；然后，在已确定的块中用顺序法进行查找。</p>
+<p>B/B+树常用于文件系统和数据库系统中，它通过对每个节点存储个数的扩展，使得对连续的数据能够进行较快的定位和访问，能够有效减少查找时间，提高存储的空间局部性从而减少IO操作。</p>
+<h4 id="哈希查找"><a href="#哈希查找" class="headerlink" title="哈希查找"></a>哈希查找</h4><p><strong>算法流程：</strong></p>
+<p>1）用给定的哈希函数构造哈希表；</p>
+<p>2）根据选择的冲突处理方法解决地址冲突；</p>
+<p>常见的解决冲突的方法：拉链法和线性探测法。</p>
+<p>3）在哈希表的基础上执行哈希查找。</p>
+<p><strong>复杂度分析</strong>：单纯论查找复杂度：对于无冲突的 Hash 表而言，查找复杂度为 O(1)（注意，在查找之前我们需要构建相应的Hash表）。</p>
+<p>Hash 是一种典型<strong>以空间换时间</strong>的算法，比如原来一个长度为 100 的数组，对其查找只需要遍历且匹配相应记录即可，从空间复杂度上来看，假如数组存储的是 byte 类型数据，那么该数组占用 100byte 空间。现在我们采用Hash算法，我们前面说的 Hash 必须有一个规则，约束键与存储位置的关系，那么就需要一个固定长度的 hash 表，此时，仍然是 100byte 的数组，假设我们需要的 100byte 用来记录键与位置的关系，那么总的空间为 200byte，而且用于记录规则的表大小会根据规则，大小可能是不定的。</p>
+<h3 id="8-排序"><a href="#8-排序" class="headerlink" title="8. 排序"></a>8. 排序</h3><p>十大排序算法：</p>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>冒泡排序循环走访要排序的数列，一次比较两个相邻元素，如果它们的顺序错误就把它们交换过来，直到所有元素排序完成。每次排序都会找到当前数列最大（最小）的值，并放到最后。</p>
+<p><img src="https://pic4.zhimg.com/v2-33a947c71ad62b254cab62e5364d2813_b.webp" alt="动图" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bubbleSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> temp = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) &#123; <span class="hljs-comment">// 每次需要排序的长度</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) &#123; <span class="hljs-comment">// 从第一个元素到第i个元素</span><br>            <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>]) &#123;<br>                temp = arr[j];<br>                arr[j] = arr[j + <span class="hljs-number">1</span>];<br>                arr[j + <span class="hljs-number">1</span>] = temp;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bubble_sort</span>(<span class="hljs-params">arr: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>    N = <span class="hljs-built_in">len</span>(arr)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(i):<br>            <span class="hljs-keyword">if</span> arr[j] &gt; arr[j + <span class="hljs-number">1</span>]:<br>                arr[j], arr[j + <span class="hljs-number">1</span>] = arr[j + <span class="hljs-number">1</span>], arr[j]<br>    <span class="hljs-keyword">return</span> arr<br></code></pre></td></tr></table></figure>
+<p><strong>稳定性</strong></p>
+<p>在相邻元素相等时，它们并不会交换位置，所以，冒泡排序是稳定排序。</p>
+<p><strong>适用场景</strong></p>
+<p>冒泡排序思路简单，代码也简单，特别适合小数据的排序。但是，由于算法复杂度较高，在数据量大的时候不适合使用。</p>
+<p><strong>算法优化</strong></p>
+<p>在数据完全有序的时候展现出最优时间复杂度，为O(n)。其他情况下，几乎总是O( n2 )。因此，算法在数据基本有序的情况下，性能最好。</p>
+<p>增加一个<code>swap</code>的标志，当前一轮没有进行交换时，说明数组已经有序，没有必要再进行下一轮的循环了，直接退出。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bubbleSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> temp = <span class="hljs-number">0</span>;<br>    boolean swap;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) &#123; <span class="hljs-comment">// 每次需要排序的长度</span><br>        swap = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) &#123; <span class="hljs-comment">// 从第一个元素到第i个元素</span><br>            <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j + <span class="hljs-number">1</span>]) &#123;<br>                temp = arr[j];<br>                arr[j] = arr[j + <span class="hljs-number">1</span>];<br>                arr[j + <span class="hljs-number">1</span>] = temp;<br>                swap = <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (swap == <span class="hljs-literal">false</span>)<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>选择排序也是一种交换排序算法，可以认为选择排序是冒泡排序的一种改进。</p>
+<p>在未排序序列中找到最小（大）元素，与排序序列起始位置元素交换，直到所有元素均排序完毕。</p>
+<p><img src="https://pic1.zhimg.com/v2-1c7e20f306ddc02eb4e3a50fa7817ff4_b.webp" alt="动图" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">selectionSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> temp, min = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        min = i;<br>        <span class="hljs-comment">// 循环查找最小值</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-keyword">if</span> (arr[min] &gt; arr[j])<br>                min = j;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (min != i) &#123;<br>            temp = arr[i];<br>            arr[i] = arr[min];<br>            arr[min] = temp;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">select_sort</span>(<span class="hljs-params">arr: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>    N = <span class="hljs-built_in">len</span>(arr)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):<br>        min_idx = i<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(i, N):<br>            <span class="hljs-keyword">if</span> arr[j] &lt; arr[min_idx]:<br>                min_idx = j<br>        <span class="hljs-keyword">if</span> min_idx != i:<br>            arr[i], arr[min_idx] = arr[min_idx], arr[i]<br>    <span class="hljs-keyword">return</span> arr<br></code></pre></td></tr></table></figure>
+<p><strong>稳定性</strong></p>
+<p>用数组实现的选择排序是不稳定的，用链表实现的选择排序是稳定的。一般提到排序算法时，大家往往会默认是数组实现，所以选择排序是不稳定的。</p>
+<p><strong>适用场景</strong></p>
+<p>选择排序实现也比较简单，并且由于在各种情况下复杂度波动小，因此一般是优于冒泡排序的。</p>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>插入排序通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<ol>
+<li>把待排序的数组分成已排序和未排序两部分，初始的时候把第一个元素认为是已排好序的。</li>
+<li>从第二个元素开始，在已排好序的子数组中寻找到该元素合适的位置并插入该位置。</li>
+<li>重复上述过程直到最后一个元素被插入有序子数组中。</li>
+</ol>
+<p><img src="https://pic3.zhimg.com/v2-91b76e8e4dab9b0cad9a017d7dd431e2_b.webp" alt="动图" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insertionSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i)&#123;<br>        <span class="hljs-keyword">int</span> value = arr[i];<br>        <span class="hljs-keyword">int</span> position = i;<br>        <span class="hljs-keyword">while</span> (position &gt; <span class="hljs-number">0</span> &amp;&amp; arr[position<span class="hljs-number">-1</span>] &gt; value) &#123;<br>            arr[position] = arr[position - <span class="hljs-number">1</span>];<br>            position--;<br>        &#125;<br>        arr[position] = value;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">insert_sort</span>(<span class="hljs-params">arr</span>):</span><br>    N = <span class="hljs-built_in">len</span>(arr)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):<br>        v = arr[i]<br>        pos = i<br>        <span class="hljs-keyword">while</span> pos &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> arr[pos - <span class="hljs-number">1</span>] &gt; v:<br>            arr[pos] = arr[pos - <span class="hljs-number">1</span>]<br>            pos -= <span class="hljs-number">1</span><br>        arr[pos] = v<br>    <span class="hljs-keyword">return</span> arr<br></code></pre></td></tr></table></figure>
+<p><strong>稳定性</strong></p>
+<p>由于只需要找到不大于当前数的位置而并不需要交换，因此，直接插入排序是稳定的排序方法。</p>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>归并排序是建立在归并操作上的一种有效的排序算法。是采用分治法的一个非常典型的应用。</p>
+<ul>
+<li>递归法</li>
+</ul>
+<ol>
+<li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列</li>
+<li>设定两个指针，最初位置分别为两个已经排序序列的起始位置</li>
+<li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置</li>
+<li>重复步骤3直到某一指针到达序列尾</li>
+<li>将另一序列剩下的所有元素直接复制到合并序列尾</li>
+</ol>
+<ul>
+<li>迭代法</li>
+</ul>
+<ol>
+<li>将序列每相邻两个数字进行归并操作，形成ceil(n/2)个序列，排序后每个序列包含两/一个元素</li>
+<li>若此时序列数不是1个则将上述序列再次归并，形成ceil(n/4)个序列，每个序列包含四/三个元素</li>
+<li>重复步骤2，直到所有元素排序完毕，即序列数为1</li>
+</ol>
+<p><img src="https://pic3.zhimg.com/v2-cdda3f11c6efbc01577f5c29a9066772_b.webp" alt="动图" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> temp[n];<br>    internalMergeSort(arr, temp, <span class="hljs-number">0</span>, n);<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">internalMergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> *temp, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>    <span class="hljs-comment">//当left==right的时，已经不需要再划分了</span><br>    <span class="hljs-keyword">if</span> (left &lt; right) &#123;<br>        <span class="hljs-keyword">int</span> middle = (left + right) / <span class="hljs-number">2</span>;<br>        internalMergeSort(arr, temp, left, middle);          <span class="hljs-comment">//左子数组</span><br>        internalMergeSort(arr, temp, middle+<span class="hljs-number">1</span>, right);       <span class="hljs-comment">//右子数组</span><br>        mergeSortedArray(arr, temp, left, middle, right);    <span class="hljs-comment">//合并两个子数组</span><br>    &#125;<br>&#125;<br><span class="hljs-comment">// 合并两个有序子序列</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergeSortedArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> *temp, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> middle, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> i = left;      <br>    <span class="hljs-keyword">int</span> j = middle + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (i &lt;= middle &amp;&amp; j &lt;= right) &#123;<br>        temp[k++] = arr[i] &lt;= arr[j] ? arr[i++] : arr[j++];<br>    &#125;<br>    <span class="hljs-keyword">while</span> (i &lt;= middle) &#123;<br>        temp[k++] = arr[i++];<br>    &#125;<br>    <span class="hljs-keyword">while</span> (j &lt;= right) &#123;<br>        temp[k++] = arr[j++];<br>    &#125;<br>    <span class="hljs-comment">//把数据复制回原数组</span><br>    <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>; i&lt;k; ++i) &#123;<br>        arr[left+i] = temp[i];<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span>(<span class="hljs-params">left, right</span>):</span><br>    result = []<br>    i, j = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> i &lt; <span class="hljs-built_in">len</span>(left) <span class="hljs-keyword">and</span> j &lt; <span class="hljs-built_in">len</span>(right):<br>        <span class="hljs-keyword">if</span> left[i] &lt;= right[j]:<br>            result.append(left[i])<br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            result.append(right[j])<br>            j += <span class="hljs-number">1</span><br>    result += left[i:]<br>    result += right[j:]<br>    <span class="hljs-keyword">return</span> result<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge_sort</span>(<span class="hljs-params">arr</span>):</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(arr) &lt;= <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> arr<br>    mid = <span class="hljs-built_in">len</span>(arr) // <span class="hljs-number">2</span><br>    left = merge_sort(arr[:mid])<br>    right = merge_sort(arr[mid:])<br>    <span class="hljs-keyword">return</span> merge(left, right)<br></code></pre></td></tr></table></figure>
+<p><strong>稳定性</strong></p>
+<p>因为我们在遇到相等的数据的时候必然是按顺序“抄写”到辅助数组上的，所以，归并排序同样是稳定算法。</p>
+<p><strong>适用场景</strong></p>
+<p>归并排序在数据量比较大的时候也有较为出色的表现（效率上），但是其空间复杂度 O(n) 使得在数据量特别大的时候（例如，1千万数据）几乎不可接受。</p>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p>快速排序是一个知名度极高的排序算法，其对于大数据的优秀排序性能和相同复杂度算法中相对简单的实现使它注定得到比其他算法更多的宠爱。</p>
+<ol>
+<li>从数列中挑出一个元素，称为”基准”（pivot），</li>
+<li>重新排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面（相同的数可以到任何一边）。在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。</li>
+<li>递归地（recursively）把小于基准值元素的子数列和大于基准值元素的子数列排序。</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/v2-c411339b79f92499dcb7b5f304c826f4_b.webp" alt="动图" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    qsort(arr, <span class="hljs-number">0</span>, n);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">qsort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (low &gt;= high)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">int</span> pivot = partition(arr, low, high);        <span class="hljs-comment">//将数组分为两部分</span><br>    qsort(arr, low, pivot - <span class="hljs-number">1</span>);                   <span class="hljs-comment">//递归排序左子数组</span><br>    qsort(arr, pivot + <span class="hljs-number">1</span>, high);                  <span class="hljs-comment">//递归排序右子数组</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> pivot = arr[low];     <span class="hljs-comment">//基准</span><br>    <span class="hljs-keyword">while</span> (low &lt; high) &#123;<br>        <span class="hljs-keyword">while</span> (low &lt; high &amp;&amp; arr[high] &gt;= pivot)<br>            --high;<br>        arr[low] = arr[high];             <span class="hljs-comment">//交换比基准大的记录到左端</span><br>        <span class="hljs-keyword">while</span> (low &lt; high &amp;&amp; arr[low] &lt;= pivot)<br>            ++low;<br>        arr[high] = arr[low];           <span class="hljs-comment">//交换比基准小的记录到右端</span><br>    &#125;<br>    <span class="hljs-comment">//扫描完成，基准到位</span><br>    arr[low] = pivot;<br>    <span class="hljs-comment">//返回的是基准的位置</span><br>    <span class="hljs-keyword">return</span> low;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">quick_sort</span>(<span class="hljs-params">arr, i, j</span>):</span><br>    <span class="hljs-keyword">if</span> i &gt;= j:<br>        <span class="hljs-keyword">return</span> arr<br>    pivot = arr[i]<br>    low, high = i, j<br>    <span class="hljs-keyword">while</span> i &lt; j:<br>        <span class="hljs-keyword">while</span> i &lt; j <span class="hljs-keyword">and</span> arr[j] &gt;= pivot:<br>            j -= <span class="hljs-number">1</span><br>        arr[i] = arr[j]<br>        <span class="hljs-keyword">while</span> i &lt; j <span class="hljs-keyword">and</span> arr[i] &lt;= pivot:<br>            i += <span class="hljs-number">1</span><br>        arr[j] = arr[i]<br>    arr[j] = pivot<br>    quick_sort(arr, low, i - <span class="hljs-number">1</span>)<br>    quick_sort(arr, i + <span class="hljs-number">1</span>, high)<br>    <span class="hljs-keyword">return</span> arr<br></code></pre></td></tr></table></figure>
+<p><strong>稳定性</strong></p>
+<p>快速排序并不是稳定的。这是因为我们无法保证相等的数据按顺序被扫描到和按顺序存放。</p>
+<p><strong>适用场景</strong></p>
+<p>快速排序在大多数情况下都是适用的，尤其在数据量大的时候性能优越性更加明显。但是在必要的时候，需要考虑下优化以提高其在最坏情况下的性能。</p>
+<h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><p>堆排序(Heapsort)是指利用堆积树（堆）这种数据结构所设计的一种排序算法，它是选择排序的一种。可以利用数组的特点快速定位指定索引的元素。堆排序就是把最大堆堆顶的最大数取出，将剩余的堆继续调整为最大堆，再次将堆顶的最大数取出，这个过程持续到剩余数只有一个时结束。</p>
+<ul>
+<li>最大堆调整（Max-Heapify）：将堆的末端子节点作调整，使得子节点永远小于父节点</li>
+<li>创建最大堆（Build-Max-Heap）：将堆所有数据重新排序，使其成为最大堆</li>
+<li>堆排序（Heap-Sort）：移除位在第一个数据的根节点，并做最大堆调整的递归运算 继续进行下面的讨论前，需要注意的一个问题是：数组都是 Zero-Based，这就意味着我们的堆数据结构模型要发生改变</li>
+</ul>
+<p><strong>稳定性</strong></p>
+<p>堆排序存在大量的筛选和移动过程，属于不稳定的排序算法。</p>
+<p><strong>适用场景</strong></p>
+<p>堆排序在建立堆和调整堆的过程中会产生比较大的开销，在元素少的时候并不适用。但是，在元素比较多的情况下，还是不错的一个选择。尤其是在解决诸如“前n大的数”一类问题时，几乎是首选算法。</p>
+<h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><p>希尔排序是第一个突破O(n2)的排序算法，它是简单插入排序的改进版。希尔排序的提出，主要基于以下两点：</p>
+<ol>
+<li>插入排序算法在数组基本有序的情况下，可以近似达到O(n)复杂度，效率极高。</li>
+<li>但插入排序每次只能将数据移动一位，在数组较大且基本无序的情况下性能会迅速恶化。</li>
+</ol>
+<p>先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，具体算法描述：</p>
+<ul>
+<li>选择一个增量序列t1，t2，…，tk，其中 ti &gt; tj，tk=1；</li>
+<li>按增量序列个数 k，对序列进行 k 趟排序；</li>
+<li>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</li>
+</ul>
+<p><img src="https://pic3.zhimg.com/v2-f14e4169ff39bad42c3dd6c385ad9c72_b.webp" alt="动图"></p>
+<p>Donald Shell增量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">shellSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> temp;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> delta = n; delta &gt;= <span class="hljs-number">1</span>; delta /= <span class="hljs-number">2</span>) &#123;                              <span class="hljs-comment">//对每个增量进行一次排序</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = delta; i &lt; n; i++) &#123;              <br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &gt;= delta &amp;&amp; arr[j] &lt; arr[j - delta]; j -= delta) &#123;  <span class="hljs-comment">//注意每个地方增量和差值都是delta</span><br>                temp = arr[j - delta];<br>                arr[j - delta] = arr[j];<br>                arr[j] = temp;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>希尔排序的增量数列可以任取，需要的唯一条件是最后一个一定为1（因为要保证按1有序）。但是，不同的数列选取会对算法的性能造成极大的影响。</p>
+<p>第一种增量是最初 Donald Shell 提出的增量，即折半降低直到 1。据研究，使用希尔增量，其时间复杂度还是 $O(n^2)$。</p>
+<p>第二种增量 Hibbard：{1, 3, …, 2k-1}。该增量序列的时间复杂度大约是 $O(n^{1.5})$。</p>
+<p><strong>稳定性</strong></p>
+<p>在一次插入中我们能确保不移动相同元素的顺序，但在多次的插入中，相同元素完全有可能在不同的插入轮次被移动，最后稳定性被破坏，因此，Shell排序不是一个稳定的算法。</p>
+<p><strong>适用场景</strong></p>
+<p>Shell 排序虽然快，但是毕竟是插入排序，其数量级并没有后起之秀——快速排序 O(nlogn) 快。在大量数据面前，Shell排序不是一个好的算法。但是，中小型规模的数据完全可以使用它。</p>
+<h4 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h4><p>计数排序不是基于比较的排序算法，其核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。 作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定范围的整数。</p>
+<ol>
+<li>找出待排序的数组中最大和最小的元素；</li>
+<li>统计数组中每个值为 i 的元素出现的次数，存入数组 C 的第 i 项；</li>
+<li>对所有的计数累加（从 C 中的第一个元素开始，每一项和前一项相加）；</li>
+<li>反向填充目标数组：将每个元素 i 放在新数组的第 C(i) 项，每放一个元素就将 C(i) 减去1。</li>
+</ol>
+<p><img src="https://pic4.zhimg.com/v2-3c7ddb59df2d21b287e42a7b908409cb_b.webp" alt="动图" style="zoom:67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">countSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> max, <span class="hljs-keyword">int</span> min)</span> </span>&#123;<br>     <span class="hljs-keyword">int</span> b[n];  <span class="hljs-comment">// 存储数组</span><br>     <span class="hljs-keyword">int</span> count[max - min + <span class="hljs-number">1</span>];  <span class="hljs-comment">// 计数数组</span><br><br>     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num = min; num &lt;= max; num++) &#123;<br>        <span class="hljs-comment">// 初始化各元素值为0，数组下标从0开始因此减min</span><br>        count[num - min] = <span class="hljs-number">0</span>;<br>     &#125;<br><br>     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;<br>        <span class="hljs-keyword">int</span> num = a[i];<br>        count[num - min]++;  <span class="hljs-comment">// 每出现一个值，计数数组对应元素的值+1</span><br>     &#125;<br><br>     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num = min + <span class="hljs-number">1</span>; num &lt;= max; num++) &#123;<br>        <span class="hljs-comment">// 加总数组元素的值为计数数组对应元素及左边所有元素的值的总和</span><br>        count[num - min] += sum[num - min - <span class="hljs-number">1</span>];<br>     &#125;<br><br>     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; a.length; i++) &#123;<br>          <span class="hljs-keyword">int</span> num = a[i];  <span class="hljs-comment">// 源数组第i位的值</span><br>          <span class="hljs-keyword">int</span> index = count[num - min] - <span class="hljs-number">1</span>;  <span class="hljs-comment">// 加总数组中对应元素的下标</span><br>          b[index] = num;  <span class="hljs-comment">// 将该值存入存储数组对应下标中</span><br>          count[num - min]--;  <span class="hljs-comment">// 加总数组中，该值的总和减少1。</span><br>     &#125;<br><br>     <span class="hljs-comment">// 将存储数组的值一一替换给源数组</span><br>     <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>         a[i] = b[i];<br>     &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>稳定性</strong></p>
+<p>最后给 b 数组赋值是倒着遍历的，而且放进去一个就将 C 数组对应的值（表示前面有多少元素小于或等于 A[i]）减去一。如果有相同的数 x1,x2，那么相对位置后面那个元素 x2 放在（比如下标为 4 的位置），相对位置前面那个元素 x1 下次进循环就会被放在 x2 前面的位置 3。从而保证了稳定性。</p>
+<p><strong>适用场景</strong></p>
+<p>排序目标要能够映射到整数域，其最大值最小值应当容易辨别。例如高中生考试的总分数，显然用0-750就OK啦；又比如一群人的年龄，用个0-150应该就可以了，再不济就用0-200喽。另外，计数排序需要占用大量空间，它比较适用于数据比较集中的情况。</p>
+<h4 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h4><p>桶排序又叫箱排序，是计数排序的升级版，它的工作原理是将数组分到有限数量的桶子里，然后对每个桶子再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序），最后将各个桶中的数据有序的合并起来。</p>
+<ol>
+<li>找出待排序数组中的最大值max、最小值min</li>
+<li>我们使用 动态数组 ArrayList 作为桶，桶里放的元素也用 ArrayList 存储。桶的数量为 (max-min) / arr.length + 1</li>
+<li>遍历数组 arr，计算每个元素 arr[i] 放的桶</li>
+<li>每个桶各自排序</li>
+<li>遍历桶数组，把排序好的元素放进输出数组</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/80/v2-465190477b7fb90d17aef27c2a213368_720w.jpg" alt="img" style="zoom:67%;" /></p>
+<p><strong>稳定性</strong></p>
+<p>可以看出，在分桶和从桶依次输出的过程是稳定的。但是，由于我们在对每个桶进行排序时使用了其他算法，所以，桶排序的稳定性依赖于这一步。如果我们使用了快排，显然，算法是不稳定的。</p>
+<p><strong>适用场景</strong></p>
+<p>桶排序可用于最大最小值相差较大的数据情况，但桶排序要求数据的分布必须均匀，否则可能导致数据都集中到一个桶中。比如[104,150,123,132,20000], 这种数据会导致前4个数都集中到同一个桶中。导致桶排序失效。</p>
+<h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><p>基数排序 (Radix Sort) 是桶排序的扩展，它的基本思想是：将整数按位数切割成不同的数字，然后按每个位数分别比较。<br>排序过程：将所有待比较数值（正整数）统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后, 数列就变成一个有序序列。</p>
+<ol>
+<li>取得数组中的最大数，并取得位数；</li>
+<li>arr为原始数组，从最低位开始取每个位组成radix数组；</li>
+<li>对 radix 进行计数排序（利用计数排序适用于小范围数的特点）；</li>
+</ol>
+<p><img src="https://pic3.zhimg.com/v2-3a6f1e5059386523ed941f0d6c3a136e_b.webp" alt="动图" style="zoom:67%;" /></p>
+<p><strong>稳定性</strong></p>
+<p>通过上面的排序过程可以看到，每一轮映射和收集操作，都保持从左到右的顺序进行，如果出现相同的元素，则保持他们在原始数组中的顺序。可见，基数排序是一种稳定的排序。</p>
+<p><strong>适用场景</strong></p>
+<p>基数排序要求较高，元素必须是整数，整数时长度 10W 以上，最大值 100W 以下效率较好，但是基数排序比其他排序好在可以适用字符串，或者其他需要根据多个条件进行排序的场景，例如日期，先排序日，再排序月，最后排序年 ，其它排序算法可是做不了的。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">排序算法</th>
+<th style="text-align:center">时间复杂度</th>
+<th style="text-align:center">最好/最坏</th>
+<th style="text-align:center">空间复杂度</th>
+<th style="text-align:center">稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">冒泡排序</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n), O(n^2)$</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">选择排序</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n), O(n^2)$</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">插入排序</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n), O(n^2)$</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">归并排序</td>
+<td style="text-align:center">$O(nlog_2n)$</td>
+<td style="text-align:center">$O(nlog_2n), O(nlog_2n)$</td>
+<td style="text-align:center">O(n)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">快速排序</td>
+<td style="text-align:center">$O(nlog_2n)$</td>
+<td style="text-align:center">$O(nlog_2n), O(n^2)$</td>
+<td style="text-align:center">$O(log_2n)$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">堆排序</td>
+<td style="text-align:center">$O(nlog_2n)$</td>
+<td style="text-align:center">$O(nlog_2n), O(nlog_2n)$</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">希尔排序</td>
+<td style="text-align:center">$O(n^{1.5})$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">计数排序</td>
+<td style="text-align:center">$O(n+k)$</td>
+<td style="text-align:center">O(n+k), O(n+k)</td>
+<td style="text-align:center">O(n+k)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">桶排序</td>
+<td style="text-align:center">$O(n+k)$</td>
+<td style="text-align:center">O(n+k), O(n+k)</td>
+<td style="text-align:center">O(n+k)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">基数排序</td>
+<td style="text-align:center">$O(n*k)$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">O(n+k)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="9-字符串"><a href="#9-字符串" class="headerlink" title="9. 字符串"></a>9. 字符串</h3><h4 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h4><p>KMP算法是一种改进的字符串匹配算法，关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。</p>
+<p><strong>next 数组（前缀数组）</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">https://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</a></p>
+<p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dunwu/algorithm-tutorial">https://github.com/dunwu/algorithm-tutorial</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>数据结构与算法</p><p><a href="https://brucehan98@github.io/2022/10/20/数据结构与算法-学习笔记/">https://brucehan98@github.io/2022/10/20/数据结构与算法-学习笔记/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-10-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-10-25</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/%E7%AE%97%E6%B3%95/">算法 </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">概率与统计</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="../%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-item">统计学习方法</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "55f31fe067df22280003addbe8a5f604",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#数据结构与算法"><span class="level-left"><span class="level-item">1</span><span class="level-item">数据结构与算法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-时间复杂度-与-空间复杂度"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">1. 时间复杂度 与 空间复杂度</span></span></a></li><li><a class="level is-mobile" href="#2-基本算法思想"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">2. 基本算法思想</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#贪心算法"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">贪心算法</span></span></a></li><li><a class="level is-mobile" href="#分治算法"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">分治算法</span></span></a></li><li><a class="level is-mobile" href="#动态规划"><span class="level-left"><span class="level-item">1.2.3</span><span class="level-item">动态规划</span></span></a></li><li><a class="level is-mobile" href="#回溯算法"><span class="level-left"><span class="level-item">1.2.4</span><span class="level-item">回溯算法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-线性表"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">3. 线性表</span></span></a></li><li><a class="level is-mobile" href="#4-树"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">4. 树</span></span></a></li><li><a class="level is-mobile" href="#5-图"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">5. 图</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#最小生成树算法"><span class="level-left"><span class="level-item">1.5.1</span><span class="level-item">最小生成树算法</span></span></a></li><li><a class="level is-mobile" href="#最短路径算法"><span class="level-left"><span class="level-item">1.5.2</span><span class="level-item">最短路径算法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#6-哈希表"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">6. 哈希表</span></span></a></li><li><a class="level is-mobile" href="#7-查找"><span class="level-left"><span class="level-item">1.7</span><span class="level-item">7. 查找</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#顺序查找"><span class="level-left"><span class="level-item">1.7.1</span><span class="level-item">顺序查找</span></span></a></li><li><a class="level is-mobile" href="#二分查找"><span class="level-left"><span class="level-item">1.7.2</span><span class="level-item">二分查找</span></span></a></li><li><a class="level is-mobile" href="#插值查找"><span class="level-left"><span class="level-item">1.7.3</span><span class="level-item">插值查找</span></span></a></li><li><a class="level is-mobile" href="#斐波那契查找"><span class="level-left"><span class="level-item">1.7.4</span><span class="level-item">斐波那契查找</span></span></a></li><li><a class="level is-mobile" href="#树表查找"><span class="level-left"><span class="level-item">1.7.5</span><span class="level-item">树表查找</span></span></a></li><li><a class="level is-mobile" href="#分块查找"><span class="level-left"><span class="level-item">1.7.6</span><span class="level-item">分块查找</span></span></a></li><li><a class="level is-mobile" href="#哈希查找"><span class="level-left"><span class="level-item">1.7.7</span><span class="level-item">哈希查找</span></span></a></li></ul></li><li><a class="level is-mobile" href="#8-排序"><span class="level-left"><span class="level-item">1.8</span><span class="level-item">8. 排序</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#冒泡排序"><span class="level-left"><span class="level-item">1.8.1</span><span class="level-item">冒泡排序</span></span></a></li><li><a class="level is-mobile" href="#选择排序"><span class="level-left"><span class="level-item">1.8.2</span><span class="level-item">选择排序</span></span></a></li><li><a class="level is-mobile" href="#插入排序"><span class="level-left"><span class="level-item">1.8.3</span><span class="level-item">插入排序</span></span></a></li><li><a class="level is-mobile" href="#归并排序"><span class="level-left"><span class="level-item">1.8.4</span><span class="level-item">归并排序</span></span></a></li><li><a class="level is-mobile" href="#快速排序"><span class="level-left"><span class="level-item">1.8.5</span><span class="level-item">快速排序</span></span></a></li><li><a class="level is-mobile" href="#堆排序"><span class="level-left"><span class="level-item">1.8.6</span><span class="level-item">堆排序</span></span></a></li><li><a class="level is-mobile" href="#希尔排序"><span class="level-left"><span class="level-item">1.8.7</span><span class="level-item">希尔排序</span></span></a></li><li><a class="level is-mobile" href="#计数排序"><span class="level-left"><span class="level-item">1.8.8</span><span class="level-item">计数排序</span></span></a></li><li><a class="level is-mobile" href="#桶排序"><span class="level-left"><span class="level-item">1.8.9</span><span class="level-item">桶排序</span></span></a></li><li><a class="level is-mobile" href="#基数排序"><span class="level-left"><span class="level-item">1.8.10</span><span class="level-item">基数排序</span></span></a></li><li><a class="level is-mobile" href="#总结"><span class="level-left"><span class="level-item">1.8.11</span><span class="level-item">总结</span></span></a></li></ul></li><li><a class="level is-mobile" href="#9-字符串"><span class="level-left"><span class="level-item">1.9</span><span class="level-item">9. 字符串</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#KMP-算法"><span class="level-left"><span class="level-item">1.9.1</span><span class="level-item">KMP 算法</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>

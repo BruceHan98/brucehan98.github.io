@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>概率与统计 - Bruce Han&#039;s Blog</title><link rel="manifest" href="../../../../manifest.json"><meta name="application-name" content="Bruce Han&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bruce Han&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="概率与统计——学习笔记"><meta property="og:type" content="blog"><meta property="og:title" content="概率与统计"><meta property="og:url" content="https://brucehan98@github.io/2022/10/20/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Bruce Han&#039;s Blog"><meta property="og:description" content="概率与统计——学习笔记"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://s2.loli.net/2022/09/20/IEXGemV6xnY5Ors.png"><meta property="og:image" content="https://s2.loli.net/2022/09/20/HiUJF1mZhYQCKfz.png"><meta property="og:image" content="https://s2.loli.net/2022/09/20/pEcS6KmdwYbMNXB.png"><meta property="og:image" content="https://s2.loli.net/2022/09/20/aEfrRTx69BL1kqH.png"><meta property="og:image" content="https://s2.loli.net/2022/09/20/QT8j7GKO6HlUYme.png"><meta property="og:image" content="https://s2.loli.net/2022/09/20/pr6OvcEjXS7wDVR.png"><meta property="og:image" content="https://s2.loli.net/2022/09/20/jJl7hOIpv24AwGQ.png"><meta property="og:image" content="https://s2.loli.net/2022/09/20/fNayq6PIcbVmXCE.png"><meta property="og:image" content="https://s2.loli.net/2022/09/21/yM1pDEH6POmrcLu.png"><meta property="article:published_time" content="2022-10-20T10:45:48.000Z"><meta property="article:modified_time" content="2022-10-25T09:38:29.740Z"><meta property="article:author" content="Bruce Han"><meta property="article:tag" content="机器学习"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://s2.loli.net/2022/09/20/IEXGemV6xnY5Ors.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://brucehan98@github.io/2022/10/20/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"},"headline":"概率与统计","image":["https://s2.loli.net/2022/09/20/IEXGemV6xnY5Ors.png","https://s2.loli.net/2022/09/20/HiUJF1mZhYQCKfz.png","https://s2.loli.net/2022/09/20/pEcS6KmdwYbMNXB.png","https://s2.loli.net/2022/09/20/aEfrRTx69BL1kqH.png","https://s2.loli.net/2022/09/20/QT8j7GKO6HlUYme.png","https://s2.loli.net/2022/09/20/pr6OvcEjXS7wDVR.png","https://s2.loli.net/2022/09/20/jJl7hOIpv24AwGQ.png","https://s2.loli.net/2022/09/20/fNayq6PIcbVmXCE.png","https://s2.loli.net/2022/09/21/yM1pDEH6POmrcLu.png"],"datePublished":"2022-10-20T10:45:48.000Z","dateModified":"2022-10-25T09:38:29.740Z","author":{"@type":"Person","name":"Bruce Han"},"publisher":{"@type":"Organization","name":"Bruce Han's Blog","logo":{"@type":"ImageObject","url":"https://brucehan98@github.io/img/logo.svg"}},"description":"概率与统计——学习笔记"}</script><link rel="canonical" href="https://brucehan98@github.io/2022/10/20/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="icon" href="../../../../img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="../../../../css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?8ff5bda969cd5128662b3fbc6a899b16";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="../../../../index.html">首页</a><a class="navbar-item" href="../../../../archives">归档</a><a class="navbar-item" href="../../../../categories">分类</a><a class="navbar-item" href="../../../../tags">标签</a><a class="navbar-item" href="../../../../about">关于</a></div><div class="navbar-end"><a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="../../../../https:/github.com/BruceHan98"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-6 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-10-20T10:45:48.000Z" title="2022-10-20T10:45:48.000Z">2022-10-20</time>发表</span><span class="level-item"><time dateTime="2022-10-25T09:38:29.740Z" title="2022-10-25T09:38:29.740Z">2022-10-25</time>更新</span><span class="level-item"><a class="link-muted" href="../../../../categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span><span class="level-item">43 分钟读完 (大约8539个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-size-4 is-size-4-mobile" style="font-weight: bold">概率与统计</h1><div class="content"><h2 id="概率统计笔记"><a href="#概率统计笔记" class="headerlink" title="概率统计笔记"></a>概率统计笔记</h2><h3 id="一、古典概型和概率空间"><a href="#一、古典概型和概率空间" class="headerlink" title="一、古典概型和概率空间"></a>一、古典概型和概率空间</h3><h4 id="1-1-试验与事件"><a href="#1-1-试验与事件" class="headerlink" title="1.1 试验与事件"></a>1.1 试验与事件</h4><p><strong>试验</strong></p>
+<p>我们用 <code>概率</code> 测量一个未来事件发生的可 能性大小.</p>
+<p>我们把按照一定的想法去作的事情称为<code>随机试验</code>. 随机试验的简称是 <code>试验</code> (experiment).</p>
+<p><strong>样本空间</strong></p>
+<p>投掷一枚硬币, 用 $ω_+$ 表示硬币正面朝上, 用 $ω_−$ 表示硬币反面朝上, 则试验有两个可能的结果：$ω_+$ 和 $ω_−$. 我们称 $ω_+$ 和 $ω_−$ 是<code>样本点</code>, 称样本点的集合 $Ω = \{ω_+, ω_−\}$ 为试验的样本空间.</p>
+<p><code>样本点</code> (sample point): 称试验 S 的可能结果为样本点, 用 ω 表示.</p>
+<p><code>样本空间</code> (sample space): 称试验 S 的样本点构成的集合为样本空间, 用 Ω 表示.</p>
+<p><strong>事件</strong></p>
+<p><code>事件</code> (event): 设 Ω 是试验 S 的样本空间. 当 Ω 中只有有限个样本点时, <strong>称 Ω 的子集为事件</strong>. 当试验的样本点 (试验结果) ω 落在 A 中, 称事件 A 发生, 否则称 A 不发生.</p>
+<p>按照上述约定, 子集符号 A ⊂ Ω 表示 A 是事件. 通常用大写字母 A, B, C, D 或 A1, A2, · · · , B1, B2, · · · 等表示事件.</p>
+<p>空集 ϕ 是 Ω 的子集. 由于 ϕ 中没有样本点, 永远不会发生, 所以称 ϕ 是 <code>不可能事件</code>.</p>
+<p>Ω 也是样本空间 Ω 的子集, 包含了所有的样本点, 因而总会发生. 我们称 Ω 是 <code>必然事件</code>.</p>
+<p><strong>事件与集合</strong></p>
+<p>当 A, B 都是事件, 则</p>
+<p>​        $A ∪ B, A ∩ B, A − B \triangleq A ∩ \bar B$</p>
+<p>都是事件. 也就是说事件经过集合运算得到的结果还是事件.</p>
+<p>我们也用 AB 表示 A ∩ B. 当 AB = ϕ 时, 也用 A + B 表示 A ∪ B.</p>
+<p>当事件 AB = ϕ, 称事件 A, B <code>不相容</code>. 特别称 $\bar A$ 为 A 的 <code>对立事件</code> 或 <code>逆事件</code>.</p>
+<p>如果多个事件 $A1, A2, . . .$ 两两不相容: $A_iA_j = ϕ, i \neq j$, 就称他们 <code>互不相容</code>.</p>
+<ul>
+<li>A = B 表示事件 A, B 相等</li>
+<li>A ∪ B (或 A + B) 发生 等价于 至少 A, B 之一发生</li>
+<li>A ∩ B (或 AB) 发生 等价于 A 和 B 都发生</li>
+</ul>
+<p><strong>事件的运算</strong></p>
+<ul>
+<li>A ∪ B = B ∪ A , A ∩ B = B ∩ A</li>
+<li>A ∪ (B ∪ C) = A ∪ B ∪ C, A ∩ (B ∩ C) = A ∩ B ∩ C</li>
+<li>A(B ∪ C) = (AB) ∪ (AC), A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</li>
+<li><p>$A ∪ B = A + \bar AB, A = AB + A \bar B$</p>
+</li>
+<li><p>对偶公式: $\overline {A \cup B} = \bar A ∩ \bar B, \overline {A ∩ B} = \bar A ∪ \bar B$</p>
+</li>
+</ul>
+<h4 id="1-2-古典概型与集合概型"><a href="#1-2-古典概型与集合概型" class="headerlink" title="1.2 古典概型与集合概型"></a>1.2 古典概型与集合概型</h4><p><strong>1.2.1 古典概型</strong></p>
+<p><strong>古典概率模型</strong></p>
+<p>设 Ω 是试验 S 的样本空间. 对于 Ω 的事件 A, 我们用 P(A) 表示 A 发生的可能性的大小, 称 P(A) 是事件 A 发生的概率, 简称为 A 的概率.</p>
+<p>概率是介于 0 和 1 之间的数, 描述事件发生的可能性的大小. 即 $P(A) \in [0, 1]$ </p>
+<p>按照以上原则, 如果事件 A, B 发生的可能性相同, 则有 P(A) = P(B). 如果事件 A 发生的可能性比 B 发生的可能性大 2 倍, 则有 P(A) = 2P(B).</p>
+<blockquote>
+<p>定义 2.1：设试验 S 的样本空间 Ω 是有限集合, A ⊂ Ω. 如果 Ω 的<strong>每个样本点发生的可能性相同</strong>, 则称</p>
+<p>​        $P(A) = \dfrac{^#A}{^#\Omega}$</p>
+<p>为试验 S 下 A 发生的概率, 简称为事件 A 的概率.</p>
+</blockquote>
+<p>能够用以上定义描述的模型称为 <code>古典概率模型</code>, 简称为 <code>古典概型</code>.</p>
+<p><strong>概率的性质</strong></p>
+<p>因为 $^#A ≥ 0$, 当 AB = ϕ 时，$^#(A+B) = ^#A + ^#B$, 所以从定义 (2.1) 可以得到概率 P 的以下性质:</p>
+<ul>
+<li>P(A) ≥ 0</li>
+<li>P(Ω) = 1</li>
+<li>如果 A, B 不相容, 则 P(A + B) = P(A) + P(B)</li>
+<li>如果 A1, A2, · · · , An 互不相容, 则 P(A1 + A2 + · · · + An) = P(A1) + P(A2) + · · · + P(An)</li>
+<li>$P(ϕ) = 0, P(A) + P(A) = 1, P(A) = P(AB) + P(A \bar B).$</li>
+</ul>
+<p><strong>古典概型中的常用计数—加法原理</strong></p>
+<p>如果一个问题的做法分为两类，第一类有 n 种方法，第二类有 m 种 方法，这两类没有重叠而且仅有此两类，则问题的做法共有 n + m 种。</p>
+<p><strong>古典概型中的常用计数—乘法原理</strong></p>
+<p>如果一个问题要两步完成，第一步有 n 种做法，第二步有 m 种做法， 则问题有 nm 种做法。</p>
+<p><strong>古典概型中常用计数—有重复的排列数</strong></p>
+<p>从 n 个不同元素中有放回地每次随机抽取一个，共抽取 m 次，有序 地记录结果，共有 $n^m$ 种等可能的不同结果。</p>
+<p><strong>古典概型中常用计数—排列数</strong></p>
+<p>从 n 个不同元素中<strong>无放回地</strong>每次随机抽取一个，共抽取 m 次 (m ≤ n), 有序地记录结果，共有</p>
+<p>​        $A^m_n = n(n-1)…(n-m+1) = \dfrac{n!}{(n-m)!}$</p>
+<p>种等可能的不同结果。</p>
+<p><strong>古典概型中常用计数—组合数</strong></p>
+<p>从 n 个不同元素中<strong>无放回地</strong>每次抽取一个，共抽取 m 次 (m ≤ n), <strong>不计次序</strong>地记录结果（只要元素相同，不管次序是否相同都算是相同结果），共有</p>
+<p>​        $C^m_n = \dfrac{n \times (n-1) \times … \times (n-m+1)}{m \times (m-1) \times … \times 1} = \dfrac{A^m_n}{m!} = \frac{n!}{m!(n-m)!}$</p>
+<p>种等可能的不同结果。</p>
+<blockquote>
+<p>排列组合中的 A 与 C：</p>
+<p>不区分个体差异和顺序时用组合 $C^m_n$, 区分个体差异和顺序时用排列 $A^m_n$.</p>
+<p>$A^m_n = n(n-1)…(n-m+1) = \dfrac{n!}{(n-m)!}$</p>
+<p>$C^m_n = \dfrac{n \times (n-1) \times … \times (n-m+1)}{m \times (m-1) \times … \times 1} = \dfrac{A^m_n}{m!} = \frac{n!}{m!(n-m)!}$</p>
+</blockquote>
+<p><strong>古典概型中常用计数—分组方式数</strong></p>
+<p>将 n 个不同元素分成有序号的 k 组，要求第 i 组恰好有 ni 个元素 (i = 1, 2, . . . , k)，分组结果中同组的元素不考虑次序。则这样分组的所有不同分法个数为</p>
+<p>​        $\dbinom{n}{n_1,n_2,…,n_k} = \dfrac{n!}{n_1!n_2!…n_k!}$</p>
+<p>当随机分组时，这些分法是等可能的。</p>
+<p><strong>古典概型中常用计数—可重复分组数</strong></p>
+<p>从 n 个不同的球中有放回地每次抽取一个，共抽取 m 次，结果不计次序，共有 $C^m_{n+m−1}$ 种不同的组合。</p>
+<p>可重复分组数在随机分组时一般不是等可能的。</p>
+<p><strong>1.2.2 几何概型</strong></p>
+<p><strong>欧氏空间中的体积</strong></p>
+<p>用 $R^r$ 表示 r 维欧氏空间，对于 $R^r$ 的子集 $A$，用 $m(A) = \int_A dx_1dx_2…d_{x_r}$ 表示 $A$ 的体积。</p>
+<p><strong>几何概率</strong></p>
+<p>设样本空间 Ω 的体积 m(Ω) 是正数，样本点等可能地落在 Ω 中 （指 Ω 的体积相同的长方体事件发生的可能性相同），对于 A ⊂ Ω，称</p>
+<p>​        $P(A) = \frac{m(A)}{m(\Omega)}$</p>
+<p>为事件 A 发生的概率，简称为 A 的概率。</p>
+<h4 id="1-3-概率的公理化和加法公式"><a href="#1-3-概率的公理化和加法公式" class="headerlink" title="1.3 概率的公理化和加法公式"></a>1.3 概率的公理化和加法公式</h4><p><strong>公理化条件</strong></p>
+<ul>
+<li>非负性：对于任何事件 A, P(A) ≥ 0 ,</li>
+<li>完全性：P(Ω) = 1,</li>
+<li>可列可加性：对于互不相容的事件 A1, A2, . . . , 有 $P(\cup^\infty_{j=1}) = \sum^\infty_{j=1}P(A_j)$</li>
+</ul>
+<p>不满足公理化条件的 P 不是概率。</p>
+<p><strong>概率的加法公式</strong></p>
+<p>概率的有限可加性和可列可加性是概率 P 的最基本性质, 由此推出概率的加法公式.</p>
+<ul>
+<li>P(A ∪ B) = P(A) +P(B) −P(AB)</li>
+<li>如果 B ⊂ A, 则 P(A−B) = P(A) −P(B), P(A) ≥ P(B)</li>
+<li>Jordan 公式: 设 A1, A2, · · · , An 是事件, 记 $p_k = \sum_{1 \le j_1 &lt; j_2 &lt; … &lt; j_k \le n} P(A_{j_1}A_{j_2}…A_{j_k})$ 时，有 $P(\cup_{i=1}^nA_i) = \sum_{k=1}^n(-1)^{k-1}p_k$.</li>
+</ul>
+<p><strong>概率的连续性</strong></p>
+<p>如果 A1 ⊂ A2 ⊂ · · · , 就称事件序列 {Aj} ≡ {Aj | j = 1, 2, · · · } 是单 调增的.</p>
+<p>如果 A1 ⊃ A2 ⊃ · · · , 就称事件序列 {Aj} 是单调减的.</p>
+<p>我们把单调增序列和单调减序列统称为单调序列.</p>
+<h4 id="1-4-条件概率和乘法公式"><a href="#1-4-条件概率和乘法公式" class="headerlink" title="1.4 条件概率和乘法公式"></a>1.4 条件概率和乘法公式</h4><p>我们称 P(B|A) 是已知 A 发生的条件下, B 发生的概率, 简称为条件概率.</p>
+<p><strong>条件概率公式</strong>：如果 P(A) &gt; 0, 则</p>
+<p>​        $P(B|A) = \frac{P(AB)}{P(A)}$</p>
+<p><strong>乘法公式</strong>：设 A,B, A1, A2, . . . , An 是事件, 则</p>
+<ul>
+<li><p>P(AB) = P(A)P(B|A)</p>
+</li>
+<li><p>当 $P(A_1A_2 . . . A_{n−1}) \ne 0$, 有 $P(A_1A_2 . . . A_n) = P(A_1)P(A_2|A_1) . . . P(A_n|A_1A_2 . . . A_{n−1})$</p>
+</li>
+</ul>
+<blockquote>
+<p>官员受贿问题</p>
+</blockquote>
+<h3 id="1-5-事件的独立性"><a href="#1-5-事件的独立性" class="headerlink" title="1.5 事件的独立性"></a>1.5 事件的独立性</h3><p><strong>事件独立</strong></p>
+<p>设 A 是试验 S1 下的事件, B 是试验 S2 下的事件, 且 A 的发生与否不 影响 B 的发生. 用公式表述出来就是 P(B|A) = P(B). (设 P(A) &gt; 0)</p>
+<p>再用乘法公式得到 P(AB) = P(A)P(B|A) = P(A)P(B). 此式表示事 件 A, B 相互独立, 不要求 P(A) &gt; 0.</p>
+<p><strong>定义 5.1</strong> 如果事件 A, B 满足 P(AB) = P(A)P(B), 就称 A, B 相互 独立, 简称为 A, B 独立 (independent).</p>
+<p>不可能事件, 必然事件与任何事件独立. 这是因为P(ϕA) = P(ϕ)P(A) = 0, P(ΩA) = P(Ω)P(A) = P(A) 总成立.</p>
+<p>当 0 &lt; P(A) &lt; 1 时, A, B 独立当且仅当 P(B|A) = P(B| ¯A) = P(B), 即 B 的概率不受已知 A 是否发生的影响。</p>
+<blockquote>
+<p>如果试验 S1 和 S2 是独立进行的, 可以证明试验 S1 的事件和试验 S2 的事件是相互独立的.</p>
+</blockquote>
+<p><strong>定理 5.1</strong> A, B 独立当且仅当 $\bar A, B$ 独立.</p>
+<p><strong>多个事件相互独立</strong></p>
+<p>如果对任何 $1 ≤ j_1 &lt; j_2 &lt; · · · &lt; j_k ≤ n$, 有</p>
+<p>​        $P(A_{j_1}A_{j_2} · · · A_{j_k}) = P(A_{j_1})P(A_{j_2}) . . . P(A_{j_k})$</p>
+<p>则称事件 $A_1, A_2,…$ 相互独立。</p>
+<blockquote>
+<p>高炮击中飞机问题</p>
+<p>古董失手打破问题</p>
+</blockquote>
+<h4 id="1-6-全概率公式与-Bayes-公式"><a href="#1-6-全概率公式与-Bayes-公式" class="headerlink" title="1.6 全概率公式与 Bayes 公式"></a>1.6 全概率公式与 Bayes 公式</h4><p><strong>全概率公式</strong></p>
+<p><strong>定理 6.1</strong> 如果事件 $A_1,A_2,…,A_n$ 互不相容，$B\sub \cup^n_{j=1}A_j$，则</p>
+<p>​        $P(B)=\sum^n_{j=1}P(A_j)P(B|A_j)$</p>
+<p><strong>完备事件组</strong></p>
+<p>如果事件 $A_1,A_2,…,A_n$ 互不相容，$\cup^n_{j=1}A_j=\Omega$，则称 $A_1,A_2,…,A_n$ 是完备事件组，这时定理6.1对任何事件 B 成立。</p>
+<blockquote>
+<p><strong>抽签问题</strong></p>
+<p>n 个签中有 m 个标有“中”, 证明无放回依次随机抽签时, 第 j 次抽中的概率是 m/n.</p>
+<p>一个班里共有 100 人，男生有 40 人，女生有 60 人，每次随机选取一人，则第 j 次选取的是男生的概率是 40 / 100 = 0.4.</p>
+<p>敏感问题调查</p>
+<p>赌徒破产模型</p>
+</blockquote>
+<p><strong>Bayes 公式</strong></p>
+<p><strong>定理 6.2</strong> 如果事件 $A_1,A_2,…,A_n$ 互不相容，$B\sub \cup^n_{j=1}A_j$，则 $P(B)&gt;0$ 时，有</p>
+<p>​        $P(A_j|B)=\frac{P(A_j)P(B|A_j)}{\sum^n_{i=1}P(A_j)P(B|A_i)}$, $i \le j\le n.$</p>
+<p>证明：由条件概率公式 $P(B|A) = \frac{P(AB)}{P(A)}$  和全概率公式 $P(B)=\sum^n_{j=1}P(A_j)P(B|A_j)$ 得到 </p>
+<p>$P(A_j|B)=\frac{P(A_jB)}{P(B)}= \frac{P(A_j)P(B|A_j)}{\sum^n_{i=1}P(A_j)P(B|A_i)}$</p>
+<p>当 P(B) &gt; 0 时，</p>
+<p>​        $P(A|B)=\frac{P(A)P(B|A)}{P(A)P(B|A)+P(\bar A)P(B|\bar A)} = \frac{P(A)P(B|A)}{P(B)}$</p>
+<blockquote>
+<p>疾病普查问题</p>
+<p>吸烟与肺癌问题</p>
+</blockquote>
+<h4 id="1-7-概率与频率"><a href="#1-7-概率与频率" class="headerlink" title="1.7 概率与频率"></a>1.7 概率与频率</h4><p>设 A 是试验 S 的事件. 在相同的条件下将试验 S 独立地重复 N 次, 我们称<br>        $fN =\frac{N次试验中 A 发生的次数}{N}$<br>是 N 次独立重复试验中, 事件 A 发生的频率 (frequency).</p>
+<p>理论和试验都证明, 当 N → ∞, fN 会收敛到一个数 P(A). 我们称 P(A) 为事件 A 在试验 S 下发生的概率, 简称为 A 的概率.</p>
+<h3 id="随机变量和概率分布"><a href="#随机变量和概率分布" class="headerlink" title="随机变量和概率分布"></a>随机变量和概率分布</h3><h4 id="2-1-随机变量"><a href="#2-1-随机变量" class="headerlink" title="2.1 随机变量"></a>2.1 随机变量</h4><p>古典概率模型认为样本空间的每个样本点发生的概率相同。频率学派则不然，通过观察随机变量来确定概率。</p>
+<p>随机变量是随机现 象的最基本的数学模型，我们用随机变量的值表示随机试验的结果。</p>
+<p><strong>随机变量</strong></p>
+<p>X 是定义在样本空间 Ω 上的<strong>实值函数</strong>: 对每一个 样本点 ω, X(ω) 是一个实数.</p>
+<p>通常将随机变量 X(ω) 简记为 X.</p>
+<p><strong>随机变量的事件</strong></p>
+<p>我们用 ${X ≤ x}$, 或更简单地用 $X ≤ x$ 表示事件 $\{\omega | X(\omega) \le x \}$</p>
+<p>对于实数的集合 A, 我们用 {X ∈ A}, 或更简单地用 X ∈ A 表示事件 {ω |X(ω) ∈ A}.</p>
+<h4 id="2-2-离散型随机变量"><a href="#2-2-离散型随机变量" class="headerlink" title="2.2 离散型随机变量"></a>2.2 离散型随机变量</h4><p>如果随机变量 X 只取有限个值 x1, x2, · · · , xn, 或可列个值 x1, x2, · · · , 就称 X 是离散型随机变量, 简称为离散随机变量 (discrete random variable)。</p>
+<p><strong>定义 2.2</strong> 设 X 是离散随机变量，称 $P(X=x_k)=p_k, k \ge 1$ 为 X 的<strong>概率分布</strong>。称 {pk} 是<strong>概率分布列</strong>， 简称<strong>分布列</strong>。</p>
+<p>设函数 f(x) 取值于 {x1, x2, …}，$f(x_k) = p_k$，称 f(x) 为随机变量 X 的概率质量函数（PMF, probability mass function）。</p>
+<p>分布列有如下性质：</p>
+<ul>
+<li>$p_k \ge 0$</li>
+<li>$\sum^\infin_{j=1}p_j=1$</li>
+</ul>
+<p><strong>两点分布（Bernoulli 分布）</strong></p>
+<p>如果 X 只能取值 0 或 1，概率分布是</p>
+<p>​        $P(X=1)=p, P(X=0)=q, p+q=1$</p>
+<p>就称 X 服从<strong>两点分布</strong>，记作 $X \sim B(1,p)$ 或 $X \sim b(1,p)$.</p>
+<p><strong>二项分布（Binomial 分布）</strong></p>
+<p>如果随机变量 X 有如下的概率分布：</p>
+<p>​        $P(X=k)=C^k_np^kq^{n-k}, k=0,1,2,…,n$</p>
+<p>其中，$pq&gt;0, p+q=1$，就称 X 服从二项分布，记作 $X \sim B(n,p)$.</p>
+<p><strong>泊松分布（Poisson 分布）</strong></p>
+<p>如果随机变量 X 有如下的概率分布：</p>
+<p>​        $P(X=k)=\frac{\lambda^k}{k!}e^{-\lambda}, k=0,1,…$</p>
+<p>就称 X 服从参数是 $\lambda$ 的 Poisson 分布，记作 $X \sim Poisson(\lambda)$，这里 $\lambda$ 是正常数。</p>
+<p>Poisson 分布的例子：</p>
+<ul>
+<li>单位时间放射性粒子个数</li>
+<li>某段高速公路上一年的事故数</li>
+<li>某商场一天中顾客到来个数</li>
+<li>一段时间内接到的电话个数</li>
+<li>等等</li>
+</ul>
+<p><strong>超几何分布 H(n, M, N)</strong></p>
+<p>如果 X 的概率分布是</p>
+<p>​        $P(X=m)=\frac{C^m_MC^{n-m}_{N-M}}{C^n_N}, m=0,1,…,M$</p>
+<p>就称 X 服从超几何分布，记作 $H(n,M,N)$.</p>
+<blockquote>
+<p>N 件产品中恰有 M 件次品, 从中任取 n 件, 用 X 表示这 n 件中的次品数, 则 X 服从超几何分布</p>
+</blockquote>
+<p><strong>几何分布</strong></p>
+<p>如果随机变量 X 有如下的分布：</p>
+<p>​        $P(X=k)=q^{k-1}p, k=1,2,…$</p>
+<p>​        $pq&gt;0,p+q=1$</p>
+<p>就称 X 服从参数是 p 的几何分布。</p>
+<blockquote>
+<p>设某试验成功概率为 p，独立地重复此试验直到第一次成功，则第一 次成功需要的试验次数分布为参数 p 的几何分布。</p>
+</blockquote>
+<h4 id="2-3-连续性随机变量"><a href="#2-3-连续性随机变量" class="headerlink" title="2.3 连续性随机变量"></a>2.3 连续性随机变量</h4><p>在线段上随机投点的位置，温度、气压、电压、电流等物理量等等，理 论上可以在取到某个区间任何实数值。这样取值的随机变量称为连续 型随机变量。</p>
+<p><strong>概率密度函数</strong></p>
+<p>设 X 是随机变量, 如果存在非负函数 f(x) 使得对任何满 足 −∞ ≤ a &lt; b ≤ ∞ 的 a, b, 有</p>
+<p>​        $P(a&lt;X \le b)=\int_a^bf(x)dx$</p>
+<p>就称 X 是连续型随机变量，称 f(x) 是 X 的<strong>概率密度函数</strong>，简称<strong>概率密度</strong> (probability density) 或<strong>密度</strong>。</p>
+<p>概率密度 f(x) 有如下的基本性质：</p>
+<ul>
+<li>$\int_{-\infin}^{\infin}f(x)dx=1$</li>
+<li>$P(X=a)=0$，于是 $P(a&lt;X\le b)=P(a\le X &lt; b)$</li>
+<li>对数集 A，$P(X\in A)=\int_Af(x)dx$</li>
+</ul>
+<p>连续型随机变量取任何一个特定值的概率都等于零; f(x) 是一个相对的概念，如果 f(x2) = 2f(x1)，可以认为 X 在 x2“附近”取值的概 率比 X 在 x1 附近取值的概率大一倍.</p>
+<p><strong>均匀分布（Uniform 分布）</strong></p>
+<p>对于 a &lt; b，如果 X 的密度是</p>
+<p>​        $f(x)=\begin{cases}\frac{1}{b-a},&amp;x\in(a,b),\\0,&amp;x\notin(a,b).\end{cases}$</p>
+<p>就称 X 服从区间 (a, b) 上的均匀分布，记作 $X \sim U(a,b)$.</p>
+<p><strong>指数分布（Exponential 分布）</strong></p>
+<p>对正常数 λ，如果 X 的密度是</p>
+<p>​        $f(x)=\begin{cases}\lambda e^{-\lambda x},&amp;x\ge 0,\\0,&amp;x&lt;0,\end{cases}$</p>
+<p>就称 X 服从参数 λ 的指数分布，记作 $X \sim E(\lambda)$.</p>
+<p>指数分布经常用来表示电子元件寿命、事件到来间隔时间等。这样的量经常具有“无后效性”，即已经存活 (等待) 了多长时间对还会再存 活 (等待) 多长时间没有影响。</p>
+<p><strong>定理 3.1</strong> 设 X 是连续型非负随机变量, 则 X 服从指数分布的充分必要条件是对任何 s, t ≥ 0, 有</p>
+<p>​        $P(X&gt;s+t|X&gt;s)=P(X&gt;t)$</p>
+<p>则称随机变量 X 有<strong>无后效性</strong>。无后效性是指数分布的特征.</p>
+<blockquote>
+<p>如果 X 表示某仪器的工作寿命, 无后效性的解释是: 当仪器工 作了 s 小时后再能继续工作 t 小时的概率等于该仪器刚开始就能工作 t 小时的概率. 说明该仪器的使用寿命不随使用时间的增加发生变化, 或说仪器是“永葆青春”的.</p>
+</blockquote>
+<p><strong>正态分布（Normal 分布）</strong></p>
+<p>设 μ 是常数，σ 是正常数，如果 X 的密度是</p>
+<p>​        $f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}exp(-\frac{(x-\mu)^2}{2\sigma^2}),x\in R$</p>
+<p>就称 X 服从参数为 $(\mu,\sigma^2)$ 的正态分布，记作 $X \sim N(\mu,\sigma^2)$.</p>
+<p>特别，当 $X \sim N(0,1)$ 时，称 X 服从<strong>标准正态分布</strong>，记作：</p>
+<p>​        $\varphi(x)=\frac{1}{\sqrt{2\pi}}exp(-\frac{x^2}{2}), x \in R$</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>参数 µ 是密度的中心和最大值点，密度在 µ 两侧对称</li>
+<li>参数 σ 代表了密度的宽度，σ 越大密度越宽</li>
+<li>正态分布的随机变量 X 具有大部分值靠近 µ 的特点 (经验规则):<ul>
+<li>Pr(|X − µ| ≤ σ) =68.27%</li>
+<li>Pr(|X − µ| ≤ 2σ) =95.45%</li>
+<li>Pr(|X − µ| ≤ 3σ) =99.73%</li>
+<li>Pr(|X − µ| &gt; 6σ) =1.96 × 10−9</li>
+</ul>
+</li>
+<li>记 $\Phi(x)=\int_{-\infty}^x\varphi(t)dt$，$\Phi(-x)=1-\Phi(x)$</li>
+<li>对 $X \sim N(\mu,\sigma^2)$, $Pr(X\in(a,b])=\Phi(\frac{b-\mu}{\sigma})-\Phi(\frac{a-\mu}{\sigma}))$</li>
+<li>特别地，如果 b = -a, 则 $Pr(X\in(a,b])=\Phi(\frac{b-\mu}{\sigma})-\Phi(\frac{a-\mu}{\sigma}))=2\Phi(\frac{b-\mu}{\sigma})-1$</li>
+</ul>
+<p>正态分布最早由 Gauss 在研究测量误差时得到, 所以正态分布又被称为 <strong>Gauss 分布</strong>.</p>
+<p>大量相互独立且有相同分布的随机变量的累积也近似服从正态分布。</p>
+<p><strong>Gamma 分布</strong></p>
+<p>设 α, λ 是正常数, Γ(α) 由积分 $\Gamma(\alpha)=\int_0^{\infty}x^{\alpha -1}e^{-x}dx$ 定义。如果 X 的密度是</p>
+<p>​        $f(x)=\begin{cases}\frac{\lambda^\alpha}{\Gamma(\alpha)x^{\alpha-1}e^{-\lambda x}},&amp;x\ge0,\\0,&amp;x&lt;0. \end{cases}$</p>
+<p>就称 X 服从参数 (α, λ) 的 Gamma 分布，记作 $X \sim \Gamma(\alpha,\lambda)$</p>
+<p>当 α = 1 时，Γ(1, λ) 即 E(λ)。</p>
+<blockquote>
+<p>在气象学中, 干旱地区的年、季或月降水量被认为服从 Γ 分布, 指定时 间段内的最大风速等也被认为服从 Γ 分布.</p>
+</blockquote>
+<h4 id="2-4-概率分布函数"><a href="#2-4-概率分布函数" class="headerlink" title="2.4 概率分布函数"></a>2.4 概率分布函数</h4><p><strong>概率分布函数</strong></p>
+<p>对随机变量 X, 称 x 的函数 </p>
+<p>​        F(x) = P(X ≤ x), −∞ ≤ x ≤ ∞,</p>
+<p>为 X 的<strong>概率分布函数</strong>, 简称为<strong>分布函数</strong> (distribution function), 也称为累积 (cumulative) 分布函数。</p>
+<p><strong>离散型随机变量的分布函数</strong></p>
+<p>如果 X 是离散型随机变量, 有概率分布</p>
+<p>​        pk = P(X = xk), k = 1, 2, · · · ,</p>
+<p>则 X 的分布函数</p>
+<p>​        $F(x)=P(X\le x)=P(\bigcup\limits_{j:x_j\le x}\{X=x_j\})=\sum\limits_{j:x_j\le x}p_j$</p>
+<p><strong>连续型随机变量的分布函数</strong></p>
+<p>如果 X 是连续型随机变量, 有概率密度 f(x), 则</p>
+<p>​        $F(x)=\int_{-\infty}^xf(t)dt$</p>
+<p>是连续函数，并且在 f(x) 的连续点 x 有 $f(x)=F’(x)$。我们也称 F(x) 是 f(x) 的分布函数。</p>
+<p><strong>N(0,1), E(1.2), E(0.6), E(0.3) 分布函数图</strong></p>
+<p><img src="https://s2.loli.net/2022/09/20/IEXGemV6xnY5Ors.png" alt="image-20220920144414434" style="zoom:50%;" /></p>
+<p>分布函数 F(x) 的常用性质:</p>
+<ul>
+<li>F 单调不减右连续</li>
+<li>F(∞) = 1，F(-∞) = 0</li>
+</ul>
+<p><strong>密度与分布函数</strong></p>
+<ul>
+<li>对于连续型的随机变量, 密度函数唯一决定分布函数.</li>
+<li>反过来，如果 X 的分布函数 F(x) 在 (−∞,∞) 有连续的导函数，则 F′(x) 是 X 的密度函数.</li>
+<li>更一般地，如果 F(x) 连续且除去有限个点之外都连续可导，则 F′(x) 是 X 的密度函数.</li>
+</ul>
+<p><strong>均匀分布的分布函数</strong></p>
+<p>若 $X \sim U(0,1)$，则其分布密度为</p>
+<p>​        $f(x)=1, x\in(0,1)$</p>
+<p>其分布函数为</p>
+<p><img src="https://s2.loli.net/2022/09/20/HiUJF1mZhYQCKfz.png" alt="image-20220920145237385" style="zoom:50%;" /></p>
+<p>若 $X \sim U(a,b)$，则其分布密度为</p>
+<p>​        $f(x)=\frac{1}{b-a}, x \in (a,b)$</p>
+<p>其分布函数为</p>
+<p><img src="https://s2.loli.net/2022/09/20/pEcS6KmdwYbMNXB.png" alt="image-20220920145355190" style="zoom:50%;" /></p>
+<p><strong>正态分布的分布函数</strong></p>
+<p>设 $X \sim N(0,1)$, 则 X 的分布函数为</p>
+<p>​        $\Phi(x)=\int_{-\infty}^x\varphi(t)dt$</p>
+<p>其中 $\varphi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$</p>
+<p>设 $X \sim N(\mu, \sigma^2)$，则 X 的分布函数为</p>
+<p>​        $F(x)=\Phi(\frac{x-\mu}{\sigma})$</p>
+<p><strong>指数函数的分布函数</strong></p>
+<p>若 $X \sim E(\lambda)$，则其分布函数为</p>
+<p>​        $f(x)=\lambda e^{-\lambda x}, x\ge0$</p>
+<p>其分布函数为</p>
+<p>​        $F(x)=\int_0^x\lambda e^{-\lambda t}dt=1-e^{-\lambda x}, x\ge0$</p>
+<h4 id="2-5-随机变量函数的分布"><a href="#2-5-随机变量函数的分布" class="headerlink" title="2.5 随机变量函数的分布"></a>2.5 随机变量函数的分布</h4><p><img src="https://s2.loli.net/2022/09/20/aEfrRTx69BL1kqH.png" alt="image-20220920151203206" style="zoom:50%;" /></p>
+<p>设 X 有密度函数 f(x), D ⊂ R, Y = g(X), P(Y ∈ D) = 1. 如果存在函数 hi(y) 使得</p>
+<ul>
+<li><p>对 $y ∈ D, \{Y = y\} = \bigcup_{i=1}^n{X = h_i(y)}$</p>
+</li>
+<li><p>每个 hi(y) 是 D 到其值域 Di 的可逆映射, 有连续的导数</p>
+</li>
+<li>值域 D1,D2, · · · ,Dn 互不相交</li>
+</ul>
+<p>则 Y 有密度函数</p>
+<p><img src="https://s2.loli.net/2022/09/20/QT8j7GKO6HlUYme.png" alt="image-20220920151830018" style="zoom:50%;" /></p>
+<p><strong>正态分布的线性变换</strong></p>
+<p>设常数 $a\ne0, X \sim N(\mu,\sigma^2)$, 则 $Y = aX + b$ 服从正态分布 $N(a\mu+b,a^2\sigma^2)$。特别地，$Y=\frac{X-\mu}{\sigma} \sim N(0,1)$.</p>
+<p><img src="https://s2.loli.net/2022/09/20/pr6OvcEjXS7wDVR.png" alt="image-20220920152533198" style="zoom:50%;" /></p>
+<h3 id="随机向量及其分布"><a href="#随机向量及其分布" class="headerlink" title="随机向量及其分布"></a>随机向量及其分布</h3><h4 id="3-1-随机向量及其联合分布"><a href="#3-1-随机向量及其联合分布" class="headerlink" title="3.1 随机向量及其联合分布"></a>3.1 随机向量及其联合分布</h4><p><strong>随机向量</strong></p>
+<p>如果 X, Y 都是随机变量, 就称 (X, Y) 是二维随机向量, 简称为<strong>随机向量</strong> (random vector).</p>
+<p><strong>联合分布</strong></p>
+<p>对于随机向量 (X, Y), 我们称</p>
+<p>​        F(x, y) = P(X ≤ x,Y ≤ y)</p>
+<p>为 (X, Y) 的<strong>联合概率分布函数</strong>, 简称为<strong>联合分布</strong> (joint distribution).</p>
+<p>联合分布函数 F(x, y) 是 x 的单调不减函数, 也是 y 的单调 不减函数.</p>
+<p><strong>边缘分布</strong></p>
+<p>设 F(x, y) 是 (X, Y) 的联合分布, 则 X,Y 分别有概率分布</p>
+<p>​        $F_X(x) =P(X ≤ x,Y ≤ ∞) = F(x,∞)$,</p>
+<p>​        $F_Y(y) =P(X ≤ ∞, Y ≤ y) = F(∞, y)$.</p>
+<p>我们称 X 的分布函数 FX(x), Y 的分布函数 FY(x) 为 (X, Y) 的<strong>边缘分布函数</strong> (marginal distribution function).</p>
+<p><strong>独立随机变量</strong></p>
+<p>如果对任何实数 x, y, 事件 {X ≤ x} 和 {Y ≤ y} 独立，称随机变量 X, Y 独立。</p>
+<p>独立的充分必要条件是对任何 x, y</p>
+<p>​        $P(X ≤ x,Y ≤ y) = P(X ≤ x)P(Y ≤ y)$</p>
+<p>或等价地有</p>
+<p>​        $F(x, y) = F_X(x)F_Y(y)$</p>
+<p>当 X1,X2, · · · ,Xn 是来自相互独立进行的随机试验的随机变量时, 它们相互独立.</p>
+<p>常数与任何随机变量独立.</p>
+<h4 id="3-2-离散型随机向量及其分布"><a href="#3-2-离散型随机向量及其分布" class="headerlink" title="3.2 离散型随机向量及其分布"></a>3.2 离散型随机向量及其分布</h4><p><strong>二元离散型随机向量</strong></p>
+<p>如果 X, Y 都是离散型随机变量, 就称 (X, Y) 是离散型随机向量. 设离散型随机向量 (X, Y) 有概率分布</p>
+<p>​        $p_{i,j}=P(X=x_i,Y=y_i), i,j\ge1$</p>
+<p>则 X 和 Y 分别有概率分布</p>
+<p><img src="https://s2.loli.net/2022/09/20/jJl7hOIpv24AwGQ.png" alt="image-20220920154128266" style="zoom:50%;" /></p>
+<p>我们称 X 的分布 {pj}，Y 的分布 {qj} 为 (X, Y) 的边缘分布。</p>
+<h4 id="3-3-连续型随机向量及其分布"><a href="#3-3-连续型随机向量及其分布" class="headerlink" title="3.3 连续型随机向量及其分布"></a>3.3 连续型随机向量及其分布</h4><p><strong>联合密度</strong></p>
+<p>设 (X, Y) 是随机向量, 如果有 R2 上的非负可积函数 f(x, y) 使得对 R2 的所有长方形子集 D = { (x, y) | a &lt; x ≤ b, c &lt; y ≤ d } 有</p>
+<p>​        $P((X,Y)\in D)=\int\int_Df(x,y)dxdy$</p>
+<p>就称 (X, Y) 是<strong>连续型随机向量</strong>，并称 f(x, y) 是 (X, Y) 的<strong>联合概率密度</strong>或<strong>联合密度</strong>.</p>
+<p>按照上述定义, 连续型随机向量有概率密度, 没有概率密度的随机向量不是连续型随机向量.</p>
+<p>注意，与一元连续型随机变量的定义类似，不是可以在 R2 连续取值 的二元随机向量就可以称为连续型随机向量，必须要有联合密度。</p>
+<p><strong>边缘密度</strong></p>
+<p>设 f(x, y) 是随机向量 (X, Y) 的概率密度, 则 X 和 Y 也都是连续型随机变量，我们称 X, Y 各自的概率密度为 f(x, y) 或 (X, Y) 的边缘 密度 (marginal density).</p>
+<p><strong>联合分布于联合密度</strong></p>
+<p>设 (X, Y) 有连续的分布函数 F(x, y), 定义</p>
+<p><img src="https://s2.loli.net/2022/09/20/fNayq6PIcbVmXCE.png" alt="image-20220920173328923" style="zoom:50%;" /></p>
+<p>如果 $\int\int_{R^2}f(x,y)dxdy=1$</p>
+<p>则 f(x, y) 是 (X, Y) 的联合密度。</p>
+<p>设 X, Y 分别有概率密度 fX(x), fY(y). 则 X, Y 独立的充分必要条件是随机向量 (X, Y) 有联合密度 f(x, y) = fX(x)fY(y).</p>
+<p><strong>均匀分布</strong></p>
+<blockquote>
+<p>两人约定时间会面，能相遇的概率</p>
+</blockquote>
+<p><strong>正态分布</strong></p>
+<blockquote>
+<p>脱靶量</p>
+</blockquote>
+<p><strong>独立同分布</strong></p>
+<p>如果随机变量 X1, X2, · · · , Xn 相 互独立并且有相同的分布, 就称它们<strong>独立同分布</strong> (independent and identically distributed), 简称为 i.i.d..</p>
+<h3 id="数学期望和方差"><a href="#数学期望和方差" class="headerlink" title="数学期望和方差"></a>数学期望和方差</h3><h4 id="4-1-数学期望"><a href="#4-1-数学期望" class="headerlink" title="4.1 数学期望"></a>4.1 数学期望</h4><p>随机变量的分布函数或密度函数描述了随机变量的统计性质, 从中可 以了解随机变量落入某个区间的概率, 但是还不能给人留下更直接的 总体印象.</p>
+<p>我们需要为随机变量 X 定义一个实数, 这个数就是数学期望, 它反映<strong>随机变量的平均取值</strong>.</p>
+<p><strong>离散型</strong></p>
+<p>设 X 有概率分布 pj = P(X = xj), j = 0, 1, · · · , 只要级数 $\sum_{j=0}^\infty|x_j|p_j$ 收敛，就称</p>
+<p>​        $E(X)=\sum\limits_{j=0}^\infty x_jp_j$</p>
+<p>为 X 或分布{pj} 的<strong>数学期望</strong>（expected value）或均值（mean）。</p>
+<p><strong>连续型</strong></p>
+<p>设 X 是有概率密度 f(x) 的随机变量, 如果下式成立,</p>
+<p>​        $\int_{-\infty}^{\infty}|x|f(x)dx&lt;\infty$</p>
+<p>就称 $\int_{-\infty}^{\infty}xf(x)dx$ 为 X 或 f(x) 的<strong>数学期望</strong>或均值。 </p>
+<p><strong>两点分布 B(1, p)</strong></p>
+<p>P(X = 1) = p, P(X = 0) = 1 − p, 则 E(X) = 1 · p + 0 · (1 − p) = p.</p>
+<p><strong>二项分布 B(n, p)</strong></p>
+<p>E(X) = np</p>
+<p>说明在 n 次独立重复试验中, 成功的概率 p 越大, 平均成功的次数越 多.</p>
+<p><strong>泊松分布 Possion(λ)</strong></p>
+<p>E(X) = λ</p>
+<p><strong>几何分布</strong></p>
+<p>$P(X=j) = pq^{j-1}, j=1,2,…$</p>
+<p>E(X) = 1/p</p>
+<p>说明单次试验中的成功概率 p 越小, 首次成功所需要的平均试验 次数就越多.</p>
+<p><strong>指数分布 E(λ)</strong></p>
+<p>$f(x) = \lambda e^{-\lambda x}, x&gt;0$</p>
+<p>E(X) = 1/λ</p>
+<p><strong>Gamma 分布 $\Gamma(\alpha,\lambda)$</strong></p>
+<p>$f(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}, x&gt;0$</p>
+<p>E(X) = α/λ</p>
+<p><strong>对称分布</strong></p>
+<p>设 X 的数学期望有限, 概率密度 f(x) 关于 µ 对称: f(µ + x) = f(µ − x), 则 E(X) = µ.</p>
+<h4 id="4-2-数学期望的性质"><a href="#4-2-数学期望的性质" class="headerlink" title="4.2 数学期望的性质"></a>4.2 数学期望的性质</h4><p>设 g(x) 为一元函数，若随机变量 X 有密度 f(x) 且 $\int|g(x)|f(x)dx&lt;\infty$，则 $Eg(X)=\int_{-\infty}^\infty g(x)f(x)dx)$</p>
+<p>若随机变量 X 有概率分布列 $Pr(X=x_k)=p_k, k=1,2,…$，且 $\sum\limits_k|g(x_k)|p_k&lt;\infty$，则 $Eg(X)=\sum\limits_kg(x_k)p_k$.</p>
+<p><img src="https://s2.loli.net/2022/09/21/yM1pDEH6POmrcLu.png" alt="image-20220921102249857" style="zoom:50%;" /></p>
+<h4 id="4-3-随机变量的方差"><a href="#4-3-随机变量的方差" class="headerlink" title="4.3 随机变量的方差"></a>4.3 随机变量的方差</h4><p>方差用来描述分布的分散程度，或宽窄。</p>
+<p>如果随机变量 X 的数学期望 µ = EX 有限, 就称 $E(X-\mu)^2$ 为 X 的<strong>方差</strong>，记作 Var(X) 或 $\sigma _{XX}$. 当 Var(X) &lt; ∞, 称 X 的方差有限. 称 $\sigma_X=\sqrt{Var(X)}$ 为 X 的<strong>标准差</strong>。</p>
+<p><strong>方差的计算</strong></p>
+<p>当 X 有离散分布 P(X = xj), j = 1, 2, · · · 时,</p>
+<p>​        $Var(X)=\sum\limits_{j=1}^\infty(x_i-\mu)^2P(X=x_j)$</p>
+<p>当 X 有概率密度 f(x) 时, </p>
+<p>​        $Var(X)=\int_{-\infty}^\infty(x-\mu)^2f(x)dx$</p>
+<p>随机变量 X 的方差 Var(X) 由 X 的分布唯一决定.</p>
+<p>X 的方差描述了 X 的分散程度, Var(X) 越小, 说明 X 在数学期望 µ 附近越集中.</p>
+<p>利用数学期望的线性性质得到,</p>
+<p>​        $Var(X)=E(X^2-2X\mu+\mu^2)=EX^2-(EX)^2$</p>
+<p><strong>两点分布</strong></p>
+<p>P(X = 1) = p, P(X = 0) = 1 − p.</p>
+<p>由 $X^2 = X$ 和 $EX = p$, 得到</p>
+<p>​        $Var(X)=EX^2-(EX)^2=p-p^2=pq$</p>
+<p><strong>二项分布</strong></p>
+<p>$Var(X)=npq$.</p>
+<p><strong>泊松分布</strong></p>
+<p>$Var(X)=\lambda$</p>
+<p><strong>几何分布</strong></p>
+<p>$Var(X)=q/p^2$</p>
+<p><strong>均匀分布</strong></p>
+<p>$Var(X)=\frac{(b-a)^2}{12}$</p>
+<p><strong>指数分布</strong></p>
+<p>$Var(X)=1/\lambda^2$</p>
+<p><strong>正态分布</strong></p>
+<p>$Var(X)=\sigma^2$</p>
+<p><strong>方差的性质</strong></p>
+<ul>
+<li>$Var(a+bX)=b^2Var(X)$</li>
+<li><p>$Var(X)=E(X-\mu)^2&lt;E(X-c)^2$，只要 $c\ne\mu$</p>
+</li>
+<li><p>$Var(X)=0$ 的充分必要条件是 $P(X=\mu)=1$</p>
+</li>
+<li>当 $X_1,X_2, · · · ,X_n$ 相互独立, $Var(\sum_{j=1}^nX_j)=\sum_{j=1}^nVar(X_j)$</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">分布 X</th>
+<th style="text-align:center">分布/密度</th>
+<th style="text-align:center">期望 EX</th>
+<th style="text-align:center">方差 Var(X)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">两点分布 $B(1,p)$</td>
+<td style="text-align:center">$P(X=1)=p,P(X=0)=q=1-p$</td>
+<td style="text-align:center">$p$</td>
+<td style="text-align:center">$pq$</td>
+</tr>
+<tr>
+<td style="text-align:center">二项分布 $B(n,p)$</td>
+<td style="text-align:center">$P(X=k)=C_n^kp^kq^{n-k}$</td>
+<td style="text-align:center">$np$</td>
+<td style="text-align:center">$npq$</td>
+</tr>
+<tr>
+<td style="text-align:center">泊松分布 $Poission(\lambda)$</td>
+<td style="text-align:center">$P(X=k)=\frac{\lambda^k}{k!}e^{-\lambda}$</td>
+<td style="text-align:center">$\lambda^2+\lambda$</td>
+<td style="text-align:center">$\lambda$</td>
+</tr>
+<tr>
+<td style="text-align:center">几何分布</td>
+<td style="text-align:center">$P(X=j)=pq^{j-1}$</td>
+<td style="text-align:center">$\frac{1}{p}$</td>
+<td style="text-align:center">$\frac{q}{p^2}$</td>
+</tr>
+<tr>
+<td style="text-align:center">均匀分布 $U(a,b)$</td>
+<td style="text-align:center">$f(x)=\frac{1}{b-a}I_{(a,b)}$</td>
+<td style="text-align:center">$\frac{a+b}{2}$</td>
+<td style="text-align:center">$\frac{(b-a)^2}{12}$</td>
+</tr>
+<tr>
+<td style="text-align:center">指数分布 $E(\lambda)$</td>
+<td style="text-align:center">$f(x)=\lambda e^{-\lambda x}$</td>
+<td style="text-align:center">$\frac{1}{\lambda}$</td>
+<td style="text-align:center">$\frac{1}{\lambda^2}$</td>
+</tr>
+<tr>
+<td style="text-align:center">正态分布 $N(\mu,\sigma^2)$</td>
+<td style="text-align:center">$f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}exp(-\frac{(x-\mu)^2}{2\sigma^2})$</td>
+<td style="text-align:center">$\mu$</td>
+<td style="text-align:center">$\sigma^2$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="4-4-协方差和相关系数"><a href="#4-4-协方差和相关系数" class="headerlink" title="4.4 协方差和相关系数"></a>4.4 协方差和相关系数</h4><p>设 $σ_X =\sqrt{σ_{XX}}, σ_Y = \sqrt{σ_{YY}}$ 分别是 X, Y 的标准差.</p>
+<p>设 $\mu_X=EX,\mu_Y=EY$ 存在，</p>
+<ul>
+<li><p>当 $E|(X-\mu_X)(Y-\mu_Y)|&lt;\infty$, 称 $E[(X-\mu_X)(Y-\mu_Y)]$ 为随机变量 X， Y 的<strong>协方差</strong>，记作 Cov(X, Y) 或 $\sigma_{XY}$. 当 Cov(X, Y) = 0 时，称 X, Y <strong>不相关</strong>。</p>
+</li>
+<li><p>当 $0&lt;\sigma_X\sigma_Y&lt;\infty$，称 $\rho_{XY}=\frac{\sigma_{XY}}{\sigma_X\sigma_Y}$ 为 X, Y 的<strong>相关系数</strong>。</p>
+</li>
+</ul>
+<p>计算协方差的常用公式：</p>
+<p>​        $\sigma_{XY}=E(XY)-(EX)(EY)$</p>
+<p><strong>相关系数的性质</strong></p>
+<p>设 $ρ_{XY}$ 是 X, Y 的相关系数, 则有</p>
+<ul>
+<li>$|\rho_{XY}|\le1$</li>
+<li>$|\rho_{XY}|=1$ 的充分必要条件是 有常数 a, b 使得 $P(Y=a+bX)=1$</li>
+<li>如果 X, Y 独立，则 X, Y 不相关</li>
+</ul>
+<h3 id="描述性统计"><a href="#描述性统计" class="headerlink" title="描述性统计"></a>描述性统计</h3><h4 id="6-1-总体和参数"><a href="#6-1-总体和参数" class="headerlink" title="6.1 总体和参数"></a>6.1 总体和参数</h4><p><strong>统计学</strong></p>
+<p>统计学研究如何收集数据、分析数据、从数据做出有依据的推断结果。 一言以蔽之，统计学是研究数据的科学。</p>
+<p>统计学主要的数学工具是概率论，也广泛使用现代信息技术作为支撑， 通过计算机和信息网络获取数据、进行建模、数据分析计算。</p>
+<p>统计学是一门科学，不再是数学的一个分支。</p>
+<p>统计学的做法分为两种：</p>
+<ul>
+<li>描述性统计：从数据样本中计算一些平均值、标准差、最小值、最大值等概括 统计量，画直方图、散点图等描述图形。</li>
+<li>推断性统计：假定要研究的对象服从某种概率模型，收集数据后把数据用模型 解释，并做出有概率意义的结论。</li>
+</ul>
+<p><strong>总体、个体和均值</strong></p>
+<p>所要调查的对象全体叫做<strong>总体</strong> (population), 总体中每个成员叫做<strong>个体</strong>。</p>
+<p><strong>总体参数</strong>是描述总体特性的指标，简称<strong>参数</strong>。</p>
+<p>如果总体中的个体是有限个，称个体总数 N 为<strong>总体容量</strong>。</p>
+<p><strong>总体平均</strong>或<strong>总体均值</strong>是参数。常用 µ 表示。</p>
+<p><strong>总体方差</strong>是参数。常记为 σ2。</p>
+<p><strong>样本与估计</strong></p>
+<p>为了得到总体的信息，可以从总体中抽取一个<strong>有代表性</strong>的个体的集合， 称为总体的一个<strong>样本</strong>。样本中个体的个数叫做<strong>样本量</strong> (sample size)。</p>
+<p>从总体中抽取样本的工作叫做<strong>抽样</strong> (sampling)。</p>
+<p>利用样本计算出的对总体参数的估计值称为<strong>估计</strong> (estimator 或 estimate)。</p>
+<h4 id="6-2-抽样调查方法"><a href="#6-2-抽样调查方法" class="headerlink" title="6.2 抽样调查方法"></a>6.2 抽样调查方法</h4><p><strong>随机抽样</strong></p>
+<p><strong>无放回随机抽样</strong>指在总体中随机抽出一个个体后, 下次在余下的个体中再进行随机抽样.</p>
+<p><strong>有放回随机抽样</strong>指抽出一个个体, 记录下抽到的结果后放回, 摇匀后再进行下一次随机抽样.</p>
+<p>无放回抽取从实现上和从精度上更好，总体容量 N 很大时两者差异很小。</p>
+<p><strong>分层抽样</strong></p>
+<p>总体当中分为不同人群时 (如城镇和乡村)，虽然仍然进行等可能随机抽样，这样不同人群差异过大引起估计误差变大，而且操作也不方便。</p>
+<p>好的作法是按人口比例在不同人群中分别进行随机抽样。</p>
+<p>计算平均值等统计量时要用加权求和（平均）计算。</p>
+<p><strong>系统抽样</strong></p>
+<p>随机抽样有时难于实施，当个体排列本身<strong>比较随机</strong>时，根据某种固定规律抽取，也能达到类似随机抽样效果，称为<strong>系统抽样</strong>。</p>
+<p>最简单的系统抽样法是取得一个个体后, 按相同的间隔抽取其他个体.</p>
+<p>系统抽样方法的主要优点是实施简单, 只需要先随机抽取第一个个体, 以后按规定抽取就可以了.</p>
+<h3 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h3><h4 id="7-1-点估计和矩估计"><a href="#7-1-点估计和矩估计" class="headerlink" title="7.1 点估计和矩估计"></a>7.1 点估计和矩估计</h4><p>如果 X 是从总体中随机抽样得到的个体, 则 X 是随机变量, X 的分布就是总体的分布.</p>
+<p>如果对总体进行<strong>有放回</strong>的随机抽样, 就得到<strong>独立同分布</strong>的, 和 X 同分布的随机变量 X1,X2, · · · ,Xn. 我们称 X1,X2, · · · ,Xn 是来自总体 X 的<strong>简单随机样本</strong>，简称为总体 X 的<strong>样本</strong>。</p>
+<p><strong>估计量</strong></p>
+<p>设 X1,X2, · · · ,Xn 是总体 X 的简单随机样本, θ 是总体 X 的未知参 数. 如果 g(x1, x2, · · · , xn) 是已知函数, 就称 $\hat\theta =g(X_1,X_2,…,X_n)$ 是 θ 的<strong>估计量</strong>，简称<strong>估计</strong>。</p>
+<p>估计或估计量是从 观测数据 X1,X2, · · · ,Xn 能够直接计算的量. 计算后得到的值称为估 计值. 估计量也称为统计量 (statistic).</p>
+<p>如果 $E\hatθ = θ$, 称 $\hatθ$ 是 θ 的无偏估计;</p>
+<p>如果当样本量 n → ∞,  $\hatθ$ 依概率收敛到 θ, 就称  $\hatθ$ 是 θ 的<strong>相合估计</strong> (consistent estimator);</p>
+<p>如果当样本量 n → ∞, $\hatθ$ 以概率 1 收敛到 θ, 就称 $\hatθ$ 是 θ 的<strong>强相合估计</strong> (strongly consistent estimator).</p>
+<ul>
+<li>样本均值 ¯Xn 是总体均值 µ 的强相合无偏估计</li>
+<li>样本方差 S2 是总体方差 σ2 的强相合无偏估计</li>
+<li><p>样本标准差 S 是总体标准差 σ 的强相合估计</p>
+<h4 id="7-2-最大似然估计"><a href="#7-2-最大似然估计" class="headerlink" title="7.2 最大似然估计"></a>7.2 最大似然估计</h4></li>
+</ul>
+<p>我们能够观测到一个事件是因为这个事件发生的概率较 大.</p>
+<p>这样思考问题的思想被称为最大似然思想.</p>
+<p><strong>离散情况</strong></p>
+<p>设离散随机变量 X1,X2, · · · ,Xn 有联合分布 p(x1, x2, · · · , xn; θ) = P(X1 = x1,X2 = x2, · · · ,Xn = xn), 其中 θ 是未知参数, 给定观测数据 x1, x2, · · · , xn 后, 我们称 θ 的函数</p>
+<p>​        L(θ) = p(x1, x2, · · · , xn; θ)</p>
+<p>为基于 x1, x2, · · · , xn 的<strong>似然函数</strong>, 称 L(θ) 的最大值点 ˆθ 为 θ 的最大似然估计 (maximum likelihood estimator).</p>
+<p><strong>连续情况</strong></p>
+<p>设随机向量 X = (X1,X2, · · · ,Xn) 有联合密度 f(x; θ), 其 中 θ 是未知参数. 得到 X 的观测值 x 后, 称 θ 的函数</p>
+<p>​        L(θ ) = f(x; θ )</p>
+<p>为基于 x 的<strong>似然函数</strong>. 称似然函数 L(θ) 的最大值点 ˆθ 为参数 θ 的<strong>最大似然估计</strong>.</p>
+<p>最大似然估计通常被缩写成 <strong>MLE</strong>(Maximum Likelihood Estimator).</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>概率与统计</p><p><a href="https://brucehan98@github.io/2022/10/20/概率统计-学习笔记/">https://brucehan98@github.io/2022/10/20/概率统计-学习笔记/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Bruce Han</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-10-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-10-25</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="../../../../https:/creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="../../../../https:/creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="../../../../https:/creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="../../../../tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习 </a></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="../../../../img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="../../../../img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="../SQL-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">关系数据库</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="../%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-item">数据结构与算法</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "21835fac86b24267f2b9e455cfdc709d",
+            repo: "brucehan98.github.io",
+            owner: "BruceHan98",
+            clientID: "84666a45ad34d2937a18",
+            clientSecret: "f2432742d8824e7bd1006ae69b85f0488f928759",
+            admin: ["BruceHan98"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            language: "zh-CN",
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#概率统计笔记"><span class="level-left"><span class="level-item">1</span><span class="level-item">概率统计笔记</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#一、古典概型和概率空间"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">一、古典概型和概率空间</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-试验与事件"><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">1.1 试验与事件</span></span></a></li><li><a class="level is-mobile" href="#1-2-古典概型与集合概型"><span class="level-left"><span class="level-item">1.1.2</span><span class="level-item">1.2 古典概型与集合概型</span></span></a></li><li><a class="level is-mobile" href="#1-3-概率的公理化和加法公式"><span class="level-left"><span class="level-item">1.1.3</span><span class="level-item">1.3 概率的公理化和加法公式</span></span></a></li><li><a class="level is-mobile" href="#1-4-条件概率和乘法公式"><span class="level-left"><span class="level-item">1.1.4</span><span class="level-item">1.4 条件概率和乘法公式</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-5-事件的独立性"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">1.5 事件的独立性</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-6-全概率公式与-Bayes-公式"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">1.6 全概率公式与 Bayes 公式</span></span></a></li><li><a class="level is-mobile" href="#1-7-概率与频率"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">1.7 概率与频率</span></span></a></li></ul></li><li><a class="level is-mobile" href="#随机变量和概率分布"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">随机变量和概率分布</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1-随机变量"><span class="level-left"><span class="level-item">1.3.1</span><span class="level-item">2.1 随机变量</span></span></a></li><li><a class="level is-mobile" href="#2-2-离散型随机变量"><span class="level-left"><span class="level-item">1.3.2</span><span class="level-item">2.2 离散型随机变量</span></span></a></li><li><a class="level is-mobile" href="#2-3-连续性随机变量"><span class="level-left"><span class="level-item">1.3.3</span><span class="level-item">2.3 连续性随机变量</span></span></a></li><li><a class="level is-mobile" href="#2-4-概率分布函数"><span class="level-left"><span class="level-item">1.3.4</span><span class="level-item">2.4 概率分布函数</span></span></a></li><li><a class="level is-mobile" href="#2-5-随机变量函数的分布"><span class="level-left"><span class="level-item">1.3.5</span><span class="level-item">2.5 随机变量函数的分布</span></span></a></li></ul></li><li><a class="level is-mobile" href="#随机向量及其分布"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">随机向量及其分布</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-1-随机向量及其联合分布"><span class="level-left"><span class="level-item">1.4.1</span><span class="level-item">3.1 随机向量及其联合分布</span></span></a></li><li><a class="level is-mobile" href="#3-2-离散型随机向量及其分布"><span class="level-left"><span class="level-item">1.4.2</span><span class="level-item">3.2 离散型随机向量及其分布</span></span></a></li><li><a class="level is-mobile" href="#3-3-连续型随机向量及其分布"><span class="level-left"><span class="level-item">1.4.3</span><span class="level-item">3.3 连续型随机向量及其分布</span></span></a></li></ul></li><li><a class="level is-mobile" href="#数学期望和方差"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">数学期望和方差</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#4-1-数学期望"><span class="level-left"><span class="level-item">1.5.1</span><span class="level-item">4.1 数学期望</span></span></a></li><li><a class="level is-mobile" href="#4-2-数学期望的性质"><span class="level-left"><span class="level-item">1.5.2</span><span class="level-item">4.2 数学期望的性质</span></span></a></li><li><a class="level is-mobile" href="#4-3-随机变量的方差"><span class="level-left"><span class="level-item">1.5.3</span><span class="level-item">4.3 随机变量的方差</span></span></a></li><li><a class="level is-mobile" href="#4-4-协方差和相关系数"><span class="level-left"><span class="level-item">1.5.4</span><span class="level-item">4.4 协方差和相关系数</span></span></a></li></ul></li><li><a class="level is-mobile" href="#描述性统计"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">描述性统计</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#6-1-总体和参数"><span class="level-left"><span class="level-item">1.6.1</span><span class="level-item">6.1 总体和参数</span></span></a></li><li><a class="level is-mobile" href="#6-2-抽样调查方法"><span class="level-left"><span class="level-item">1.6.2</span><span class="level-item">6.2 抽样调查方法</span></span></a></li></ul></li><li><a class="level is-mobile" href="#参数估计"><span class="level-left"><span class="level-item">1.7</span><span class="level-item">参数估计</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#7-1-点估计和矩估计"><span class="level-left"><span class="level-item">1.7.1</span><span class="level-item">7.1 点估计和矩估计</span></span></a></li><li><a class="level is-mobile" href="#7-2-最大似然估计"><span class="level-left"><span class="level-item">1.7.2</span><span class="level-item">7.2 最大似然估计</span></span></a></li></ul></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="../../../../js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="../../../../index.html"><img src="../../../../img/logo.svg" alt="Bruce Han&#039;s Blog" height="18"></a><p class="is-size-7"><span>&copy; 2022 Bruce Han</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="../../../../js/column.js"></script><script src="../../../../js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="../../../../js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="../../../../js/main.js" defer></script><script src="../../../../js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="../../../../js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"../../../../content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body><script type="text/javascript" src="/js/mathjax-config.js"></script></html>
