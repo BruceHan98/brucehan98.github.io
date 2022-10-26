@@ -11638,14 +11638,14 @@ figure.highlight .section {
 @media screen and (min-width: 1280px) {
   .is-1-column .container,
   .is-2-column .container {
-    max-width: 1011.2px;
-    width: 1011.2px;
+    max-width: 947.2px;
+    width: 947.2px;
   }
 }
 @media screen and (min-width: 1472px) {
   .is-2-column .container {
-    max-width: 1203.2px;
-    width: 1203.2px;
+    max-width: 1139.2px;
+    width: 1139.2px;
   }
   .is-1-column .container {
     max-width: 1011.2px;
